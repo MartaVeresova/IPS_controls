@@ -1,0 +1,57 @@
+input {
+  padding-left: 5px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.tabControlButtons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.propertyDisplay {
+  display: flex;
+  flex-direction: row;
+  //justify-content: space-between;
+  //border: 1px solid black;
+  margin-bottom: 100px;
+  //width: 1000px;
+
+  .propertyName {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid black;
+    padding-left: 25px;
+  }
+
+  .propertyName input:focus {
+    background-color: #428bca;
+    color: white;
+    caret-color: transparent;
+  }
+
+  .propertyValue {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid black;
+  }
+}
+
+.container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  //border: 1px solid black;
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid black;
+  }
+}
+
