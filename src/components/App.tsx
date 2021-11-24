@@ -1,8 +1,8 @@
-import React from 'react';
-import { TabControl } from './TabControl';
+import React, {FC} from 'react';
 import style from './App.module.scss'
+import {TabControl} from './TabControl';
 
-function App() {
+export const App: FC = () => {
     return (
         <div className={style.wrap}>
             <TabControl/>
@@ -10,4 +10,3 @@ function App() {
     );
 }
 
-export default App;

@@ -1,5 +1,6 @@
 input {
   padding-left: 5px;
+  border: 0;
 }
 
 input:focus {
@@ -12,19 +13,50 @@ input:focus {
 }
 
 .propertyDisplay {
+  width: 70%;
   display: flex;
   flex-direction: row;
-  //justify-content: space-between;
-  //border: 1px solid black;
-  margin-bottom: 100px;
-  //width: 1000px;
+  border: .5px solid black;
+  //margin-bottom: 100px;
+
+  .expandIcon {
+    width: 25px;
+    border: 1px solid gray;
+    background-color: gray;
+    text-align: center;
+  }
 
   .propertyName {
     display: flex;
     flex-direction: column;
     width: 500px;
-    border: 1px solid black;
-    padding-left: 25px;
+    position: relative;
+    //border: 1px solid black;
+    padding-left: 20px;
+
+    .icon {
+      position: absolute;
+      top: 0;
+      left: 7px;
+      z-index: 1;
+    }
+
+    .closeImageBlock {
+      display: none;
+    }
+
+    .openImageBlock {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        top: 0;
+        left: 7px;
+        z-index: 1;
+      }
+    }
   }
 
   .propertyName input:focus {
@@ -37,21 +69,46 @@ input:focus {
     display: flex;
     flex-direction: column;
     width: 500px;
-    border: 1px solid black;
+    //border: 1px solid black;
+
+    .closeImageBlock {
+      display: none;
+    }
+
+    .openImageBlock {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
 
-.container {
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  //border: 1px solid black;
 
-  .column {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    border: 1px solid black;
-  }
-}
+
+
+
+
+//.container {
+//  width: 100px;
+//  height: 100px;
+//  position: relative;
+//}
+//
+//.naviA {
+//  border: 3px solid red;
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//}
+//
+//.infoiB {
+//  width: 10px;
+//  height: 10px;
+//  border: 3px solid red;
+//  position: absolute;
+//  top: 0;
+//  left: 0;
+//  z-index: 10;
+//  background-color: blueviolet;
+//}
+
 

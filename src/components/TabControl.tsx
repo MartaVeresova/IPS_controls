@@ -1,8 +1,44 @@
-import React from 'react';
+import React, {FC, useState} from 'react';
 import style from './TabControl.module.scss'
 
+type dataOfPropertiesTabType = {
+    id: number
+    isImage: boolean
+    propertyName: string
+    propertyValue: string
+}
 
-export const TabControl = () => {
+const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
+    {id: 1, isImage: false, propertyName: 'Глобальный идентификатор', propertyValue: '7cx8vx5cv45c4-dkfj5ds-sdfsdas'},
+    {id: 2, isImage: false, propertyName: 'Идентификатор', propertyValue: '1024'},
+    {id: 3, isImage: true, propertyName: 'Изображение', propertyValue: '(Значок)'},
+    {id: 4, isImage: false, propertyName: 'Использовать в качестве первого шага', propertyValue: 'нет'},
+    {id: 5, isImage: false, propertyName: 'Контроль подписей', propertyValue: '[не настроен]'},
+    {id: 6, isImage: false, propertyName: 'Литера', propertyValue: 'литера'},
+    {id: 7, isImage: false, propertyName: 'Наименование', propertyValue: 'Test'},
+    {
+        id: 8,
+        isImage: false,
+        propertyName: 'Предметная область',
+        propertyValue: 'Администрирование системы, Архитектура и строительство, Отладка'
+    },
+    {id: 9, isImage: false, propertyName: 'Файловый шкаф', propertyValue: 'Выбрать'},
+]
+
+export const TabControl: FC = () => {
+
+    const [showImage, setShowImage] = useState(true)
+    const [showSize, setShowSize] = useState(true)
+
+    const onImageClick = () => {
+        setShowImage(!showImage)
+        setShowSize(false)
+    }
+
+    const onSizeClick = () => {
+        setShowSize(!showSize)
+    }
+
     return (
         <>
             <div className={style.tabControlButtons}>
@@ -10,45 +46,55 @@ export const TabControl = () => {
                 <button>Безопасность</button>
                 <button>Действия над объектом</button>
             </div>
-            <div className={style.propertyDisplay}>
-                <div className={style.propertyName}>
-                    <input type='text' value="Глобальный идентификатор"/>
-                    <input type='text' value="Идентификатор"/>
-                    <input type='text' value="Изображение"/>
-                    <input type='text' value="Использовать в качестве первого шага"/>
-                    <input type='text' value="Контроль подписей"/>
-                    <input type='text' value="Литера"/>
-                    <input type='text' value="Наименование"/>
-                    <input type='text' value="Предметная область"/>
-                    <input type='text' value="Файловый шкаф"/>
-                </div>
-                <div className={style.propertyValue}>
-                    <input type='text' value="7cx8vx5cv45c4-dkfj5ds-sdfsdas"/>
-                    <input type='text' value="1024"/>
-                    <input type='text' value="(Значок)"/>
-                    <input type='text' value="нет"/>
-                    <input type='text' value="[не настроен]"/>
-                    <input type='text' value="литера"/>
-                    <input type='text' value="Test"/>
-                    <input type='text' value="Администрирование системы, Архитектура и строительство, Отладка"/>
-                    <input type='text' value="Выбрать"/>
-                </div>
+            <div>
+                {dataOfPropertiesTab.map(prop => {
+                    return <div key={prop.id} className={style.propertyDisplay}>
+                        {/*<div className={style.expandIcon} onClick={onIconClick}>*/}
+                        {/*    {prop.isImage && '!'}*/}
+                        {/*</div>*/}
+                        <div className={style.propertyName}>
+                            {prop.isImage && <div className={style.icon} onClick={onImageClick}>!</div>}
+                            <input type="text" value={prop.propertyName}/>
+                            {
+                                showImage && prop.isImage &&
+                                <div className={showImage ? style.openImageBlock : style.closeImageBlock}>
+                                    {prop.isImage && <div className={style.icon} onClick={onSizeClick}>!</div>}
+                                    <input style={{paddingLeft: '20px', color: 'gray'}} type="text" value="Size"/>
+                                    {
+                                        showSize && prop.isImage &&
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                                            <input style={{paddingLeft: '40px', color: 'gray'}} type="text"
+                                                   value="Width"/>
+                                            <input style={{paddingLeft: '40px', color: 'gray'}} type="text"
+                                                   value="Height"/>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div className={style.propertyValue}>
+                            <input type="text" value={prop.propertyValue}/>
+                            {
+                                showImage && prop.isImage &&
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <input style={{color: 'gray'}} type="text" value="16; 16"/>
+                                    {
+                                        showSize && prop.isImage &&
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                                            <input style={{color: 'gray'}} type="text" value="16"/>
+                                            <input style={{color: 'gray'}} type="text" value="16"/>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                })}
             </div>
-            <div className={style.securityDisplay}></div>
-            <div className={style.actionsOnTheObjectDisplay}></div>
+
             {/*<div className={style.container}>*/}
-            {/*    <div className={style.column}>*/}
-            {/*        <div>Глобальный идентификатор</div>*/}
-            {/*        <div>Идентификатор</div>*/}
-            {/*        /!*<input value="Глобальный идентификатор"/>*!/*/}
-            {/*        /!*<input value="Идентификатор"/>*!/*/}
-            {/*    </div>*/}
-            {/*    <div className={style.column}>*/}
-            {/*        <div>7cx8vx5cv45c4-dkfj5ds-sdfsdas</div>*/}
-            {/*        <div>1024</div>*/}
-            {/*        /!*<input value="7cx8vx5cv45c4-dkfj5ds-sdfsdas"/>*!/*/}
-            {/*        /!*<input value="1024"/>*!/*/}
-            {/*    </div>*/}
+            {/*    <div className={style.infoiB}>b</div>*/}
+            {/*    <input className={style.naviA}/>*/}
             {/*</div>*/}
         </>
     )
