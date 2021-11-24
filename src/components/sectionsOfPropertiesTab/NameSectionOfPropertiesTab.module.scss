@@ -1,0 +1,32 @@
+.closeImageBlock {
+  display: none;
+}
+
+.openImageBlock {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    top: 0;
+    left: 7px;
+    z-index: 1;
+  }
+
+  .sizeInput {
+    padding-left: 20px;
+    color: gray;
+  }
+
+  .openImageBlock input:focus {
+    background-color: #428bca;
+    color: white;
+    caret-color: transparent;
+  }
+
+  div Input {
+    padding-left: 40px;
+    color: gray;
+  }
+}

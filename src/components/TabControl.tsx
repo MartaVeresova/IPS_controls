@@ -1,5 +1,8 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useCallback, useState} from 'react';
 import style from './TabControl.module.scss'
+import {NameSectionOfPropertiesTab} from './sectionsOfPropertiesTab/NameSectionOfPropertiesTab';
+import {ValueSectionOfPropertiesTab} from './sectionsOfPropertiesTab/ValueSectionOfPropertiesTab';
+import {DropDownInput} from './sectionsOfPropertiesTab/inputVarieties/DropDownInput';
 
 type dataOfPropertiesTabType = {
     id: number
@@ -30,10 +33,10 @@ export const TabControl: FC = () => {
     const [showImage, setShowImage] = useState(true)
     const [showSize, setShowSize] = useState(true)
 
-    const onImageClick = () => {
+    const onImageClick = useCallback(() => {
         setShowImage(!showImage)
         setShowSize(false)
-    }
+    }, [showImage])
 
     const onSizeClick = () => {
         setShowSize(!showSize)
@@ -48,47 +51,35 @@ export const TabControl: FC = () => {
             </div>
             <div>
                 {dataOfPropertiesTab.map(prop => {
-                    return <div key={prop.id} className={style.propertyDisplay}>
-                        {/*<div className={style.expandIcon} onClick={onIconClick}>*/}
-                        {/*    {prop.isImage && '!'}*/}
-                        {/*</div>*/}
-                        <div className={style.propertyName}>
-                            {prop.isImage && <div className={style.icon} onClick={onImageClick}>!</div>}
-                            <input type="text" value={prop.propertyName}/>
-                            {
-                                showImage && prop.isImage &&
-                                <div className={showImage ? style.openImageBlock : style.closeImageBlock}>
-                                    {prop.isImage && <div className={style.icon} onClick={onSizeClick}>!</div>}
-                                    <input style={{paddingLeft: '20px', color: 'gray'}} type="text" value="Size"/>
-                                    {
-                                        showSize && prop.isImage &&
-                                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                                            <input style={{paddingLeft: '40px', color: 'gray'}} type="text"
-                                                   value="Width"/>
-                                            <input style={{paddingLeft: '40px', color: 'gray'}} type="text"
-                                                   value="Height"/>
-                                        </div>
-                                    }
-                                </div>
-                            }
+                    return (
+                        <div key={prop.id} className={style.propertyDisplay}>
+                            <div className={style.propertyName}>
+                                {prop.isImage && <div className={style.icon} onClick={onImageClick}>!</div>}
+                                <input type="text" value={prop.propertyName} readOnly/>
+                                {
+                                    showImage && prop.isImage &&
+                                    <NameSectionOfPropertiesTab showImage={showImage}
+                                                                showSize={showSize}
+                                                                onSizeClick={onSizeClick}
+                                                                isImage={prop.isImage}
+                                    />
+                                }
+                            </div>
+                            <div className={style.propertyValue}>
+
+                                <input type="text" value={prop.propertyValue}/>
+                                {/*<EditableInput propertyValue={prop.propertyValue}/>*/}
+                                {/*<OpenFileInput propertyValue={prop.propertyValue}/>*/}
+
+                                {
+                                    showImage && prop.isImage &&
+                                    <ValueSectionOfPropertiesTab showSize={showSize}
+                                                                 isImage={prop.isImage}
+                                    />
+                                }
+                            </div>
                         </div>
-                        <div className={style.propertyValue}>
-                            <input type="text" value={prop.propertyValue}/>
-                            {
-                                showImage && prop.isImage &&
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <input style={{color: 'gray'}} type="text" value="16; 16"/>
-                                    {
-                                        showSize && prop.isImage &&
-                                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                                            <input style={{color: 'gray'}} type="text" value="16"/>
-                                            <input style={{color: 'gray'}} type="text" value="16"/>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                        </div>
-                    </div>
+                    )
                 })}
             </div>
 
@@ -96,6 +87,7 @@ export const TabControl: FC = () => {
             {/*    <div className={style.infoiB}>b</div>*/}
             {/*    <input className={style.naviA}/>*/}
             {/*</div>*/}
+            <DropDownInput/>
         </>
     )
 }

@@ -1,9 +1,9 @@
-input {
+Input {
   padding-left: 5px;
   border: 0;
 }
 
-input:focus {
+Input:focus {
   outline: none;
 }
 
@@ -19,11 +19,10 @@ input:focus {
   border: .5px solid black;
   //margin-bottom: 100px;
 
-  .expandIcon {
-    width: 25px;
-    border: 1px solid gray;
-    background-color: gray;
-    text-align: center;
+  .propertyName input:focus {
+    background-color: #428bca;
+    color: white;
+    caret-color: transparent;
   }
 
   .propertyName {
@@ -31,7 +30,6 @@ input:focus {
     flex-direction: column;
     width: 500px;
     position: relative;
-    //border: 1px solid black;
     padding-left: 20px;
 
     .icon {
@@ -40,51 +38,24 @@ input:focus {
       left: 7px;
       z-index: 1;
     }
-
-    .closeImageBlock {
-      display: none;
-    }
-
-    .openImageBlock {
-      display: flex;
-      flex-direction: column;
-      position: relative;
-
-      .icon {
-        position: absolute;
-        top: 0;
-        left: 7px;
-        z-index: 1;
-      }
-    }
-  }
-
-  .propertyName input:focus {
-    background-color: #428bca;
-    color: white;
-    caret-color: transparent;
   }
 
   .propertyValue {
     display: flex;
     flex-direction: column;
     width: 500px;
-    //border: 1px solid black;
 
-    .closeImageBlock {
-      display: none;
-    }
 
-    .openImageBlock {
-      display: flex;
-      flex-direction: column;
-    }
+    //.closeImageBlock {
+    //  display: none;
+    //}
+    //
+    //.openImageBlock {
+    //  display: flex;
+    //  flex-direction: column;
+    //}
   }
 }
-
-
-
-
 
 
 //.container {

@@ -1,0 +1,41 @@
+.inputField {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  position: relative;
+
+  Input[type='text'] {
+    width: 100vw;
+  }
+
+  Input[type='text']:focus {
+
+  }
+
+  Input[type='file'] {
+    //background-color: red;
+    width: 62px;
+    height: 20px;
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    overflow: visible;
+    text-indent: -9999px;
+  }
+
+  Input[type='file']:hover {
+    opacity: .5;
+    cursor: pointer;
+    background-color: gray;
+  }
+
+  Button {
+    opacity: 1;
+    position: absolute;
+    z-index: 2;
+    border-radius: 2px;
+    border: 1px solid #333;
+  }
+
+}
+
