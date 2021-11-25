@@ -2,7 +2,6 @@ import React, {FC, useCallback, useState} from 'react';
 import style from './TabControl.module.scss'
 import {NameSectionOfPropertiesTab} from './sectionsOfPropertiesTab/NameSectionOfPropertiesTab';
 import {ValueSectionOfPropertiesTab} from './sectionsOfPropertiesTab/ValueSectionOfPropertiesTab';
-import {DropDownInput} from './sectionsOfPropertiesTab/inputVarieties/DropDownInput';
 
 type dataOfPropertiesTabType = {
     id: number
@@ -58,10 +57,10 @@ export const TabControl: FC = () => {
                                 <input type="text" value={prop.propertyName} readOnly/>
                                 {
                                     showImage && prop.isImage &&
-                                    <NameSectionOfPropertiesTab showImage={showImage}
-                                                                showSize={showSize}
-                                                                onSizeClick={onSizeClick}
-                                                                isImage={prop.isImage}
+                                    <NameSectionOfPropertiesTab expandImageField={showImage}
+                                                                expandSizeField={showSize}
+                                                                onSizeFieldClick={onSizeClick}
+                                                                hasIcon={prop.isImage}
                                     />
                                 }
                             </div>
@@ -73,8 +72,8 @@ export const TabControl: FC = () => {
 
                                 {
                                     showImage && prop.isImage &&
-                                    <ValueSectionOfPropertiesTab showSize={showSize}
-                                                                 isImage={prop.isImage}
+                                    <ValueSectionOfPropertiesTab expandSizeField={showSize}
+                                                                 hasIcon={prop.isImage}
                                     />
                                 }
                             </div>
@@ -87,7 +86,6 @@ export const TabControl: FC = () => {
             {/*    <div className={style.infoiB}>b</div>*/}
             {/*    <input className={style.naviA}/>*/}
             {/*</div>*/}
-            <DropDownInput/>
         </>
     )
 }

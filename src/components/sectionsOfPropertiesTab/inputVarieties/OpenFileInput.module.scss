@@ -14,17 +14,20 @@
 
   Input[type='file'] {
     //background-color: red;
-    width: 62px;
-    height: 20px;
-    position: relative;
+    width: 18px;
+    height: 17.4px;
+    position: absolute;
     z-index: 3;
-    opacity: 0;
-    overflow: visible;
+    opacity: .7;
+    overflow: hidden;
     text-indent: -9999px;
+    padding: 1px 0;
+    border-radius: 2px;
   }
 
   Input[type='file']:hover {
-    opacity: .5;
+    position: absolute;
+    opacity: .2;
     cursor: pointer;
     background-color: gray;
   }
@@ -34,8 +37,8 @@
     position: absolute;
     z-index: 2;
     border-radius: 2px;
-    border: 1px solid #333;
+    border: .5px solid gray;
+    padding: .5px 3px;
   }
-
 }
 

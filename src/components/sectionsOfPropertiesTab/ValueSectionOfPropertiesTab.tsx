@@ -1,23 +1,24 @@
 import React, {FC} from 'react';
+import style from './ValueSectionOfPropertiesTab.module.scss';
 
 type ValueSectionOfPropertiesTabType = {
-    showSize: boolean
-    isImage: boolean
+    expandSizeField: boolean
+    hasIcon: boolean
 }
 
 export const ValueSectionOfPropertiesTab: FC<ValueSectionOfPropertiesTabType> = props => {
-    const {showSize, isImage} = props
+    const {expandSizeField, hasIcon} = props
 
     return (
         <>
 
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-                <input style={{color: 'gray'}} type="text" value="16; 16" readOnly/>
+            <div className={style.openImageField}>
+                <input type="text" value="16; 16" readOnly/>
                 {
-                    showSize && isImage &&
+                    expandSizeField && hasIcon &&
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <input style={{color: 'gray'}} type="text" value="16" readOnly/>
-                        <input style={{color: 'gray'}} type="text" value="16" readOnly/>
+                        <input type="text" value="16" readOnly/>
+                        <input type="text" value="16" readOnly/>
                     </div>
                 }
             </div>

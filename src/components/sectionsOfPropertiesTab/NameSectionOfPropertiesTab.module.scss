@@ -1,32 +1,49 @@
-.closeImageBlock {
+.closeImageField {
   display: none;
 }
 
-.openImageBlock {
+.openImageField {
   display: flex;
   flex-direction: column;
   position: relative;
+  border-top: 1.6px solid gray;
 
   .icon {
+    width: 10px;
+    height: 10px;
     position: absolute;
-    top: 0;
-    left: 7px;
-    z-index: 1;
+    z-index: 2;
+    top: 3.5px;
+    left: 25px;
+    cursor: pointer;
   }
 
-  .sizeInput {
-    padding-left: 20px;
+  .sizeField {
     color: gray;
+    //border-top: 1.6px solid gray;
+    padding-left: 60px;
+    //border-width: .1px 0;
+    //border-bottom: solid red;
+
   }
 
-  .openImageBlock input:focus {
+  .openImageField Input {
+    padding-left: 50px;
+  }
+
+  .openImageField Input:focus {
     background-color: #428bca;
     color: white;
     caret-color: transparent;
   }
 
   div Input {
-    padding-left: 40px;
+    //padding-left: 40px;
     color: gray;
+    border-top: 1.6px solid gray;
+  }
+  div :first-child {
+    //border-width: .1px 0;
+    //border-bottom: solid red;
   }
 }

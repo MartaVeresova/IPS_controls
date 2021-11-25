@@ -6,3 +6,17 @@
 //input:focus {
 //  outline: none;
 //}
+
+.openImageField {
+  display: flex;
+  flex-direction: column;
+
+  Input {
+    color: gray;
+    border-top: 1.6px solid gray;
+  }
+
+  div Input {
+    color: gray;
+  }
+}
