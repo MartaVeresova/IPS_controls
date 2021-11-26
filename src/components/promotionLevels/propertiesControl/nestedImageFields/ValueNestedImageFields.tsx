@@ -1,28 +1,26 @@
 import React, {FC} from 'react';
-import style from './ValueSectionOfPropertiesTab.module.scss';
+import style from './ValueNestedImageFields.module.scss';
 
-type ValueSectionOfPropertiesTabType = {
+type ValueNestedImageFieldsType = {
     expandSizeField: boolean
-    hasIcon: boolean
+    hasNestedField: boolean
 }
 
-export const ValueSectionOfPropertiesTab: FC<ValueSectionOfPropertiesTabType> = props => {
-    const {expandSizeField, hasIcon} = props
+export const ValueNestedImageFields: FC<ValueNestedImageFieldsType> = props => {
+    const {expandSizeField, hasNestedField} = props
 
     return (
         <>
-
             <div className={style.openImageField}>
                 <input type="text" value="16; 16" readOnly/>
                 {
-                    expandSizeField && hasIcon &&
+                    expandSizeField && hasNestedField &&
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <input type="text" value="16" readOnly/>
                         <input type="text" value="16" readOnly/>
                     </div>
                 }
             </div>
-
         </>
     )
 }

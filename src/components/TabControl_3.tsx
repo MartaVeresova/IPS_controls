@@ -1,31 +1,92 @@
 import React, {FC, useCallback, useState} from 'react';
 import style from './TabControl_3.module.scss'
-import {NameSectionOfPropertiesTab} from './sectionsOfPropertiesTab/NameSectionOfPropertiesTab';
-import {ValueSectionOfPropertiesTab} from './sectionsOfPropertiesTab/ValueSectionOfPropertiesTab';
-import {EditableInput} from './sectionsOfPropertiesTab/inputVarieties/EditableInput';
-import {ReadOnlyInput} from './sectionsOfPropertiesTab/inputVarieties/ReadOnlyInput';
-import {OpenFileInput} from './sectionsOfPropertiesTab/inputVarieties/OpenFileInput';
+import {EditableInput} from './promotionLevels/propertiesControl/fieldTypes/EditableInput';
+import {ReadOnlyInput} from './promotionLevels/propertiesControl/fieldTypes/ReadOnlyInput';
+import {OpenFileInput} from './promotionLevels/propertiesControl/fieldTypes/OpenFileInput';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
-import {SingleDropDownSelect} from './sectionsOfPropertiesTab/inputVarieties/SingleDropDownSelect';
+import {SingleDropDownSelect} from './promotionLevels/propertiesControl/fieldTypes/SingleDropDownSelect';
+import {ValueNestedImageFields} from './promotionLevels/propertiesControl/nestedImageFields/ValueNestedImageFields';
+import {NameNestedImageFields} from './promotionLevels/propertiesControl/nestedImageFields/NameNestedImageFields';
 
 type dataOfPropertiesTabType = {
     id: number
-    hasIcon: boolean
+    hasNestedField: boolean
     fieldType: string
     propertyName: string
     propertyValue: string
 }
 
 const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
-    {id: 1, hasIcon: false, fieldType: 'editableInput', propertyName: 'Глобальный идентификатор', propertyValue: '7cx8vx5cv45c4-dkfj5ds-sdfsdas'},
-    {id: 2, hasIcon: false, fieldType: 'readOnlyInput', propertyName: 'Идентификатор', propertyValue: '1024'},
-    {id: 3, hasIcon: true, fieldType: 'openFileInput', propertyName: 'Изображение', propertyValue: '(Значок)'},
-    {id: 4, hasIcon: false, fieldType: 'singleDropDownSelect', propertyName: 'Использовать в качестве первого шага', propertyValue: 'нет'},
-    {id: 5, hasIcon: false, fieldType: 'openFileInput', propertyName: 'Контроль подписей', propertyValue: '[не настроен]'},
-    {id: 6, hasIcon: false, fieldType: 'editableInput', propertyName: 'Литера', propertyValue: 'литера'},
-    {id: 7, hasIcon: false, fieldType: 'editableInput', propertyName: 'Наименование', propertyValue: 'Test'},
-    {id: 8, hasIcon: false, fieldType: 'editableInput', propertyName: 'Предметная область', propertyValue: 'Администрирование системы'},
-    {id: 9, hasIcon: false, fieldType: 'editableInput', propertyName: 'Файловый шкаф', propertyValue: 'Выбрать'},
+    {
+        id: 1,
+        hasNestedField: false,
+        fieldType: 'editableInput',
+        propertyName: 'Глобальный идентификатор',
+        propertyValue: '7cx8vx5cv45c4-dkfj5ds-sdfsdas'
+    },
+    {id: 2, hasNestedField: false, fieldType: 'readOnlyInput', propertyName: 'Идентификатор', propertyValue: '1024'},
+    {id: 3, hasNestedField: true, fieldType: 'openFileInput', propertyName: 'Изображение', propertyValue: '(Значок)'},
+    {
+        id: 4,
+        hasNestedField: false,
+        fieldType: 'singleDropDownSelect',
+        propertyName: 'Использовать в качестве первого шага',
+        propertyValue: 'нет'
+    },
+    {
+        id: 5,
+        hasNestedField: false,
+        fieldType: 'openFileInput',
+        propertyName: 'Контроль подписей',
+        propertyValue: '[не настроен]'
+    },
+    {id: 6, hasNestedField: false, fieldType: 'editableInput', propertyName: 'Литера', propertyValue: 'литера'},
+    {id: 7, hasNestedField: false, fieldType: 'editableInput', propertyName: 'Наименование', propertyValue: 'Test'},
+    {
+        id: 8,
+        hasNestedField: false,
+        fieldType: 'editableInput',
+        propertyName: 'Предметная область',
+        propertyValue: 'Администрирование системы'
+    },
+    {id: 9, hasNestedField: false, fieldType: 'editableInput', propertyName: 'Файловый шкаф', propertyValue: 'Выбрать'},
+]
+
+const nameSection = [
+    {id: 1, hasNestedField: false, propertyName: 'Глобальный идентификатор', fieldType: 'editableInput'},
+    {id: 2, hasNestedField: false, propertyName: 'Идентификатор', fieldType: 'editableInput'},
+    {id: 3, hasNestedField: true, propertyName: 'Изображение', fieldType: 'editableInput'},
+    {
+        id: 4,
+        hasNestedField: false,
+        propertyName: 'Использовать в качестве первого шага',
+        fieldType: 'singleDropDownSelect'
+    },
+    {id: 5, hasNestedField: false, propertyName: 'Контроль подписей', fieldType: 'openFileInput'},
+    {id: 6, hasNestedField: false, propertyName: 'Литера', fieldType: 'editableInput'},
+    {id: 7, hasNestedField: false, propertyName: 'Наименование', fieldType: 'editableInput'},
+    {id: 8, hasNestedField: false, propertyName: 'Предметная область', fieldType: 'editableInput'},
+    {id: 9, hasNestedField: false, propertyName: 'Файловый шкаф', fieldType: 'editableInput'},
+]
+
+const assignedSubjectAreaTypes = [
+    {id: 'D', name: 'Администрирование системы'},
+    {id: 'B', name: 'Архитектура и строительство'},
+    {id: 'C', name: 'Отладка'},
+]
+
+const valueSection = [
+    {
+        globalKey: '7cx8vx5cv45c4-dkfj5ds-sdfsdas',
+        id: 1,
+        icon: '',
+        isDefault: false,
+        litera: 't',
+        name: 'Test11331222323',
+        assignedSubjectAreaTypes: assignedSubjectAreaTypes,
+        storageId: '',
+        fieldType: 'editableInput',
+    }
 ]
 
 export const TabControl_3: FC = () => {
@@ -55,17 +116,17 @@ export const TabControl_3: FC = () => {
                         return (
                             <div key={field.id} className={style.propertyDisplay}>
                                 <div className={style.propertyName}>
-                                    {field.hasIcon && !expandImageField &&
+                                    {field.hasNestedField && !expandImageField &&
                                     <BsChevronRight className={style.icon} onClick={onImageFieldClick}/>}
-                                    {field.hasIcon && expandImageField &&
+                                    {field.hasNestedField && expandImageField &&
                                     <BsChevronDown className={style.icon} onClick={onImageFieldClick}/>}
                                     <input type="text" value={field.propertyName} readOnly/>
                                     {
-                                        expandImageField && field.hasIcon &&
-                                        <NameSectionOfPropertiesTab expandImageField={expandImageField}
-                                                                    expandSizeField={expandSizeField}
-                                                                    onSizeFieldClick={onSizeFieldClick}
-                                                                    hasIcon={field.hasIcon}
+                                        expandImageField && field.hasNestedField &&
+                                        <NameNestedImageFields expandImageField={expandImageField}
+                                                               expandSizeField={expandSizeField}
+                                                               onSizeFieldClick={onSizeFieldClick}
+                                                               hasNestedField={field.hasNestedField}
                                         />
                                     }
                                 </div>
@@ -113,9 +174,9 @@ export const TabControl_3: FC = () => {
 
 
                                     {
-                                        expandImageField && field.hasIcon &&
-                                        <ValueSectionOfPropertiesTab expandSizeField={expandSizeField}
-                                                                     hasIcon={field.hasIcon}
+                                        expandImageField && field.hasNestedField &&
+                                        <ValueNestedImageFields expandSizeField={expandSizeField}
+                                                                hasNestedField={field.hasNestedField}
                                         />
                                     }
                                 </div>

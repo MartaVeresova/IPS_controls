@@ -18,11 +18,14 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
     const stopPropagation = () => {
         // e.stopImmediatePropagation()
     }
+    const onInputChange = () => {
+
+    }
 
     return (
         <>
             <div className={style.inputField}>
-                <input type="text" value={propertyValue} onFocus={onInputFocus} onBlur={onBlurFocus}/>
+                <input type="text" value={propertyValue} onFocus={onInputFocus} onBlur={onBlurFocus} onChange={onInputChange}/>
                 <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation}/>
                 <button>...</button>
 

@@ -1,0 +1,51 @@
+Input {
+  padding-left: 5px;
+  border: 0;
+}
+
+Input:focus {
+  outline: none;
+}
+
+.propertyDisplay {
+  display: flex;
+  flex-direction: row;
+
+  .propertyName {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border: .1px solid gray;
+    position: relative;
+    z-index: 1;
+
+    .icon {
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      z-index: 2;
+      top: 3.5px;
+      left: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .propertyName Input {
+    padding-left: 20px;
+  }
+
+  .propertyName input:focus {
+    background-color: #428bca;
+    color: white;
+    caret-color: transparent;
+  }
+
+  .propertyValue {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    border: .1px solid gray;
+  }
+}
+
+
