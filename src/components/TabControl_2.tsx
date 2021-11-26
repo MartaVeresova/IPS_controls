@@ -3,7 +3,6 @@ import style from './TabControl_2.module.scss'
 import {ReadOnlyInput} from './sectionsOfPropertiesTab/inputVarieties/ReadOnlyInput';
 import {OpenFileInput} from './sectionsOfPropertiesTab/inputVarieties/OpenFileInput';
 import {EditableInput} from './sectionsOfPropertiesTab/inputVarieties/EditableInput';
-import {DropDownInput} from './sectionsOfPropertiesTab/inputVarieties/DropDownInput';
 
 type dataOfPropertiesTabType = {
     id: number

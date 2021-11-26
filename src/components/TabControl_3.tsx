@@ -6,24 +6,26 @@ import {EditableInput} from './sectionsOfPropertiesTab/inputVarieties/EditableIn
 import {ReadOnlyInput} from './sectionsOfPropertiesTab/inputVarieties/ReadOnlyInput';
 import {OpenFileInput} from './sectionsOfPropertiesTab/inputVarieties/OpenFileInput';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
+import {SingleDropDownSelect} from './sectionsOfPropertiesTab/inputVarieties/SingleDropDownSelect';
 
 type dataOfPropertiesTabType = {
     id: number
     hasIcon: boolean
+    fieldType: string
     propertyName: string
     propertyValue: string
 }
 
 const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
-    {id: 1, hasIcon: false, propertyName: 'Глобальный идентификатор', propertyValue: '7cx8vx5cv45c4-dkfj5ds-sdfsdas'},
-    {id: 2, hasIcon: false, propertyName: 'Идентификатор', propertyValue: '1024'},
-    {id: 3, hasIcon: true, propertyName: 'Изображение', propertyValue: '(Значок)'},
-    {id: 4, hasIcon: false, propertyName: 'Использовать в качестве первого шага', propertyValue: 'нет'},
-    {id: 5, hasIcon: false, propertyName: 'Контроль подписей', propertyValue: '[не настроен]'},
-    {id: 6, hasIcon: false, propertyName: 'Литера', propertyValue: 'литера'},
-    {id: 7, hasIcon: false, propertyName: 'Наименование', propertyValue: 'Test'},
-    {id: 8, hasIcon: false, propertyName: 'Предметная область', propertyValue: 'Администрирование системы'},
-    {id: 9, hasIcon: false, propertyName: 'Файловый шкаф', propertyValue: 'Выбрать'},
+    {id: 1, hasIcon: false, fieldType: 'editableInput', propertyName: 'Глобальный идентификатор', propertyValue: '7cx8vx5cv45c4-dkfj5ds-sdfsdas'},
+    {id: 2, hasIcon: false, fieldType: 'readOnlyInput', propertyName: 'Идентификатор', propertyValue: '1024'},
+    {id: 3, hasIcon: true, fieldType: 'openFileInput', propertyName: 'Изображение', propertyValue: '(Значок)'},
+    {id: 4, hasIcon: false, fieldType: 'singleDropDownSelect', propertyName: 'Использовать в качестве первого шага', propertyValue: 'нет'},
+    {id: 5, hasIcon: false, fieldType: 'openFileInput', propertyName: 'Контроль подписей', propertyValue: '[не настроен]'},
+    {id: 6, hasIcon: false, fieldType: 'editableInput', propertyName: 'Литера', propertyValue: 'литера'},
+    {id: 7, hasIcon: false, fieldType: 'editableInput', propertyName: 'Наименование', propertyValue: 'Test'},
+    {id: 8, hasIcon: false, fieldType: 'editableInput', propertyName: 'Предметная область', propertyValue: 'Администрирование системы'},
+    {id: 9, hasIcon: false, fieldType: 'editableInput', propertyName: 'Файловый шкаф', propertyValue: 'Выбрать'},
 ]
 
 export const TabControl_3: FC = () => {
@@ -53,8 +55,10 @@ export const TabControl_3: FC = () => {
                         return (
                             <div key={field.id} className={style.propertyDisplay}>
                                 <div className={style.propertyName}>
-                                    {field.hasIcon && !expandImageField && <BsChevronRight className={style.icon} onClick={onImageFieldClick}/>}
-                                    {field.hasIcon && expandImageField && <BsChevronDown className={style.icon} onClick={onImageFieldClick}/>}
+                                    {field.hasIcon && !expandImageField &&
+                                    <BsChevronRight className={style.icon} onClick={onImageFieldClick}/>}
+                                    {field.hasIcon && expandImageField &&
+                                    <BsChevronDown className={style.icon} onClick={onImageFieldClick}/>}
                                     <input type="text" value={field.propertyName} readOnly/>
                                     {
                                         expandImageField && field.hasIcon &&
@@ -69,11 +73,11 @@ export const TabControl_3: FC = () => {
 
                                     {
                                         field.propertyName === 'Глобальный идентификатор' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <EditableInput propertyValue={field.propertyValue}/>
                                     }
                                     {
                                         field.propertyName === 'Идентификатор' &&
-                                        <ReadOnlyInput propertyValue={field.propertyValue} />
+                                        <ReadOnlyInput propertyValue={field.propertyValue}/>
                                     }
                                     {
                                         field.propertyName === 'Изображение' &&
@@ -81,7 +85,7 @@ export const TabControl_3: FC = () => {
                                     }
                                     {
                                         field.propertyName === 'Использовать в качестве первого шага' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <SingleDropDownSelect/>
                                     }
                                     {
                                         field.propertyName === 'Контроль подписей' &&
@@ -89,19 +93,19 @@ export const TabControl_3: FC = () => {
                                     }
                                     {
                                         field.propertyName === 'Литера' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <EditableInput propertyValue={field.propertyValue}/>
                                     }
                                     {
                                         field.propertyName === 'Наименование' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <EditableInput propertyValue={field.propertyValue}/>
                                     }
                                     {
                                         field.propertyName === 'Предметная область' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <EditableInput propertyValue={field.propertyValue}/>
                                     }
                                     {
                                         field.propertyName === 'Файловый шкаф' &&
-                                        <EditableInput propertyValue={field.propertyValue} />
+                                        <EditableInput propertyValue={field.propertyValue}/>
                                     }
 
 
