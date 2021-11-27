@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import style from './NameNestedImageFields.module.scss'
+import {observer} from 'mobx-react-lite';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
 
 type NameNestedImageFieldsType = {
@@ -9,7 +10,7 @@ type NameNestedImageFieldsType = {
     hasNestedField: boolean
 }
 
-export const NameNestedImageFields: FC<NameNestedImageFieldsType> = props => {
+export const NameNestedImageFields: FC<NameNestedImageFieldsType> = observer(props => {
     const {expandImageField, expandSizeField, onSizeFieldClick, hasNestedField} = props
 
     return (
@@ -32,4 +33,4 @@ export const NameNestedImageFields: FC<NameNestedImageFieldsType> = props => {
             </div>
         </>
     )
-}
+})

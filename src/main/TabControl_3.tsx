@@ -1,12 +1,12 @@
 import React, {FC, useCallback, useState} from 'react';
 import style from './TabControl_3.module.scss'
-import {EditableInput} from './promotionLevels/propertiesControl/fieldTypes/EditableInput';
-import {ReadOnlyInput} from './promotionLevels/propertiesControl/fieldTypes/ReadOnlyInput';
-import {OpenFileInput} from './promotionLevels/propertiesControl/fieldTypes/OpenFileInput';
+import {EditableInput} from './components/common/fieldTypes/EditableInput';
+import {ReadOnlyInput} from './components/common/fieldTypes/ReadOnlyInput';
+import {OpenFileInput} from './components/common/fieldTypes/OpenFileInput';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
-import {SingleDropDownSelect} from './promotionLevels/propertiesControl/fieldTypes/SingleDropDownSelect';
-import {ValueNestedImageFields} from './promotionLevels/propertiesControl/nestedImageFields/ValueNestedImageFields';
-import {NameNestedImageFields} from './promotionLevels/propertiesControl/nestedImageFields/NameNestedImageFields';
+import {SingleDropDownSelect} from './components/common/fieldTypes/SingleDropDownSelect';
+import {ValueNestedImageFields} from './components/promotionLevels/propertiesControl/nestedImageFields/ValueNestedImageFields';
+import {NameNestedImageFields} from './components/promotionLevels/propertiesControl/nestedImageFields/NameNestedImageFields';
 
 type dataOfPropertiesTabType = {
     id: number

@@ -49,6 +49,7 @@ export const SingleDropDownSelect: FC = () => {
 
     return (
         <>
+
             {/*<form>*/}
             {/*    <div className={style.multiselect}>*/}
             {/*        <div className={style.selectBox} onClick={onCheckboxesClick}>*/}

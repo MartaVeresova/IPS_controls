@@ -1,12 +1,13 @@
 import React, {FC} from 'react';
 import style from './ValueNestedImageFields.module.scss';
+import {observer} from 'mobx-react-lite';
 
 type ValueNestedImageFieldsType = {
     expandSizeField: boolean
     hasNestedField: boolean
 }
 
-export const ValueNestedImageFields: FC<ValueNestedImageFieldsType> = props => {
+export const ValueNestedImageFields: FC<ValueNestedImageFieldsType> = observer(props => {
     const {expandSizeField, hasNestedField} = props
 
     return (
@@ -23,4 +24,4 @@ export const ValueNestedImageFields: FC<ValueNestedImageFieldsType> = props => {
             </div>
         </>
     )
-}
+})

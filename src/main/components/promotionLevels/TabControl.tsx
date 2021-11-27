@@ -1,5 +1,6 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import style from './TabControl.module.scss'
+import {observer} from 'mobx-react-lite';
 import {PropertiesControl} from './propertiesControl/PropertiesControl';
 
 export type dataOfPropertiesTabType = {
@@ -16,12 +17,6 @@ type assignedSubjectAreaTypesType = {
     name: string
 }
 
-const assignedSubjectAreaTypes: assignedSubjectAreaTypesType[] = [
-    {id: 'D', name: 'Администрирование системы'},
-    {id: 'B', name: 'Архитектура и строительство'},
-    {id: 'C', name: 'Отладка'},
-]
-
 type propertyValueSectionType = {
     globalKey: string
     id: number
@@ -31,8 +26,13 @@ type propertyValueSectionType = {
     name: string
     assignedSubjectAreaTypes: assignedSubjectAreaTypesType[]
     storageId: string
-    fieldType: string
 }
+
+const assignedSubjectAreaTypes: assignedSubjectAreaTypesType[] = [
+    {id: 'D', name: 'Администрирование системы'},
+    {id: 'B', name: 'Архитектура и строительство'},
+    {id: 'C', name: 'Отладка'},
+]
 
 const propertyValueSection: propertyValueSectionType = {
     globalKey: '7cx8vx5cv45c4-dkfj5ds-sdfsdas',
@@ -43,7 +43,6 @@ const propertyValueSection: propertyValueSectionType = {
     name: 'Test11331222323',
     assignedSubjectAreaTypes: assignedSubjectAreaTypes,
     storageId: 'storageId',
-    fieldType: 'editableInput',
 }
 
 const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
@@ -66,7 +65,7 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
         hasNestedField: true,
         propertyName: 'Изображение',
         propertyValue: propertyValueSection.icon,
-        fieldType: 'editableInput'
+        fieldType: 'openFileInput'
     },
     {
         id: 4,
@@ -79,8 +78,8 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
         id: 5,
         hasNestedField: false,
         propertyName: 'Контроль подписей',
-        propertyValue: '',
-        fieldType: 'openFileInput'
+        propertyValue: '[не настроен]',
+        fieldType: ''
     },
     {
         id: 6,
@@ -113,7 +112,8 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
 ]
 
 
-export const TabControl: FC = () => {
+export const TabControl: FC = observer(() => {
+    // const {propertiesControl} = useStore()
 
     return (
         <>
@@ -127,4 +127,4 @@ export const TabControl: FC = () => {
             </div>
         </>
     )
-}
+})

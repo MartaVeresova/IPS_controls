@@ -1,13 +1,15 @@
 import React, {FC, useCallback, useState} from 'react';
 import style from './PropertiesControl.module.scss'
+import {observer} from 'mobx-react-lite';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
 import {dataOfPropertiesTabType} from '../TabControl';
 import {NameNestedImageFields} from './nestedImageFields/NameNestedImageFields';
-import {EditableInput} from './fieldTypes/EditableInput';
-import {ReadOnlyInput} from './fieldTypes/ReadOnlyInput';
-import {OpenFileInput} from './fieldTypes/OpenFileInput';
-import {SingleDropDownSelect} from './fieldTypes/SingleDropDownSelect';
+import {EditableInput} from '../../common/fieldTypes/EditableInput';
+import {ReadOnlyInput} from '../../common/fieldTypes/ReadOnlyInput';
+import {OpenFileInput} from '../../common/fieldTypes/OpenFileInput';
+import {SingleDropDownSelect} from '../../common/fieldTypes/SingleDropDownSelect';
 import {ValueNestedImageFields} from './nestedImageFields/ValueNestedImageFields';
+import {SingleDropDown} from '../../common/fieldTypes/SingleDropDown';
 
 
 type PropertiesControlType = {
@@ -15,7 +17,7 @@ type PropertiesControlType = {
 }
 
 
-export const PropertiesControl: FC<PropertiesControlType> = ({field}) => {
+export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) => {
 
     const [expandImageField, setExpandImageField] = useState(false)
     const [expandSizeField, setExpandSizeField] = useState(false)
@@ -52,7 +54,8 @@ export const PropertiesControl: FC<PropertiesControlType> = ({field}) => {
                     {field.fieldType === 'editableInput' && <EditableInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'readOnlyInput' && <ReadOnlyInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'openFileInput' && <OpenFileInput propertyValue={field.propertyValue}/>}
-                    {field.fieldType === 'singleDropDownSelect' && <SingleDropDownSelect/>}
+                    {/*{field.fieldType === 'singleDropDownSelect' && <SingleDropDownSelect/>}*/}
+                    {field.fieldType === 'singleDropDownSelect' && <SingleDropDown/>}
 
                     {
                         expandImageField && field.hasNestedField &&
@@ -65,4 +68,4 @@ export const PropertiesControl: FC<PropertiesControlType> = ({field}) => {
             </div>
         </>
     )
-}
+})
