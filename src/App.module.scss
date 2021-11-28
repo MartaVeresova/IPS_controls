@@ -3,6 +3,17 @@
   font-family: sans-serif;
 }
 .wrap {
-  margin: 50px;
+  margin: 50px 10px;
   width: 70vw;
+
+  display: flex;
+  flex-direction: row;
+
+  .treeMenu {
+    min-width: 220px;
+    font-size: 11px;
+  }
+
+
 }
+
