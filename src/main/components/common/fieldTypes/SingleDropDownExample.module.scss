@@ -8,10 +8,26 @@
   color: #474747;
   text-align: left;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  height: 20px;
+
+  input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
   .select {
     display: block;
     position: relative;
     background-color: red;
+
+    margin-bottom: 10px;
+    margin-top: 10px;
 
     input {
       width: 100%;
@@ -71,21 +87,21 @@
   list-style: none;
   //border: 1px solid red;
 
-  li {
+  option {
     padding: 2px 5px;
     transition: all .2s ease-in-out;
     cursor: pointer;
   }
 
-  li:hover {
+  option:hover {
     background-color: #f2f2f2;
   }
 
-  li:active {
+  option:active {
     background-color: #e2e2e2;
   }
 
-  li:focus {
+  option:focus {
     //background-color: red;
   }
 }

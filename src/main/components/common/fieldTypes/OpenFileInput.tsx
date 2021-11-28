@@ -11,6 +11,15 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
     const [selectedFile, setSelectedFile] = useState<File | null>()
     const [preview, setPreview] = useState<string>('')
 
+    // useEffect(() => {
+    //     let elem = document.getElementsByTagName('img')
+    //     console.log(elem)
+    //     let theCSSprop = window.getComputedStyle(elem[0]).width;
+    //     console.log((parseInt(theCSSprop)).toString())
+    //     // @ts-ignore
+    //     document.getElementById('output').innerHTML = (parseInt(theCSSprop)).toString();
+    // }, [])
+
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
         if (!selectedFile) {
@@ -46,17 +55,15 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
 
     }
 
-
     return (
         <>
             <div className={style.inputField}>
-                {selectedFile && <img src={preview} alt="img"/>}
-                <input type="text" value={propertyValue} onFocus={onInputFocus} onBlur={onBlurFocus} onChange={onTextInputChange}/>
-
+                <img alt="img" className={style.image} src={selectedFile ? preview : propertyValue}/>
+                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onBlurFocus}
+                       onChange={onTextInputChange}/>
                 <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation}
                        onChange={onSelectFile}/>
                 <button>...</button>
-
             </div>
         </>
     )

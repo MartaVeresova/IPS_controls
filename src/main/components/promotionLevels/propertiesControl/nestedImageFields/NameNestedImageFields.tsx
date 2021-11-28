@@ -16,20 +16,18 @@ export const NameNestedImageFields: FC<NameNestedImageFieldsType> = observer(pro
     return (
         <>
             <div className={expandImageField ? style.openImageField : style.closeImageField}>
-
                 {hasNestedField && !expandSizeField &&
                 <BsChevronRight className={style.icon} onClick={onSizeFieldClick}/>}
                 {hasNestedField && expandSizeField &&
                 <BsChevronDown className={style.icon} onClick={onSizeFieldClick}/>}
 
                 <input style={{paddingLeft: '40px'}} type="text" className={style.sizeField} value="Size" readOnly/>
-                {
-                    expandSizeField && hasNestedField &&
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <input style={{paddingLeft: '60px'}} type="text" value="Width" readOnly/>
-                        <input style={{paddingLeft: '60px'}} type="text" value="Height" readOnly/>
-                    </div>
-                }
+
+                {expandSizeField && hasNestedField &&
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <input style={{paddingLeft: '60px'}} type="text" value="Width" readOnly/>
+                    <input style={{paddingLeft: '60px'}} type="text" value="Height" readOnly/>
+                </div>}
             </div>
         </>
     )
