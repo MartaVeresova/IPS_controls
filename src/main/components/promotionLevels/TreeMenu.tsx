@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {observer} from 'mobx-react-lite';
 import style from './TreeMenu.module.scss'
 
-const menu: string[] = [
+const treeList: string[] = [
     'Удалено',
     'Создание и модификация',
     'Производство и эксплуатация',
@@ -15,19 +15,20 @@ const menu: string[] = [
 ]
 
 type TreeMenuType = {
-    setShowTabControl: (showTabControl: boolean) => void
+    setIsRightBlockShow: (isRightBlockShow: boolean) => void
 }
 
-export const TreeMenu: FC<TreeMenuType> = observer(({setShowTabControl}) => {
+export const TreeMenu: FC<TreeMenuType> = observer(({setIsRightBlockShow}) => {
 
     const onTreeItemClick = () => {
-        setShowTabControl(true)
+        setIsRightBlockShow(true)
     }
 
     return (
         <>
             <div className={style.treeMenu}>
-                {menu.map((el, index) => <div key={index} className={style.element} onClick={onTreeItemClick}>{el}</div>)}
+                {treeList.map((leaf, index) =>
+                    <div key={index} className={style.leaf} onClick={onTreeItemClick}>{leaf}</div>)}
             </div>
         </>
     )

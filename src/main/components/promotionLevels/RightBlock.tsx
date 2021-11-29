@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import style from './TabControl.module.scss'
+import style from './RightBlock.module.scss'
 import {observer} from 'mobx-react-lite';
 import {PropertiesControl} from './propertiesControl/PropertiesControl';
 
@@ -14,7 +14,7 @@ export type dataOfPropertiesTabType = {
     fieldType: string
 }
 
-type assignedSubjectAreaTypesType = {
+type assignedSubjectAreaType = {
     id: string
     name: string
 }
@@ -26,11 +26,11 @@ type propertyValueSectionType = {
     isDefault: boolean
     litera: string
     name: string
-    assignedSubjectAreaTypes: assignedSubjectAreaTypesType[]
+    assignedSubjectAreaTypes: assignedSubjectAreaType[]
     storageId: string
 }
 
-const assignedSubjectAreaTypes: assignedSubjectAreaTypesType[] = [
+const assignedSubjectArea: assignedSubjectAreaType[] = [
     {id: 'D', name: 'Администрирование системы'},
     {id: 'B', name: 'Архитектура и строительство'},
     {id: 'C', name: 'Отладка'},
@@ -43,7 +43,7 @@ const propertyValueSection: propertyValueSectionType = {
     isDefault: false,
     litera: 'litera',
     name: 'Test11331222323',
-    assignedSubjectAreaTypes: assignedSubjectAreaTypes,
+    assignedSubjectAreaTypes: assignedSubjectArea,
     storageId: 'storageId',
 }
 
@@ -102,7 +102,7 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
         hasNestedField: false,
         propertyName: 'Предметная область',
         propertyValue: propertyValueSection.assignedSubjectAreaTypes,
-        fieldType: 'plentyDropDown'
+        fieldType: 'multiDropDown'
     },
     {
         id: 9,
@@ -114,11 +114,12 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
 ]
 
 
-export const TabControl: FC = observer(() => {
+export const RightBlock: FC = observer(() => {
     // const {propertiesControl} = useStore()
 
     return (
         <>
+            {/*TabControl*/}
             <div className={style.tabControlButtons}>
                 <button>Свойства</button>
                 <button>Безопасность</button>
@@ -128,10 +129,8 @@ export const TabControl: FC = observer(() => {
                 {dataOfPropertiesTab.map(field => <PropertiesControl key={field.id} field={field}/>)}
             </div>
 
-            <div id="output">!</div>
-            <div className={style.svg}>
-
-            </div>
+            {/*<div id="output">!</div>*/}
+            {/*<div className={style.svg}></div>*/}
         </>
     )
 })

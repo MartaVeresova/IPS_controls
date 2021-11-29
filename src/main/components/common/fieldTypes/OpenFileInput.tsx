@@ -7,7 +7,7 @@ type OpenFileInputType = {
 
 export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
 
-    const [isFocused, setIsFocused] = useState(false)
+    const [isInputFocused, setIsInputFocused] = useState(false)
     const [selectedFile, setSelectedFile] = useState<File | null>()
     const [preview, setPreview] = useState<string>('')
 
@@ -34,6 +34,7 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
+
     const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || !e.target.files.length) {
             setSelectedFile(null)
@@ -43,24 +44,20 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
     }
 
     const onInputFocus = () => {
-        setIsFocused(true)
+        setIsInputFocused(true)
     }
-    const onBlurFocus = () => {
-        setIsFocused(false)
+    const onInputBlur = () => {
+        setIsInputFocused(false)
     }
     const stopPropagation = () => {
         // e.stopImmediatePropagation()
-    }
-    const onTextInputChange = () => {
-
     }
 
     return (
         <>
             <div className={style.inputField}>
                 <img alt="img" className={style.image} src={selectedFile ? preview : propertyValue}/>
-                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onBlurFocus}
-                       onChange={onTextInputChange}/>
+                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onInputBlur}/>
                 <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation}
                        onChange={onSelectFile}/>
                 <button>...</button>

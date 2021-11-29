@@ -2,20 +2,19 @@ import React, {FC, useState} from 'react';
 import style from './App.module.scss'
 import {observer} from 'mobx-react-lite';
 import {TreeMenu} from './main/components/promotionLevels/TreeMenu';
-import {TabControl} from './main/components/promotionLevels/TabControl';
+import {RightBlock} from './main/components/promotionLevels/RightBlock';
 
 
 export const App: FC = observer(() => {
-    const [showTabControl, setShowTabControl] = useState(false)
+    const [isRightBlockShow, setIsRightBlockShow] = useState(false)
 
 
     return (
         <div className={style.wrap}>
-            <div className={style.treeMenu}><TreeMenu setShowTabControl={setShowTabControl}/></div>
+            <div className={style.treeMenu}><TreeMenu setIsRightBlockShow={setIsRightBlockShow}/></div>
             {
-                showTabControl && <div className={style.tabControl}><TabControl/></div>
+                isRightBlockShow && <div><RightBlock/></div> //rightBlock
             }
-
         </div>
     );
 })

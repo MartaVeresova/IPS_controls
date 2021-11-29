@@ -1,4 +1,4 @@
-.dropdown {
+.dropDown {
   width: 100%;
   background-color: #fff;
   border-radius: 2px;
@@ -8,26 +8,9 @@
   color: #474747;
   text-align: left;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  height: 20px;
-
-  input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-  }
-
   .select {
     display: block;
     position: relative;
-    background-color: red;
-
-    margin-bottom: 10px;
-    margin-top: 10px;
 
     input {
       width: 100%;
@@ -50,11 +33,11 @@
   }
 }
 
-.dropdown:hover {
+.dropDown:hover {
   //box-shadow: 0 0 4px rgb(204, 204, 204);
 }
 
-.dropdown:active {
+.dropDown:active {
   background-color: #f8f8f8;
 
   .select > i {
@@ -62,14 +45,14 @@
   }
 }
 
-.dropdown.active:hover,
-.dropdown.active {
+.dropDown.active:hover,
+.dropDown.active {
   box-shadow: 0 0 4px rgb(204, 204, 204);
   border-radius: 2px 2px 0 0;
   background-color: #f8f8f8;
 }
 
-.dropdownList {
+.dropDownList {
   position: absolute;
   //color: black;
   background-color: #fff;
@@ -87,21 +70,21 @@
   list-style: none;
   //border: 1px solid red;
 
-  option {
+  li {
     padding: 2px 5px;
     transition: all .2s ease-in-out;
     cursor: pointer;
   }
 
-  option:hover {
+  li:hover {
     background-color: #f2f2f2;
   }
 
-  option:active {
+  li:active {
     background-color: #e2e2e2;
   }
 
-  option:focus {
+  li:focus {
     //background-color: red;
   }
 }

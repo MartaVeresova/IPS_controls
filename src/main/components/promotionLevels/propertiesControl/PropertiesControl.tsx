@@ -2,14 +2,14 @@ import React, {FC, useCallback, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {observer} from 'mobx-react-lite';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
-import {dataOfPropertiesTabType} from '../TabControl';
-import {NameNestedImageFields} from './nestedImageFields/NameNestedImageFields';
+import {dataOfPropertiesTabType} from '../RightBlock';
+import {ImageSizeProperty} from './nestedImageFields/ImageSizeProperty';
 import {EditableInput} from '../../common/fieldTypes/EditableInput';
 import {ReadOnlyInput} from '../../common/fieldTypes/ReadOnlyInput';
 import {OpenFileInput} from '../../common/fieldTypes/OpenFileInput';
-import {ValueNestedImageFields} from './nestedImageFields/ValueNestedImageFields';
+import {ImageSizeValue} from './nestedImageFields/ImageSizeValue';
 import {MultiDropDown} from '../../common/fieldTypes/MultiDropDown';
-import {SingleDropDown} from '../../common/fieldTypes/SingleDropDown';
+import {SimpleDropDown} from '../../common/fieldTypes/SimpleDropDown';
 
 
 type PropertiesControlType = {
@@ -18,33 +18,34 @@ type PropertiesControlType = {
 
 export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) => {
 
-    const [expandImageField, setExpandImageField] = useState(false)
-    const [expandSizeField, setExpandSizeField] = useState(false)
+    const [isImageFieldExpanded, setIsImageFieldExpanded] = useState(false)
+    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState(false)
 
-    const onImageFieldClick = useCallback(() => {
-        setExpandImageField(!expandImageField)
-        setExpandSizeField(false)
-    }, [expandImageField])
 
-    const onSizeFieldClick = () => {
-        setExpandSizeField(!expandSizeField)
-    }
+    const onIconClick = useCallback(() => {
+        setIsImageFieldExpanded(!isImageFieldExpanded)
+        setIsSizeFieldExpanded(false)
+    }, [isImageFieldExpanded])
+
+    const onImageSizePropertyClick = useCallback(() => {
+        setIsSizeFieldExpanded(!isSizeFieldExpanded)
+    }, [isSizeFieldExpanded])
 
     return (
         <>
             <div key={field.id} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
-                    {field.hasNestedField && !expandImageField &&
-                    <BsChevronRight className={style.icon} onClick={onImageFieldClick}/>}
-                    {field.hasNestedField && expandImageField &&
-                    <BsChevronDown className={style.icon} onClick={onImageFieldClick}/>}
+                    {field.hasNestedField && !isImageFieldExpanded &&
+                    <BsChevronRight className={style.icon} onClick={onIconClick}/>}
+                    {field.hasNestedField && isImageFieldExpanded &&
+                    <BsChevronDown className={style.icon} onClick={onIconClick}/>}
                     <input type="text" value={field.propertyName} readOnly/>
 
-                    {expandImageField && field.hasNestedField &&
-                    <NameNestedImageFields
-                        expandImageField={expandImageField}
-                        expandSizeField={expandSizeField}
-                        onSizeFieldClick={onSizeFieldClick}
+                    {isImageFieldExpanded && field.hasNestedField &&
+                    <ImageSizeProperty
+                        isImageFieldExpanded={isImageFieldExpanded}
+                        isSizeFieldExpanded={isSizeFieldExpanded}
+                        onSizeFieldClick={onImageSizePropertyClick}
                         hasNestedField={field.hasNestedField}/>}
                 </div>
 
@@ -52,12 +53,12 @@ export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) =
                     {field.fieldType === 'editableInput' && <EditableInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'readOnlyInput' && <ReadOnlyInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'openFileInput' && <OpenFileInput propertyValue={field.propertyValue}/>}
-                    {field.fieldType === 'singleDropDown' && <SingleDropDown/>}
-                    {field.fieldType === 'plentyDropDown' && <MultiDropDown/>}
+                    {field.fieldType === 'singleDropDown' && <SimpleDropDown/>}
+                    {field.fieldType === 'multiDropDown' && <MultiDropDown/>}
 
-                    {expandImageField && field.hasNestedField &&
-                    <ValueNestedImageFields
-                        expandSizeField={expandSizeField}
+                    {isImageFieldExpanded && field.hasNestedField &&
+                    <ImageSizeValue
+                        isSizeFieldExpanded={isSizeFieldExpanded}
                         hasNestedField={field.hasNestedField}/>}
                 </div>
             </div>

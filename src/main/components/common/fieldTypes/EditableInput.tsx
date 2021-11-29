@@ -5,15 +5,15 @@ type EditableInputType = {
 }
 
 export const EditableInput: FC<EditableInputType> = ({propertyValue}) => {
-    const [value, setValue] = useState(propertyValue)
+    const [inputValue, setInputValue] = useState(propertyValue)
 
-    const onEditableInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.currentTarget.value)
+    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setInputValue(e.currentTarget.value)
     }
 
     return (
         <>
-            <input type="text" value={value} onChange={onEditableInputChange}/>
+            <input type="text" value={inputValue} onChange={onInputChange}/>
         </>
     )
 }

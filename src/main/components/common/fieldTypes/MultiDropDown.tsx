@@ -2,12 +2,15 @@ import React, {FC, useState} from 'react';
 import style from './MultiDropDown.module.scss'
 import {BsChevronDown} from 'react-icons/all';
 
-type assignedSubjectAreaTypesType = {
+//assignedSubjectAreaType
+type assignedSubjectAreaType = {
     id: string
     name: string
+    // checked: boolean
 }
 
-const assignedSubjectAreaTypes: assignedSubjectAreaTypesType[] = [
+//assignedSubjectArea
+const assignedSubjectArea: assignedSubjectAreaType[] = [
     {id: 'D', name: 'Администрирование системы'},
     {id: 'B', name: 'Архитектура и строительство'},
     {id: 'C', name: 'Отладка'},
@@ -17,25 +20,25 @@ const assignedSubjectAreaTypes: assignedSubjectAreaTypesType[] = [
 
 export const MultiDropDown: FC = () => {
 
-    const [showDropdownList, setShowDropdownList] = useState(false)
+    const [isDropdownListOpened, setIsDropdownListOpened] = useState(false) //isDropdownListOpened
     const [displayStyle, setDisplayStyle] = useState('none')
-    const [selectOption, setSelectOption] = useState<assignedSubjectAreaTypesType[]>([])
-    const [checkedState, setCheckedState] = useState(new Array(assignedSubjectAreaTypes.length).fill(false))
+    const [selectOption, setSelectOption] = useState<assignedSubjectAreaType[]>([])
+    const [checkedState, setCheckedState] = useState(new Array(assignedSubjectArea.length).fill(false))
 
     const onIconClick = () => {
-        if (!showDropdownList) {
+        if (!isDropdownListOpened) {
             setDisplayStyle('flex')
-            setShowDropdownList(true)
+            setIsDropdownListOpened(true)
         } else {
             setDisplayStyle('none')
-            setShowDropdownList(false)
+            setIsDropdownListOpened(false)
         }
     }
 
-    const onAllCheckboxesChange = () => {
+    const onAllOptionsChange = () => {
         if (checkedState.every(el => el === false) || checkedState.some(el => el === true)) {
             setCheckedState(checkedState.map(() => true))
-            setSelectOption(assignedSubjectAreaTypes)
+            setSelectOption(assignedSubjectArea)
         }
         if (checkedState.every(el => el === true)) {
             setCheckedState(checkedState.map(() => false))
@@ -58,11 +61,11 @@ export const MultiDropDown: FC = () => {
                     <label>
                         <input type="checkbox"
                                checked={checkedState.every(el => el === true)}
-                               onChange={onAllCheckboxesChange}/>
+                               onChange={onAllOptionsChange}/>
                         <li>Все</li>
                     </label>
 
-                    {assignedSubjectAreaTypes.map(({id, name}, index) => {
+                    {assignedSubjectArea.map(({id, name}, index) => {
 
                         const markOptions = (position: number) => {
                             const updatedCheckedState = checkedState.map((item, index) =>
@@ -70,21 +73,19 @@ export const MultiDropDown: FC = () => {
                             )
                             setCheckedState(updatedCheckedState)
 
-                            const arr: assignedSubjectAreaTypesType[] = []
+                            const arr: assignedSubjectAreaType[] = []
                             updatedCheckedState.forEach((el, index) => {
                                 if (el === true) {
                                     arr.push({
-                                        id: assignedSubjectAreaTypes[index].id,
-                                        name: assignedSubjectAreaTypes[index].name
+                                        id: assignedSubjectArea[index].id,
+                                        name: assignedSubjectArea[index].name
                                     })
                                     return arr
                                 }
                             })
                             setSelectOption(arr)
                         }
-
                         const onCheckboxChange = () => markOptions(index)
-
 
                         return (
                             <label key={id}>

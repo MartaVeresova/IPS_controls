@@ -1,21 +1,21 @@
 import React, {FC} from 'react';
-import style from './ValueNestedImageFields.module.scss';
+import style from './ImageSizeValue.module.scss';
 import {observer} from 'mobx-react-lite';
 
-type ValueNestedImageFieldsType = {
-    expandSizeField: boolean
+type ImageSizeValueType = {
+    isSizeFieldExpanded: boolean
     hasNestedField: boolean
 }
 
-export const ValueNestedImageFields: FC<ValueNestedImageFieldsType> = observer(props => {
-    const {expandSizeField, hasNestedField} = props
+export const ImageSizeValue: FC<ImageSizeValueType> = observer(props => {
+    const {isSizeFieldExpanded, hasNestedField} = props
 
     return (
         <>
             <div className={style.openImageField}>
                 <input type="text" value="16; 16" readOnly/>
 
-                {expandSizeField && hasNestedField &&
+                {isSizeFieldExpanded && hasNestedField &&
                 <div style={{display: 'flex', flexDirection: 'column'}}>
                     <input type="text" value="16" readOnly/>
                     <input type="text" value="16" readOnly/>
