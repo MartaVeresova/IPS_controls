@@ -57,9 +57,8 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
         <>
             <div className={style.inputField}>
                 <img alt="img" className={style.image} src={selectedFile ? preview : propertyValue}/>
-                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onInputBlur}/>
-                <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation}
-                       onChange={onSelectFile}/>
+                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onInputBlur} readOnly/>
+                <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation} onChange={onSelectFile}/>
                 <button>...</button>
             </div>
         </>

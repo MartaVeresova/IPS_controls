@@ -4,12 +4,12 @@ import {observer} from 'mobx-react-lite';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
 import {dataOfPropertiesTabType} from '../RightBlock';
 import {ImageSizeProperty} from './nestedImageFields/ImageSizeProperty';
-import {EditableInput} from '../../common/fieldTypes/EditableInput';
-import {ReadOnlyInput} from '../../common/fieldTypes/ReadOnlyInput';
-import {OpenFileInput} from '../../common/fieldTypes/OpenFileInput';
+import {EditableInput} from '../../common/inputTypes/EditableInput';
+import {ReadOnlyInput} from '../../common/inputTypes/ReadOnlyInput';
+import {OpenFileInput} from '../../common/inputTypes/OpenFileInput';
 import {ImageSizeValue} from './nestedImageFields/ImageSizeValue';
-import {MultiDropDown} from '../../common/fieldTypes/MultiDropDown';
-import {SimpleDropDown} from '../../common/fieldTypes/SimpleDropDown';
+import {MultiDropDown} from '../../common/inputTypes/MultiDropDown';
+import {SimpleDropDown} from '../../common/inputTypes/SimpleDropDown';
 
 
 type PropertiesControlType = {
@@ -53,7 +53,7 @@ export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) =
                     {field.fieldType === 'editableInput' && <EditableInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'readOnlyInput' && <ReadOnlyInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'openFileInput' && <OpenFileInput propertyValue={field.propertyValue}/>}
-                    {field.fieldType === 'singleDropDown' && <SimpleDropDown/>}
+                    {field.fieldType === 'singleDropDown' && <SimpleDropDown propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'multiDropDown' && <MultiDropDown/>}
 
                     {isImageFieldExpanded && field.hasNestedField &&

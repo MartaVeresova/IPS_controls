@@ -53,63 +53,63 @@ const dataOfPropertiesTab: dataOfPropertiesTabType[] = [
         hasNestedField: false,
         propertyName: 'Глобальный идентификатор',
         propertyValue: propertyValueSection.globalKey,
-        fieldType: 'editableInput'
+        fieldType: 'editableInput',
     },
     {
         id: 2,
         hasNestedField: false,
         propertyName: 'Идентификатор',
         propertyValue: propertyValueSection.id,
-        fieldType: 'readOnlyInput'
+        fieldType: 'readOnlyInput',
     },
     {
         id: 3,
         hasNestedField: true,
         propertyName: 'Изображение',
         propertyValue: propertyValueSection.icon,
-        fieldType: 'openFileInput'
+        fieldType: 'openFileInput',
     },
     {
         id: 4,
         hasNestedField: false,
         propertyName: 'Использовать в качестве первого шага',
         propertyValue: propertyValueSection.isDefault,
-        fieldType: 'singleDropDown'
+        fieldType: 'singleDropDown',
     },
     {
         id: 5,
         hasNestedField: false,
         propertyName: 'Контроль подписей',
         propertyValue: '[не настроен]',
-        fieldType: 'readOnlyInput'
+        fieldType: 'readOnlyInput',
     },
     {
         id: 6,
         hasNestedField: false,
         propertyName: 'Литера',
         propertyValue: propertyValueSection.litera,
-        fieldType: 'editableInput'
+        fieldType: 'editableInput',
     },
     {
         id: 7,
         hasNestedField: false,
         propertyName: 'Наименование',
         propertyValue: propertyValueSection.name,
-        fieldType: 'editableInput'
+        fieldType: 'editableInput',
     },
     {
         id: 8,
         hasNestedField: false,
         propertyName: 'Предметная область',
         propertyValue: propertyValueSection.assignedSubjectAreaTypes,
-        fieldType: 'multiDropDown'
+        fieldType: 'multiDropDown',
     },
     {
         id: 9,
         hasNestedField: false,
         propertyName: 'Файловый шкаф',
         propertyValue: propertyValueSection.storageId,
-        fieldType: 'singleDropDown'
+        fieldType: 'editableInput',
     },
 ]
 
@@ -129,8 +129,12 @@ export const RightBlock: FC = observer(() => {
                 {dataOfPropertiesTab.map(field => <PropertiesControl key={field.id} field={field}/>)}
             </div>
 
+            <div>
+                <input type="checkbox" id="string"/>
+                <label htmlFor="string">!</label>
+            </div>
+
             {/*<div id="output">!</div>*/}
-            {/*<div className={style.svg}></div>*/}
         </>
     )
 })

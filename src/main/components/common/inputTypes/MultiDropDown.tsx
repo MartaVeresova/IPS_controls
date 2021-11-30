@@ -1,6 +1,5 @@
-import React, {FC, useState} from 'react';
+import React, {FC, FocusEvent, useState} from 'react';
 import style from './MultiDropDown.module.scss'
-import {BsChevronDown} from 'react-icons/all';
 
 //assignedSubjectAreaType
 type assignedSubjectAreaType = {
@@ -20,18 +19,18 @@ const assignedSubjectArea: assignedSubjectAreaType[] = [
 
 export const MultiDropDown: FC = () => {
 
-    const [isDropdownListOpened, setIsDropdownListOpened] = useState(false) //isDropdownListOpened
-    const [displayStyle, setDisplayStyle] = useState('none')
+    const [isDropDownListOpened, setIsDropDownListOpened] = useState(false) //isDropdownListOpened
     const [selectOption, setSelectOption] = useState<assignedSubjectAreaType[]>([])
     const [checkedState, setCheckedState] = useState(new Array(assignedSubjectArea.length).fill(false))
 
-    const onIconClick = () => {
-        if (!isDropdownListOpened) {
-            setDisplayStyle('flex')
-            setIsDropdownListOpened(true)
-        } else {
-            setDisplayStyle('none')
-            setIsDropdownListOpened(false)
+    const onInputClick = () => {
+        setIsDropDownListOpened(!isDropDownListOpened)
+    }
+
+    const onDropDownBlur = (e: FocusEvent<HTMLInputElement | HTMLLabelElement>) => {
+        const event = e.relatedTarget
+        if (event === null || event.parentNode === null || event.parentNode.nodeName !== 'LABEL') {
+            setIsDropDownListOpened(false)
         }
     }
 
@@ -49,20 +48,22 @@ export const MultiDropDown: FC = () => {
     return (
         <>
             <form className={style.multiselect}>
-                <div className={style.selectBox}>
-                    <input type="text"
-                           readOnly
-                           value={checkedState.every(el => el === true)
-                               ? 'Все'
-                               : selectOption.map(el => el.name)}/>
-                    <BsChevronDown className={style.icon} onClick={onIconClick}/>
-                </div>
-                <ul className={style.checkboxes} style={{display: displayStyle}}>
-                    <label>
+                <input type="text"
+                       readOnly
+                       onClick={onInputClick}
+                       onBlur={onDropDownBlur}
+                       value={checkedState.every(el => el === true)
+                           ? 'Все'
+                           : selectOption.map(el => el.name)}/>
+
+                <label tabIndex={0} className={style.icon}>⌵</label>
+
+                <ul className={isDropDownListOpened ? style.dropDownListOpened : style.dropDownListClosed}>
+                    <label className={style.list} onBlur={onDropDownBlur}>
                         <input type="checkbox"
                                checked={checkedState.every(el => el === true)}
                                onChange={onAllOptionsChange}/>
-                        <li>Все</li>
+                        <li tabIndex={0}>Все</li>
                     </label>
 
                     {assignedSubjectArea.map(({id, name}, index) => {
@@ -88,11 +89,11 @@ export const MultiDropDown: FC = () => {
                         const onCheckboxChange = () => markOptions(index)
 
                         return (
-                            <label key={id}>
+                            <label key={id} className={style.list} onBlur={onDropDownBlur}>
                                 <input type="checkbox"
                                        checked={checkedState[index]}
                                        onChange={onCheckboxChange}/>
-                                <li>{name}</li>
+                                <li tabIndex={index}>{name}</li>
                             </label>
                         )
                     })}

@@ -8,14 +8,13 @@ import {RightBlock} from './main/components/promotionLevels/RightBlock';
 export const App: FC = observer(() => {
     const [isRightBlockShow, setIsRightBlockShow] = useState(false)
 
-
     return (
         <div className={style.wrap}>
             <div className={style.treeMenu}><TreeMenu setIsRightBlockShow={setIsRightBlockShow}/></div>
             {
-                isRightBlockShow && <div><RightBlock/></div> //rightBlock
+                isRightBlockShow && <div><RightBlock/></div>
             }
         </div>
-    );
+    )
 })
 
