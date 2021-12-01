@@ -1,0 +1,20 @@
+.tree {
+  list-style-type: none;
+  padding-left: 5px;
+
+  li {
+    margin: 0;
+    padding: 10px 10px;
+    width: 250px;
+    list-style: none;
+
+    span {
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      display: block;
+    }
+  }
+}

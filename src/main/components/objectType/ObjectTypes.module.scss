@@ -1,0 +1,18 @@
+.tabControlButtons {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 70vw;
+
+  button {
+    font-size: 10px;
+  }
+}
+
+.tabControlContainer {
+  display: flex;
+  flex-direction: column;
+  width: 70vw;
+  border: .1px solid gray;
+}
+

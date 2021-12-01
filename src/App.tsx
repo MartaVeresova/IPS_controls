@@ -1,19 +1,24 @@
 import React, {FC, useState} from 'react';
 import style from './App.module.scss'
 import {observer} from 'mobx-react-lite';
-import {TreeMenu} from './main/components/promotionLevels/TreeMenu';
-import {RightBlock} from './main/components/promotionLevels/RightBlock';
+import {LifeCycle} from './main/components/lifeCycle/LifeCycle';
+import {RootTree} from './main/components/RootTree';
+import {ObjectTypes} from './main/components/objectType/ObjectTypes';
 
 
 export const App: FC = observer(() => {
-    const [isRightBlockShow, setIsRightBlockShow] = useState(false)
+    const [isPromotionLevelsOpen, setIsPromotionLevelsOpen] = useState(false)
+    const [isSharedArchivesOpen, setIsSharedArchivesOpen] = useState(false)
 
     return (
         <div className={style.wrap}>
-            <div className={style.treeMenu}><TreeMenu setIsRightBlockShow={setIsRightBlockShow}/></div>
-            {
-                isRightBlockShow && <div><RightBlock/></div>
-            }
+            <div className={style.treeMenu}>
+                <RootTree setIsPromotionLevelsOpen={setIsPromotionLevelsOpen}
+                          setIsSharedArchivesOpen={setIsSharedArchivesOpen}
+                />
+            </div>
+            {isPromotionLevelsOpen && <div><LifeCycle/></div>}
+            {isSharedArchivesOpen && <div><ObjectTypes/></div>}
         </div>
     )
 })

@@ -1,4 +1,4 @@
-.multiselect {
+.dropDown {
   width: 100%;
   background-color: #fff;
   border-radius: 2px;
@@ -14,9 +14,13 @@
     width: 100%;
     z-index: 1;
     background-color: transparent;
+    //background-position: top 2px right 2.5px;
+    //background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" height="100" width="100"%3E%3Cpath d="M97.625 25.3l-4.813-4.89c-1.668-1.606-3.616-2.41-5.84-2.41-2.27 0-4.194.804-5.777 2.41L50 52.087 18.806 20.412C17.223 18.805 15.298 18 13.03 18c-2.225 0-4.172.804-5.84 2.41l-4.75 4.89C.813 26.95 0 28.927 0 31.23c0 2.346.814 4.301 2.439 5.865l41.784 42.428C45.764 81.174 47.689 82 50 82c2.268 0 4.215-.826 5.84-2.476l41.784-42.428c1.584-1.608 2.376-3.563 2.376-5.865 0-2.26-.792-4.236-2.375-5.932z"/%3E%3C/svg%3E');
+    //background-repeat: no-repeat;
+    //background-size: 4%;
   }
 
-  .icon {
+  label {
     position: absolute;
     top: 1px;
     right: 1px;
@@ -38,51 +42,32 @@
     position: absolute;
     background-color: #fff;
     width: 100%;
-    margin: 0;
+    margin-top: 1.5px;
     box-shadow: 0 1px 2px rgb(204, 204, 204);
+    border-radius: 0 1px 2px 2px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     max-height: 100px;
+    overflow-y: auto;
     z-index: 3;
     padding: 0;
     list-style: none;
-    overflow-y: auto;
-    border: 1px #dadada solid;
-    //transition: all 2s ease;
+    transition: display 4s ease;
+    //border: 1px solid red;
 
-    .list {
-      display: flex;
-      flex-direction: row;
-
-      input[type='checkbox'] {
-        position: relative;
-        top: 2px;
-        left: 5px;
-        margin: 0;
-        width: 15px;
-        height: 15px;
-        cursor: pointer;
-      }
-
-      li {
-        width: 100%;
-        padding: 1px 0 0 10px;
-        transition: all .2s ease-in-out;
-        cursor: pointer;
-      }
-
-      li:hover {
-        background-color: #f2f2f2;
-      }
-
-      li:active {
-        background-color: #e2e2e2;
-      }
+    li {
+      padding: 2px 5px;
+      transition: all .2s ease-in-out;
+      cursor: pointer;
     }
 
-    .list:hover {
+    li:hover {
       background-color: #f2f2f2;
+    }
+
+    li:active {
+      background-color: #e2e2e2;
     }
   }
 
@@ -91,12 +76,12 @@
   }
 }
 
-.multiselect:active {
+.dropDown:active {
   background-color: #f8f8f8;
 }
 
-.multiselect.active:hover,
-.multiselect.active {
+.dropDown.active:hover,
+.dropDown.active {
   box-shadow: 0 0 4px rgb(204, 204, 204);
   border-radius: 2px 2px 0 0;
   background-color: #f8f8f8;

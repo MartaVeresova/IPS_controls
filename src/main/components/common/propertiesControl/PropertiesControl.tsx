@@ -2,18 +2,18 @@ import React, {FC, useCallback, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {observer} from 'mobx-react-lite';
 import {BsChevronDown, BsChevronRight} from 'react-icons/all';
-import {dataOfPropertiesTabType} from '../RightBlock';
 import {ImageSizeProperty} from './nestedImageFields/ImageSizeProperty';
-import {EditableInput} from '../../common/inputTypes/EditableInput';
-import {ReadOnlyInput} from '../../common/inputTypes/ReadOnlyInput';
-import {OpenFileInput} from '../../common/inputTypes/OpenFileInput';
+import {EditableInput} from '../inputTypes/EditableInput';
+import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
+import {OpenFileInput} from '../inputTypes/OpenFileInput';
 import {ImageSizeValue} from './nestedImageFields/ImageSizeValue';
-import {MultiDropDown} from '../../common/inputTypes/MultiDropDown';
-import {SimpleDropDown} from '../../common/inputTypes/SimpleDropDown';
+import {MultiDropDown} from '../inputTypes/MultiDropDown';
+import {SimpleDropDownExample} from '../inputTypes/SimpleDropDownExample';
+import {LifeCycleDataType} from '../../lifeCycle/LifeCycleData';
 
 
 type PropertiesControlType = {
-    field: dataOfPropertiesTabType
+    field: LifeCycleDataType
 }
 
 export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) => {
@@ -33,7 +33,7 @@ export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) =
 
     return (
         <>
-            <div key={field.id} className={style.propertyDisplay}>
+            <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
                     {field.hasNestedField && !isImageFieldExpanded &&
                     <BsChevronRight className={style.icon} onClick={onIconClick}/>}
@@ -53,7 +53,7 @@ export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) =
                     {field.fieldType === 'editableInput' && <EditableInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'readOnlyInput' && <ReadOnlyInput propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'openFileInput' && <OpenFileInput propertyValue={field.propertyValue}/>}
-                    {field.fieldType === 'singleDropDown' && <SimpleDropDown propertyValue={field.propertyValue}/>}
+                    {field.fieldType === 'singleDropDown' && <SimpleDropDownExample propertyValue={field.propertyValue}/>}
                     {field.fieldType === 'multiDropDown' && <MultiDropDown/>}
 
                     {isImageFieldExpanded && field.hasNestedField &&
