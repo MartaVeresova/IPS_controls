@@ -1,4 +1,5 @@
 import React, {ChangeEvent, FC, useState} from 'react';
+import style from './EditableInput.module.scss'
 
 type EditableInputType = {
     propertyValue: string
@@ -13,7 +14,7 @@ export const EditableInput: FC<EditableInputType> = ({propertyValue}) => {
 
     return (
         <>
-            <input type="text" value={inputValue} onChange={onInputChange}/>
+            <input type="text" className={style.editableInput} value={inputValue} onChange={onInputChange}/>
         </>
     )
 }

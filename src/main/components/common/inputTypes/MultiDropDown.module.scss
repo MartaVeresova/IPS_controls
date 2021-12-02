@@ -10,28 +10,37 @@
 
   input {
     display: block;
-    position: relative;
+    //position: relative;
     width: 100%;
-    z-index: 1;
+    //z-index: 1;
     background-color: transparent;
+    font-size: 20px;
+    cursor: pointer;
   }
 
   .icon {
+    background-color: white;
     position: absolute;
-    top: 1px;
-    right: 1px;
+    top: 2px;
+    right: 2px;
     display: flex;
-    height: 15px;
+    height: 23px;
+    width: 25px;
     outline: 0;
     color: black;
-    z-index: 0;
-    background-color: transparent;
-    padding: 0 2px;
-    font-size: 15px;
+    //z-index: 1;
+    cursor: pointer;
+    //background-color: transparent;
+    padding: 4px;
+    font-size: 20px;
     text-align: center;
     line-height: 10px;
     //transition: transform .3s;
     //transform: rotate(90deg);
+  }
+
+  .icon:hover {
+    font-weight: bold;
   }
 
   .dropDownListOpened {
@@ -49,6 +58,7 @@
     list-style: none;
     overflow-y: auto;
     border: 1px #dadada solid;
+    font-size: 20px;
     //transition: all 2s ease;
 
     .list {
@@ -84,10 +94,6 @@
     .list:hover {
       background-color: #f2f2f2;
     }
-  }
-
-  .dropDownListClosed {
-    display: none;
   }
 }
 

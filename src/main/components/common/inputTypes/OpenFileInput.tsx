@@ -3,22 +3,18 @@ import style from './OpenFileInput.module.scss'
 
 type OpenFileInputType = {
     propertyValue: string
+    isImageFieldExpanded: boolean
+    isSizeFieldExpanded: boolean
 }
 
-export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
+export const OpenFileInput: FC<OpenFileInputType> = props => {
 
-    const [isInputFocused, setIsInputFocused] = useState(false)
+    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded} = props
+
     const [selectedFile, setSelectedFile] = useState<File | null>()
     const [preview, setPreview] = useState<string>('')
-
-    // useEffect(() => {
-    //     let elem = document.getElementsByTagName('img')
-    //     console.log(elem)
-    //     let theCSSprop = window.getComputedStyle(elem[0]).width;
-    //     console.log((parseInt(theCSSprop)).toString())
-    //     // @ts-ignore
-    //     document.getElementById('output').innerHTML = (parseInt(theCSSprop)).toString();
-    // }, [])
+    const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>('')
+    console.log(selectedFile)
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -26,7 +22,6 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
             setPreview('')
             return
         }
-
         const objectUrl = URL.createObjectURL(selectedFile)
         setPreview(objectUrl)
 
@@ -35,32 +30,88 @@ export const OpenFileInput: FC<OpenFileInputType> = ({propertyValue}) => {
     }, [selectedFile])
 
 
-    const onSelectFile = (e: ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files || !e.target.files.length) {
+    const imageUpload = (event: ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+
+        const files = event.target.files
+        const reader = new FileReader()
+
+        if (!files || !files.length) {
             setSelectedFile(null)
             return
         }
-        setSelectedFile(e.target.files[0])
+        setSelectedFile(files[0])
+
+        if (reader !== undefined && files[0] !== undefined) {
+            reader.onloadend = () => {
+                setImagePreview(reader.result)
+            }
+            reader.readAsDataURL(files[0])
+        }
+        // console.log(event)
+        // console.log(reader)
+        console.log(event)
     }
 
-    const onInputFocus = () => {
-        setIsInputFocused(true)
+    const inputValue = () => {
+        if (selectedFile || propertyValue) {
+            return '(Значок)'
+        }
+        return '(отсутствует)'
     }
-    const onInputBlur = () => {
-        setIsInputFocused(false)
-    }
-    const stopPropagation = () => {
-        // e.stopImmediatePropagation()
-    }
+
 
     return (
         <>
             <div className={style.inputField}>
-                <img alt="img" className={style.image} src={selectedFile ? preview : propertyValue}/>
-                <input type="text" value="(Значок)" onFocus={onInputFocus} onBlur={onInputBlur} readOnly/>
-                <input type="file" name="file" id="file" accept=".ico" onClick={stopPropagation} onChange={onSelectFile}/>
+                <img alt="" src={selectedFile ? preview : propertyValue}/>
+                <input type="text" value={inputValue()} readOnly/>
+                <input tabIndex={0} type="file" name="file" id="file" accept=".ico" onChange={imageUpload}/>
                 <button>...</button>
+            </div>
+
+            <div className={style.openImageField} hidden={!isImageFieldExpanded}>
+                <input type="text" value="16; 16" readOnly/>
+
+                <div className={style.widthHeightValueFields} hidden={!isSizeFieldExpanded}>
+                    <input type="text" value="16" readOnly/>
+                    <input type="text" value="16" readOnly/>
+                </div>
             </div>
         </>
     )
 }
+
+
+// useEffect(() => {
+//     let elem = document.getElementsByTagName('img')
+//     console.log(elem)
+//     let theCSSprop = window.getComputedStyle(elem[0]).width;
+//     console.log((parseInt(theCSSprop)).toString())
+//     // @ts-ignore
+//     document.getElementById('output').innerHTML = (parseInt(theCSSprop)).toString();
+// }, [])
+
+
+// const onChange = (e: any) => {
+//     const files = e.target.files
+//     console.log("file", files[0]);
+//     let file = files[0];
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = _handleReaderLoaded
+//         reader.readAsBinaryString(file)
+//     }
+// }
+
+// const onFileSubmit = (e: any) => {
+//     setIsLoading(true);
+//     e.preventDefault()
+//     console.log('bine', base64)
+//     let payload = {image: base64}
+//     console.log('payload', payload)
+//
+//     setTimeout(() => {
+//         setIsLoading(false)
+//     }, 2000)
+// }

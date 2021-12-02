@@ -4,16 +4,17 @@
 }
 .wrap {
   margin: 50px 10px;
-  width: 70vw;
+  width: 60vw;
   max-height: 200px;
 
   display: flex;
   flex-direction: row;
+  justify-content: left;
   //position: relative;
   //z-index: 0;
 
   .treeMenu {
-    min-width: 220px;
+    min-width: 500px;
     font-size: 11px;
   }
 

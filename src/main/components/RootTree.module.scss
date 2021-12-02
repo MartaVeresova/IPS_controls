@@ -1,11 +1,13 @@
 .tree {
   list-style-type: none;
   padding-left: 5px;
+  font-size: 20px;
+  width: 300px;
 
   li {
     margin: 0;
     padding: 10px 10px;
-    width: 250px;
+    min-width: 400px;
     list-style: none;
 
     span {

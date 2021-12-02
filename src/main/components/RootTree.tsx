@@ -2,30 +2,23 @@ import React, {FC, useState} from 'react';
 import style from './RootTree.module.scss';
 
 type TreeMenuType = {
-    setIsPromotionLevelsOpen: (value: boolean) => void
-    setIsSharedArchivesOpen: (value: boolean) => void
+    setIsLifeCycleLevelOpen: (value: boolean) => void
+    setIsObjectTypesOpen: (value: boolean) => void
+    isObjectTypesOpen: boolean
 }
 
 export const RootTree: FC<TreeMenuType> = (props) => {
 
-    const {setIsPromotionLevelsOpen, setIsSharedArchivesOpen} = props
+    const {setIsLifeCycleLevelOpen, setIsObjectTypesOpen, isObjectTypesOpen} = props
 
-    const [isObjectTypesOpen, setIsObjectTypesOpen] = useState(false)
     const [isPromoLevelOpen, setIsPromoLevelOpen] = useState(false)
     const [isArchivesOpen, setIsArchivesOpen] = useState(false)
 
-    const onPropertyControlClick = () => {
-        setIsSharedArchivesOpen(false)
-        setIsPromotionLevelsOpen(true)
-    }
-
-    const onSharedArchivesClick = () => {
-        setIsPromotionLevelsOpen(false)
-        setIsSharedArchivesOpen(true)
-    }
 
     const onFiveLiClick = () => {
         setIsObjectTypesOpen(!isObjectTypesOpen)
+        setIsLifeCycleLevelOpen(false)
+        setIsObjectTypesOpen(true)
     }
 
     const onFiveOneLiClick = () => {
@@ -34,6 +27,8 @@ export const RootTree: FC<TreeMenuType> = (props) => {
 
     const onSevenLiClick = () => {
         setIsPromoLevelOpen(!isPromoLevelOpen)
+        setIsObjectTypesOpen(false)
+        setIsLifeCycleLevelOpen(true)
     }
 
     return (
@@ -62,7 +57,7 @@ export const RootTree: FC<TreeMenuType> = (props) => {
                             <li><span onClick={onFiveOneLiClick}>Архивы</span>
                                 {
                                     isArchivesOpen &&
-                                    <ul onClick={onSharedArchivesClick}>
+                                    <ul>
                                         <li>Общие архивы</li>
                                     </ul>
                                 }
@@ -77,7 +72,7 @@ export const RootTree: FC<TreeMenuType> = (props) => {
                 <li><span onClick={onSevenLiClick}>Уровни продвижения</span>
                     {
                         isPromoLevelOpen &&
-                        <ul onClick={onPropertyControlClick}>
+                        <ul>
                             <li>Удалено</li>
                             <li>Создание и модификация</li>
                             <li>Производство и эксплуатация</li>

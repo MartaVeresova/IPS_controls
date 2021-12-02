@@ -1,7 +1,6 @@
-import React, {FC, FocusEvent, useState} from 'react';
-import style from './SimpleDropDown.module.scss'
-
-// type simpleDropDownDataType = 'да' | 'нет'
+import React, {FC, useRef, useState} from 'react';
+import style from './SimpleDropDown.module.scss';
+import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 
 type SimpleDropDownType = {
     propertyValue: boolean
@@ -9,21 +8,16 @@ type SimpleDropDownType = {
 
 const simpleDropDownData: string[] = ['да', 'нет']
 
-
 export const SimpleDropDown: FC<SimpleDropDownType> = ({propertyValue}) => {
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState(false)
     const [selectOption, setSelectOption] = useState<boolean>(propertyValue)
+    const formRef = useRef<HTMLFormElement | null>(null);
+
+    useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
 
     const onInputClick = () => {
         setIsDropDownListOpened(!isDropDownListOpened)
-    }
-
-    const onInputBlur = (e: FocusEvent<HTMLInputElement>) => {
-        const event = e.relatedTarget
-        if (event === null || event.nodeName !== 'LI') {
-            setIsDropDownListOpened(false)
-        }
     }
 
     const options = simpleDropDownData.map((item, index) => {
@@ -38,17 +32,37 @@ export const SimpleDropDown: FC<SimpleDropDownType> = ({propertyValue}) => {
 
     return (
         <>
-            <form className={style.dropDown}>
+            <form className={style.dropDown} ref={formRef}>
                 <input type="text"
                        value={selectOption ? simpleDropDownData[0] : simpleDropDownData[1]}
                        onClick={onInputClick}
-                       onBlur={onInputBlur}
                        readOnly/>
-                <label tabIndex={0}>⌵</label>
-                <ul className={isDropDownListOpened ? style.dropDownListOpened : style.dropDownListClosed}>
-                    {options}
-                </ul>
+                <label tabIndex={0} onClick={onInputClick}>⌵</label>
+                <div hidden={!isDropDownListOpened}>
+                    <ul className={style.dropDownListOpened}>
+                        {options}
+                    </ul>
+                </div>
+
+                {/*<ul className={isDropDownListOpened ? style.dropDownListOpened : style.dropDownListClosed}>*/}
+                {/*    {options}*/}
+                {/*</ul>*/}
             </form>
         </>
     )
+}
+
+{/*{*/
+}
+{/*    isDropDownListOpened &&*/
+}
+{/*    <ul*/
+}
+{/*        className={style.dropDownListOpened}>*/
+}
+{/*        {options}*/
+}
+{/*    </ul>*/
+}
+{/*}*/
 }

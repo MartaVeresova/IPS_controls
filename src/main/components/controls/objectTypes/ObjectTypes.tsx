@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import style from './ObjectTypes.module.scss'
 import {observer} from 'mobx-react-lite';
-import {PropertiesControl} from '../common/propertiesControl/PropertiesControl';
-import {objectTypesData} from './ObjectTypeData';
+import {PropertiesControl} from '../../common/propertiesControl/PropertiesControl';
+import {objectTypesData} from './ObjectTypesData';
 
 
 export const ObjectTypes: FC = observer(() => {
