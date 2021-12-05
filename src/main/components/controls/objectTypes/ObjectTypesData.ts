@@ -1,24 +1,13 @@
-import {AssignedSubjectAreaType, PropertyDataType} from '../../common/types/Types';
+import {
+    AssignedSubjectAreaType,
+    CaptionAttributeType,
+    DefaultRelationTypeType,
+    ObjectTypesType,
+    PropertyDataType
+} from '../../common/types/Types';
 
 
 //данные с сервака
-const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
-    {id: "A", name: "Конструкторская подготовка"},
-    {id: "B", name: "Архитектура и строительство"},
-    {id: "C", name: "Отладка"},
-    {id: "D", name: "Администрирование системы"},
-    {id: "E", name: "Технологическая подготовка"},
-    {id: "F", name: "Общая"},
-    {id: "G", name: "Производство"},
-    {id: "H", name: "Управление НСИ"},
-    {id: "I", name: "SubjectArea_test1_ui"}
-]
-
-export type DefaultRelationTypeType = {
-    id: number
-    name: string
-}
-
 export const defaultRelationType: DefaultRelationTypeType[] = [
     {id: 0, name: 'Аналоги'},
     {id: 1, name: 'Вложения'},
@@ -30,11 +19,6 @@ export const defaultRelationType: DefaultRelationTypeType[] = [
     {id: 7, name: 'Изменяемые объекты'},
     {id: 8, name: 'Изменяется по извещению'},
 ]
-
-export type CaptionAttributeType = {
-    id: number
-    displayName: string
-}
 
 export const captionAttribute: CaptionAttributeType[] = [
     {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},
@@ -53,38 +37,19 @@ export const captionAttribute: CaptionAttributeType[] = [
     {id: 1017, displayName: 'Файловый шкаф'}
 ]
 
-type PropertyValueSectionType = {
-    id: number
-    globalKey: string
-    name: string
-    shortName: string
-    objectInstanceName: string
-    note_Create: string
-    icon: string | null
-    versionMode: string
-    defaultRelationTypeId: number
-    captionAttributeId: number | null
-    isAbleToAddAnyAttributes: boolean
-    deletedObjectLifetimeInDays: number
-    objectTypeClassifiedOptionId: number
-    isCurrentProjectEnabled: boolean
-    isNeedToCheckParentAccess: boolean
-    isLocalObjectType: boolean
-    isDisableManualCreate: boolean
-    isAbleToCreateSnapshots: boolean
-    isAutoContextEnabled: boolean
-    isMandateAccess: boolean
-    isNeedToIndexAttributes: boolean
-    isAutoCreateSnapshots: boolean
-    isDisablePrototyping: boolean
-    isNotificationsEnabled: boolean
-    isForumEnabled: boolean
-    isExtendedAudit: boolean
-    isEnableWebEdit: boolean
-    assignedSubjectAreaTypes: AssignedSubjectAreaType[]
-}
+export const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
+    {id: "A", name: "Конструкторская подготовка"},
+    {id: "B", name: "Архитектура и строительство"},
+    {id: "C", name: "Отладка"},
+    {id: "D", name: "Администрирование системы"},
+    {id: "E", name: "Технологическая подготовка"},
+    {id: "F", name: "Общая"},
+    {id: "G", name: "Производство"},
+    {id: "H", name: "Управление НСИ"},
+    {id: "I", name: "SubjectArea_test1_ui"}
+]
 
-const propertyValueSection: PropertyValueSectionType = {
+const propertyValueSection: ObjectTypesType = {
     id: 2039,
     globalKey: '037c4a0e-d1b4-4531-97dd-72cc5f7962d4',
     name: 'name_create',
@@ -112,7 +77,7 @@ const propertyValueSection: PropertyValueSectionType = {
     isForumEnabled: true,
     isExtendedAudit: true,
     isEnableWebEdit: false,
-    assignedSubjectAreaTypes: assignedSubjectAreaTypes,
+    assignedSubjectAreaTypes: ['B', 'C'],
 }
 
 //данные на фронте
@@ -125,7 +90,7 @@ export const objectTypesData: PropertyDataType[] = [
     {
         propertyName: 'Версионность',
         propertyValue: propertyValueSection.versionMode,
-        fieldType: 'editableInput',
+        fieldType: 'simpleDropDown',
     },
     {
         propertyName: 'Включать новые версии в текущий контекст редактирования',

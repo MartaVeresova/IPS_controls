@@ -1,13 +1,13 @@
 import React, {FC, memo, useState} from 'react';
 import style from './RootTree.module.scss';
 
-type TreeMenuType = {
+type PropsType = {
     setIsLifeCycleLevelOpen: (value: boolean) => void
     setIsObjectTypesOpen: (value: boolean) => void
     isObjectTypesOpen: boolean
 }
 
-export const RootTree: FC<TreeMenuType> = memo((props) => {
+export const RootTree: FC<PropsType> = memo((props) => {
 
     const {setIsLifeCycleLevelOpen, setIsObjectTypesOpen, isObjectTypesOpen} = props
 

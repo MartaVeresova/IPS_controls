@@ -2,7 +2,10 @@ import React, {FC, memo, useRef, useState} from 'react';
 import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 
-//assignedSubjectAreaType
+type PropsType = {
+    propertyValue: string[]
+}
+
 type assignedSubjectAreaType = {
     id: string
     name: string
@@ -29,7 +32,7 @@ const selectedNames = assignedSubjectArea.reduce((acc: string[], el: assignedSub
     return acc
 }, [])
 
-export const MultiDropDown: FC = memo(() => {
+export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
     const [selectOption, setSelectOption] = useState<assignedSubjectAreaType[]>(selectedItems)
@@ -38,7 +41,6 @@ export const MultiDropDown: FC = memo(() => {
     const [checkedState, setCheckedState] = useState<boolean[]>(isSelectedValues)
 
     const formRef = useRef<HTMLFormElement | null>(null);
-
     useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
 
     const onInputClick = () => {
@@ -62,9 +64,6 @@ export const MultiDropDown: FC = memo(() => {
                 <input type="text"
                        readOnly
                        onClick={onInputClick}
-                       // value={checkedState.every(el => el)
-                       //     ? 'Все'
-                       //     : selectOption.map(el => el.name)}
                        value={checkedState.every(el => el)
                            ? 'Все'
                            : selectOption.map(el => el.name)}

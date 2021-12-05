@@ -6,14 +6,14 @@ import {MultiDropDown} from '../inputTypes/MultiDropDown';
 import {YesNoDropDown} from '../inputTypes/YesNoDropDown';
 import {OpenFileInputExample} from '../inputTypes/OpenFileInputExample';
 import {PropertyDataType} from '../types/Types';
-import {SimpleDropDownContainer} from '../inputTypes/SimpleDropDownContainer';
+import {SimpleDropDown} from '../inputTypes/SimpleDropDown';
 
 
-type PropertiesControlType = {
+type PropsType = {
     field: PropertyDataType
 }
 
-export const PropertiesControl: FC<PropertiesControlType> = memo(({field}) => {
+export const PropertiesControl: FC<PropsType> = memo(({field}) => {
 
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
     const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(true)
@@ -62,11 +62,11 @@ export const PropertiesControl: FC<PropertiesControlType> = memo(({field}) => {
                     <YesNoDropDown propertyValue={field.propertyValue}/>}
 
                     {field.fieldType === 'multiDropDown' &&
-                    <MultiDropDown/>}
+                    <MultiDropDown propertyValue={field.propertyValue}/>}
 
                     {field.fieldType === 'simpleDropDown' &&
-                    <SimpleDropDownContainer propertyValue={field.propertyValue}
-                                             propertyName={field.propertyName}/>}
+                    <SimpleDropDown propertyValue={field.propertyValue}
+                                    propertyName={field.propertyName}/>}
 
                 </div>
             </div>

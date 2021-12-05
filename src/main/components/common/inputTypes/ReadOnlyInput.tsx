@@ -1,11 +1,11 @@
 import React, {FC, memo} from 'react';
 import style from './ReadOnlyInput.module.scss'
 
-type ReadOnlyInputType = {
+type PropsType = {
     propertyValue: string
 }
 
-export const ReadOnlyInput: FC<ReadOnlyInputType> = memo(({propertyValue}) => {
+export const ReadOnlyInput: FC<PropsType> = memo(({propertyValue}) => {
 
     return (
         <>

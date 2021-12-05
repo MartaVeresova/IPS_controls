@@ -2,14 +2,14 @@ import React, {FC, memo, useRef, useState} from 'react';
 import style from './YesNoDropDown.module.scss';
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 
-type YesNoDropDownType = {
+type PropsType = {
     propertyValue: boolean
 }
 type YesNoType = 'да' | 'нет'
 const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
 
-export const YesNoDropDown: FC<YesNoDropDownType> = memo(({propertyValue}) => {
+export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
     const [selectOption, setSelectOption] = useState<boolean>(propertyValue) //propertyValue-приходит с сервера, selectOption-отправляю на сервер

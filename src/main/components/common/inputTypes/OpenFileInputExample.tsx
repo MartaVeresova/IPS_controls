@@ -1,13 +1,13 @@
 import React, {FC, memo} from 'react';
 import style from './OpenFileInputExample.module.scss'
 
-type OpenFileInputType = {
+type PropsType = {
     propertyValue: string
     isImageFieldExpanded: boolean
     isSizeFieldExpanded: boolean
 }
 
-export const OpenFileInputExample: FC<OpenFileInputType> = memo((props) => {
+export const OpenFileInputExample: FC<PropsType> = memo((props) => {
     const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded} = props
 
     const inputValue = () => {

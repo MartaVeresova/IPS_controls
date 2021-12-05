@@ -1,14 +1,10 @@
-import React, {FC, memo, MouseEvent, useRef, useState} from 'react';
+import React, {FC, memo, useRef, useState} from 'react';
 import style from './SimpleDropDown.module.scss';
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
-import {
-    captionAttribute,
-    CaptionAttributeType,
-    defaultRelationType,
-    DefaultRelationTypeType
-} from '../../controls/objectTypes/ObjectTypesData';
+import {captionAttribute, defaultRelationType} from '../../controls/objectTypes/ObjectTypesData';
+import {CaptionAttributeType, DefaultRelationTypeType} from '../types/Types';
 
-type SimpleDropDownType = {
+type PropsType = {
     propertyValue: number //id чекнутого элемента
     propertyName: string
 }
@@ -18,8 +14,7 @@ type DataType = {
     name: string
 }
 
-
-export const SimpleDropDownContainer: FC<SimpleDropDownType> = memo(({propertyValue, propertyName}) => {
+export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}) => {
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
 
