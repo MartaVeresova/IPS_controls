@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import style from './RootTree.module.scss';
 
 type TreeMenuType = {
@@ -7,12 +7,12 @@ type TreeMenuType = {
     isObjectTypesOpen: boolean
 }
 
-export const RootTree: FC<TreeMenuType> = (props) => {
+export const RootTree: FC<TreeMenuType> = memo((props) => {
 
     const {setIsLifeCycleLevelOpen, setIsObjectTypesOpen, isObjectTypesOpen} = props
 
-    const [isPromoLevelOpen, setIsPromoLevelOpen] = useState(false)
-    const [isArchivesOpen, setIsArchivesOpen] = useState(false)
+    const [isPromoLevelOpen, setIsPromoLevelOpen] = useState<boolean>(false)
+    const [isArchivesOpen, setIsArchivesOpen] = useState<boolean>(false)
 
 
     const onFiveLiClick = () => {
@@ -92,4 +92,4 @@ export const RootTree: FC<TreeMenuType> = (props) => {
             </ul>
         </>
     )
-}
+})

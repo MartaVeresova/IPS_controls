@@ -1,11 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import style from './LifeCycleLevel.module.scss'
-import {observer} from 'mobx-react-lite';
 import {PropertiesControl} from '../../common/propertiesControl/PropertiesControl';
 import {lifeCycleLevelData} from './LifeCycleLevelData';
 
 
-export const LifeCycleLevel: FC = observer(() => {
+export const LifeCycleLevel: FC = memo(() => {
     // const {propertiesControl} = useStore()
 
     return (
@@ -19,9 +18,6 @@ export const LifeCycleLevel: FC = observer(() => {
             <div className={style.tabControlContainer}>
                 {lifeCycleLevelData.map(field => <PropertiesControl key={field.propertyName} field={field}/>)}
             </div>
-
-            {/*<div id="output">!</div>*/}
-            {/*<SimpleDropDownExample />*/}
         </>
     )
 })

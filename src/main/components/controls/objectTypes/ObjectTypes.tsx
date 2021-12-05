@@ -1,11 +1,10 @@
-import React, {FC} from 'react';
+import React, {FC, memo} from 'react';
 import style from './ObjectTypes.module.scss'
-import {observer} from 'mobx-react-lite';
 import {PropertiesControl} from '../../common/propertiesControl/PropertiesControl';
 import {objectTypesData} from './ObjectTypesData';
 
 
-export const ObjectTypes: FC = observer(() => {
+export const ObjectTypes: FC = memo(() => {
     // const {propertiesControl} = useStore()
 
     return (

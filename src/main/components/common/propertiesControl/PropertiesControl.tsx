@@ -1,22 +1,22 @@
-import React, {FC, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import style from './PropertiesControl.module.scss'
-import {observer} from 'mobx-react-lite';
 import {EditableInput} from '../inputTypes/EditableInput';
 import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
-import {OpenFileInput} from '../inputTypes/OpenFileInput';
 import {MultiDropDown} from '../inputTypes/MultiDropDown';
-import {SimpleDropDown} from '../inputTypes/SimpleDropDown';
-import {LifeCycleLevelDataType} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
+import {YesNoDropDown} from '../inputTypes/YesNoDropDown';
+import {OpenFileInputExample} from '../inputTypes/OpenFileInputExample';
+import {PropertyDataType} from '../types/Types';
+import {SimpleDropDownContainer} from '../inputTypes/SimpleDropDownContainer';
 
 
 type PropertiesControlType = {
-    field: LifeCycleLevelDataType
+    field: PropertyDataType
 }
 
-export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) => {
+export const PropertiesControl: FC<PropertiesControlType> = memo(({field}) => {
 
-    const [isImageFieldExpanded, setIsImageFieldExpanded] = useState(false)
-    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState(true)
+    const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
+    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(true)
 
     const onImageClick = () => {
         setIsImageFieldExpanded(!isImageFieldExpanded)
@@ -54,15 +54,20 @@ export const PropertiesControl: FC<PropertiesControlType> = observer(({field}) =
                     <ReadOnlyInput propertyValue={field.propertyValue}/>}
 
                     {field.fieldType === 'openFileInput' &&
-                    <OpenFileInput propertyValue={field.propertyValue}
-                                   isImageFieldExpanded={isImageFieldExpanded}
-                                   isSizeFieldExpanded={isSizeFieldExpanded}/>}
+                    <OpenFileInputExample propertyValue={field.propertyValue}
+                                          isImageFieldExpanded={isImageFieldExpanded}
+                                          isSizeFieldExpanded={isSizeFieldExpanded}/>}
 
-                    {field.fieldType === 'simpleDropDown' &&
-                    <SimpleDropDown propertyValue={field.propertyValue}/>}
+                    {field.fieldType === 'yesNoDropDown' &&
+                    <YesNoDropDown propertyValue={field.propertyValue}/>}
 
                     {field.fieldType === 'multiDropDown' &&
                     <MultiDropDown/>}
+
+                    {field.fieldType === 'simpleDropDown' &&
+                    <SimpleDropDownContainer propertyValue={field.propertyValue}
+                                             propertyName={field.propertyName}/>}
+
                 </div>
             </div>
         </>

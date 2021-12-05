@@ -1,14 +1,56 @@
-import {string} from 'mobx-state-tree/dist/types/primitives';
+import {AssignedSubjectAreaType, PropertyDataType} from '../../common/types/Types';
 
-type AssignedSubjectAreaType = {
-    id: string
+
+//данные с сервака
+const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
+    {id: "A", name: "Конструкторская подготовка"},
+    {id: "B", name: "Архитектура и строительство"},
+    {id: "C", name: "Отладка"},
+    {id: "D", name: "Администрирование системы"},
+    {id: "E", name: "Технологическая подготовка"},
+    {id: "F", name: "Общая"},
+    {id: "G", name: "Производство"},
+    {id: "H", name: "Управление НСИ"},
+    {id: "I", name: "SubjectArea_test1_ui"}
+]
+
+export type DefaultRelationTypeType = {
+    id: number
     name: string
 }
 
-const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
-    {id: 'D', name: 'Администрирование системы'},
-    {id: 'B', name: 'Архитектура и строительство'},
-    {id: 'C', name: 'Отладка'},
+export const defaultRelationType: DefaultRelationTypeType[] = [
+    {id: 0, name: 'Аналоги'},
+    {id: 1, name: 'Вложения'},
+    {id: 2, name: 'Документация на изделие'},
+    {id: 3, name: 'Дополняет извещение'},
+    {id: 4, name: 'Журнал изменений на изделие'},
+    {id: 5, name: 'Избранное IMBASE'},
+    {id: 6, name: 'Изделие-заготовка'},
+    {id: 7, name: 'Изменяемые объекты'},
+    {id: 8, name: 'Изменяется по извещению'},
+]
+
+export type CaptionAttributeType = {
+    id: number
+    displayName: string
+}
+
+export const captionAttribute: CaptionAttributeType[] = [
+    {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},
+    {id: 18033, displayName: 'Автоматически размещающиеся в архиве типы документов'},
+    {id: 1056, displayName: 'Глобальные идентификаторы типов объектов'},
+    {id: 18206, displayName: 'Значения по умолчанию атрибутов структуры архива'},
+    {id: 17491, displayName: 'Идентификатор активной итерации'},
+    {id: 10, displayName: 'Наименование'},
+    {id: 1031, displayName: 'Настройка подписей'},
+    {id: 18523, displayName: 'Настройки колонок архива по умолчанию'},
+    {id: 7, displayName: 'Описание'},
+    {id: 18034, displayName: 'Пользователи, автоматически размещающие в архив документы'},
+    {id: 17493, displayName: 'Режим использования списка типов файлов архива'},
+    {id: 17487, displayName: 'Создавать версии документов в архиве'},
+    {id: 1030, displayName: 'Структура архива'},
+    {id: 1017, displayName: 'Файловый шкаф'}
 ]
 
 type PropertyValueSectionType = {
@@ -21,7 +63,7 @@ type PropertyValueSectionType = {
     icon: string | null
     versionMode: string
     defaultRelationTypeId: number
-    captionAttributeId: string | null
+    captionAttributeId: number | null
     isAbleToAddAnyAttributes: boolean
     deletedObjectLifetimeInDays: number
     objectTypeClassifiedOptionId: number
@@ -51,8 +93,8 @@ const propertyValueSection: PropertyValueSectionType = {
     note_Create: 'note_Create',
     icon: null,
     versionMode: 'multiVersion',
-    defaultRelationTypeId: 0,
-    captionAttributeId: '',
+    defaultRelationTypeId: 6,
+    captionAttributeId: 18206,
     isAbleToAddAnyAttributes: true,
     deletedObjectLifetimeInDays: 0,
     objectTypeClassifiedOptionId: 1,
@@ -73,25 +115,12 @@ const propertyValueSection: PropertyValueSectionType = {
     assignedSubjectAreaTypes: assignedSubjectAreaTypes,
 }
 
-type FieldTypes =
-    | 'editableInput'
-    | 'readOnlyInput'
-    | 'openFileInput'
-    | 'simpleDropDown'
-    | 'multiDropDown'
-
-
-export type ObjectTypesDataType = {
-    propertyName: string
-    propertyValue: any
-    fieldType: FieldTypes
-}
-
-export const objectTypesData: ObjectTypesDataType[] = [
+//данные на фронте
+export const objectTypesData: PropertyDataType[] = [
     {
         propertyName: 'Атрибут-описатель',
         propertyValue: propertyValueSection.captionAttributeId,
-        fieldType: 'editableInput',
+        fieldType: 'simpleDropDown',
     },
     {
         propertyName: 'Версионность',
@@ -101,12 +130,12 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Включать новые версии в текущий контекст редактирования',
         propertyValue: propertyValueSection.isAutoContextEnabled,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Возможна рассылка уведомлений о действиях над объектами',
         propertyValue: propertyValueSection.isNotificationsEnabled,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Время жизни удалённых объектов (дней)',
@@ -121,12 +150,12 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Запрет создания объектов командами Навигатора',
         propertyValue: propertyValueSection.isDisableManualCreate,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Запрет создания объектов по прототипу',
         propertyValue: propertyValueSection.isDisablePrototyping,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Идентификатор',
@@ -146,7 +175,7 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Индексировать таблицу атрибутов',
         propertyValue: propertyValueSection.isNeedToIndexAttributes,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Классификация создаваемых объектов',
@@ -166,17 +195,17 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Локальный тип объектов',
         propertyValue: propertyValueSection.isLocalObjectType,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Любой атрибут',
         propertyValue: propertyValueSection.isAbleToAddAnyAttributes,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Мандатное разграничение доступа',
         propertyValue: propertyValueSection.isMandateAccess,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Наименование',
@@ -186,17 +215,17 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Наследование прав доступа',
         propertyValue: propertyValueSection.isNeedToCheckParentAccess,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Объекты выпускаются в рамках текущего проекта',
         propertyValue: propertyValueSection.isCurrentProjectEnabled,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Объекты доступны для обсуждения',
         propertyValue: propertyValueSection.isForumEnabled,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Предметная область',
@@ -206,26 +235,26 @@ export const objectTypesData: ObjectTypesDataType[] = [
     {
         propertyName: 'Разрешить редактирование объектов в IPS WebInterface',
         propertyValue: propertyValueSection.isEnableWebEdit,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Разрешить создание итераций',
         propertyValue: propertyValueSection.isAbleToCreateSnapshots,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Разрешить создание итераций в автоматическом режиме',
         propertyValue: propertyValueSection.isAutoCreateSnapshots,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Расширенная регистрация событий в журнале',
         propertyValue: propertyValueSection.isExtendedAudit,
-        fieldType: 'simpleDropDown',
+        fieldType: 'yesNoDropDown',
     },
     {
         propertyName: 'Связь по умолчанию',
         propertyValue: propertyValueSection.defaultRelationTypeId,
-        fieldType: 'editableInput',
+        fieldType: 'simpleDropDown',
     },
 ]

@@ -1,5 +1,5 @@
-import React, {ChangeEvent, FC, memo, useEffect, useState} from 'react';
-import style from './OpenFileInput.module.scss'
+import React, {FC, memo} from 'react';
+import style from './OpenFileInputExample.module.scss'
 
 type OpenFileInputType = {
     propertyValue: string
@@ -7,54 +7,11 @@ type OpenFileInputType = {
     isSizeFieldExpanded: boolean
 }
 
-export const OpenFileInput: FC<OpenFileInputType> = memo((props) => {
-
+export const OpenFileInputExample: FC<OpenFileInputType> = memo((props) => {
     const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded} = props
 
-    const [selectedFile, setSelectedFile] = useState<File | null>(null)
-    const [preview, setPreview] = useState<string>('')
-    const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(propertyValue)
-    // console.log(imagePreview)
-
-    // create a preview as a side effect, whenever selected file is changed
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview('')
-            return
-        }
-        const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
-
-    const imageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-        event.preventDefault()
-
-        const files = event.target.files
-        const reader = new FileReader()
-
-        if (!files || !files.length) {
-            setSelectedFile(null)
-            return
-        }
-        setSelectedFile(files[0])
-
-        if (reader !== undefined && files[0] !== undefined) {
-            reader.onloadend = () => {
-                setImagePreview(reader.result)
-            }
-            reader.readAsDataURL(files[0])
-        }
-        // console.log(event)
-        // console.log(reader)
-        // console.log(event)
-    }
-
     const inputValue = () => {
-        if (selectedFile || propertyValue) {
+        if (propertyValue) {
             return '(Значок)'
         }
         return '(отсутствует)'
@@ -64,9 +21,9 @@ export const OpenFileInput: FC<OpenFileInputType> = memo((props) => {
     return (
         <>
             <div className={style.inputField}>
-                <img alt="" src={selectedFile ? preview : propertyValue}/>
+                <img alt="" src={propertyValue}/>
                 <input type="text" value={inputValue()} readOnly/>
-                <input tabIndex={0} type="file" name="file" id="file" accept=".ico" onChange={imageUpload}/>
+                <input tabIndex={0} type="file" name="file" id="file" accept=".ico"/>
                 <button>...</button>
             </div>
 

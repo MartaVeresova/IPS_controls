@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, memo, useRef, useState} from 'react';
 import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 
@@ -29,7 +29,7 @@ const selectedNames = assignedSubjectArea.reduce((acc: string[], el: assignedSub
     return acc
 }, [])
 
-export const MultiDropDown: FC = () => {
+export const MultiDropDown: FC = memo(() => {
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
     const [selectOption, setSelectOption] = useState<assignedSubjectAreaType[]>(selectedItems)
@@ -117,5 +117,5 @@ export const MultiDropDown: FC = () => {
             </form>
         </>
     )
-}
+})
 

@@ -7,8 +7,8 @@ import {ObjectTypes} from './main/components/controls/objectTypes/ObjectTypes';
 
 
 export const App: FC = observer(() => {
-    const [isLifeCycleLevelOpen, setIsLifeCycleLevelOpen] = useState(false)
-    const [isObjectTypesOpen, setIsObjectTypesOpen] = useState(false)
+    const [isLifeCycleLevelOpen, setIsLifeCycleLevelOpen] = useState<boolean>(false)
+    const [isObjectTypesOpen, setIsObjectTypesOpen] = useState<boolean>(false)
 
     return (
         <div className={style.wrap}>
