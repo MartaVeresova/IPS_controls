@@ -1,5 +1,5 @@
 import React, {FC, memo} from 'react';
-import style from './OpenFileInputExample.module.scss'
+import style from './OpenFileInput.module.scss'
 
 type PropsType = {
     propertyValue: string

@@ -11,8 +11,11 @@ const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
 export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
+    const initialValue = propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1]
+
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-    const [selectOption, setSelectOption] = useState<boolean>(propertyValue) //propertyValue-приходит с сервера, selectOption-отправляю на сервер
+    const [name, setName] = useState<string>(initialValue)
+    const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //propertyValue-response, selectedOption-for sent to back
     const formRef = useRef<HTMLFormElement | null>(null)
 
     useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
@@ -20,7 +23,8 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
     const options = yesNoDropDownData.map((item, index) => {
         const onOptionClick = () => {
-            setSelectOption(item === yesNoDropDownData[0])
+            setSelectedOption(item === yesNoDropDownData[0])
+            setName(item)
             setIsDropDownListOpened(false)
         }
         return <li key={index} onClick={onOptionClick} tabIndex={index}>{item}</li>
@@ -30,7 +34,7 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
         <>
             <form className={style.dropDown} ref={formRef}>
                 <input type="text"
-                       value={selectOption ? yesNoDropDownData[0] : yesNoDropDownData[1]}
+                       value={name}
                        onClick={onInputClick}
                        readOnly/>
                 <label tabIndex={0} onClick={onInputClick}>⌵</label>

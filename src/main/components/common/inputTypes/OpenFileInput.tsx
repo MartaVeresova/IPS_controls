@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, memo, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, memo, useEffect, useRef, useState} from 'react';
 import style from './OpenFileInput.module.scss'
 
 type PropsType = {
@@ -8,13 +8,16 @@ type PropsType = {
 }
 
 export const OpenFileInput: FC<PropsType> = memo((props) => {
-
     const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded} = props
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [preview, setPreview] = useState<string>('')
-    const [imagePreview, setImagePreview] = useState<string | ArrayBuffer | null>(propertyValue)
+    const [imagePreview, setImagePreview] = useState<string | null>(propertyValue)
     // console.log(imagePreview)
+
+    // const [fileData, setFileData] = useState({});
+
+    const inputRef = useRef<HTMLInputElement>(null)
 
     // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
@@ -23,7 +26,16 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
             return
         }
         const objectUrl = URL.createObjectURL(selectedFile)
-        setPreview(objectUrl)
+        if (inputRef.current) {
+            const fileName = inputRef.current.value
+            const index = fileName.lastIndexOf('.') + 1;
+            const extFile = fileName.substring(index, fileName.length).toLowerCase();
+            if (extFile === 'ico') {
+                setPreview(objectUrl)
+            } else {
+                console.log('Only \'.ico\' files are allowed!')
+            }
+        }
 
         // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl)
@@ -33,41 +45,56 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     const imageUpload = (event: ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
 
-        const files = event.target.files
         const reader = new FileReader()
+        // const formData = new FormData(); // for send to back
+
+        const files = event.target.files
 
         if (!files || !files.length) {
             setSelectedFile(null)
             return
         }
         setSelectedFile(files[0])
+        // formData.append('newFile', files[0], files[0].name);
+        // setFileData(formData);
 
         if (reader !== undefined && files[0] !== undefined) {
             reader.onloadend = () => {
-                setImagePreview(reader.result)
+                if (reader.result) {
+                    if (inputRef.current) {
+                        const fileName = inputRef.current.value
+                        const index = fileName.lastIndexOf('.') + 1;
+                        const extFile = fileName.substring(index, fileName.length).toLowerCase();
+                        if (extFile === 'ico') {
+                            const encodedData = window.btoa((reader.result).toString())
+                            setImagePreview(encodedData)
+                        }
+                    }
+                }
             }
             reader.readAsDataURL(files[0])
         }
-        // console.log(event)
-        // console.log(reader)
-        // console.log(event)
     }
 
-    const inputValue = () => {
+    const inputTextValue = () => {
         if (selectedFile || propertyValue) {
             return '(Значок)'
         }
         return '(отсутствует)'
     }
 
+    const onButtonClick = () => {
+        inputRef && inputRef.current && inputRef.current.click()
+    }
 
     return (
         <>
             <div className={style.inputField}>
                 <img alt="" src={selectedFile ? preview : propertyValue}/>
-                <input type="text" value={inputValue()} readOnly/>
-                <input tabIndex={0} type="file" name="file" id="file" accept=".ico" onChange={imageUpload}/>
-                <button>...</button>
+                <input type="text" value={inputTextValue()} readOnly/>
+                <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
+                       onChange={imageUpload}/>
+                <button onClick={onButtonClick}>...</button>
             </div>
 
             <div className={style.openImageField} hidden={!isImageFieldExpanded}>

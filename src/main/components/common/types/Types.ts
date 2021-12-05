@@ -6,6 +6,7 @@ export type FieldTypes =
     | 'yesNoDropDown'
     | 'multiDropDown'
     | 'simpleDropDown'
+    | 'enumDropDown'
 
 
 export type PropertyDataType = {

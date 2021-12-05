@@ -4,9 +4,10 @@ import {EditableInput} from '../inputTypes/EditableInput';
 import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
 import {MultiDropDown} from '../inputTypes/MultiDropDown';
 import {YesNoDropDown} from '../inputTypes/YesNoDropDown';
-import {OpenFileInputExample} from '../inputTypes/OpenFileInputExample';
 import {PropertyDataType} from '../types/Types';
 import {SimpleDropDown} from '../inputTypes/SimpleDropDown';
+import {EnumDropDown} from '../inputTypes/EnumDropDown';
+import {OpenFileInput} from '../inputTypes/OpenFileInput';
 
 
 type PropsType = {
@@ -16,7 +17,7 @@ type PropsType = {
 export const PropertiesControl: FC<PropsType> = memo(({field}) => {
 
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
-    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(true)
+    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(false)
 
     const onImageClick = () => {
         setIsImageFieldExpanded(!isImageFieldExpanded)
@@ -54,9 +55,9 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                     <ReadOnlyInput propertyValue={field.propertyValue}/>}
 
                     {field.fieldType === 'openFileInput' &&
-                    <OpenFileInputExample propertyValue={field.propertyValue}
-                                          isImageFieldExpanded={isImageFieldExpanded}
-                                          isSizeFieldExpanded={isSizeFieldExpanded}/>}
+                    <OpenFileInput propertyValue={field.propertyValue}
+                                   isImageFieldExpanded={isImageFieldExpanded}
+                                   isSizeFieldExpanded={isSizeFieldExpanded}/>}
 
                     {field.fieldType === 'yesNoDropDown' &&
                     <YesNoDropDown propertyValue={field.propertyValue}/>}
@@ -67,6 +68,9 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                     {field.fieldType === 'simpleDropDown' &&
                     <SimpleDropDown propertyValue={field.propertyValue}
                                     propertyName={field.propertyName}/>}
+
+                    {field.fieldType === 'enumDropDown' &&
+                    <EnumDropDown propertyValue={field.propertyValue}/>}
 
                 </div>
             </div>

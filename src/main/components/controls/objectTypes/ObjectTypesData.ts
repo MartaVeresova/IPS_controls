@@ -49,7 +49,7 @@ export const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
     {id: "I", name: "SubjectArea_test1_ui"}
 ]
 
-const propertyValueSection: ObjectTypesType = {
+    const propertyValueSection: ObjectTypesType = {
     id: 2039,
     globalKey: '037c4a0e-d1b4-4531-97dd-72cc5f7962d4',
     name: 'name_create',

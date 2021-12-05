@@ -21,28 +21,8 @@
     border: none;
   }
 
-  Input[type='text']:focus {
-
-  }
-
   Input[type='file'] {
-    //background-color: red;
-    width: 25px;
-    height: 100%;
-    position: absolute;
-    z-index: 3;
-    opacity: .7;
-    overflow: hidden;
-    text-indent: -9999px;
-    padding: 1px 0;
-    border-radius: 2px;
-  }
-
-  Input[type='file']:hover {
-    position: absolute;
-    opacity: .2;
-    cursor: pointer;
-    background-color: gray;
+    display: none;
   }
 
   Button {
@@ -54,6 +34,11 @@
     padding: .5px 3px;
     width: 25px;
     height: 100%;
+  }
+
+  Button:hover {
+    cursor: pointer;
+    border: 1.5px solid black;
   }
 }
 
