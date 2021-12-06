@@ -5,83 +5,58 @@ type PropsType = {
     propertyValue: string
     isImageFieldExpanded: boolean
     isSizeFieldExpanded: boolean
+    previewImg: string
+    setPreviewImg: (value: string) => void
 }
 
 export const OpenFileInput: FC<PropsType> = memo((props) => {
-    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded} = props
+    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded, previewImg, setPreviewImg} = props
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
-    const [preview, setPreview] = useState<string>('')
-    const [imagePreview, setImagePreview] = useState<string | null>(propertyValue)
-
+    // const [previewImg, setPreviewImg] = useState<string>('')
     const [sizeWidth, setSizeWidth] = useState<string | number>('')
     const [sizeHeight, setSizeHeight] = useState<string | number>('')
 
     const inputRef = useRef<HTMLInputElement | null>(null)
     const imgRef = createRef<HTMLImageElement>()
 
-    // create a preview as a side effect, whenever selected file is changed
-    useEffect(() => {
-        if (!selectedFile) {
-            setPreview('')
-            return
-        }
-
-        const objectUrl = URL.createObjectURL(selectedFile)
-        if (inputRef.current) {
-            const fileName = inputRef.current.value
-            const index = fileName.lastIndexOf('.') + 1;
-            const extFile = fileName.substring(index, fileName.length).toLowerCase();
-            if (extFile === 'ico') {
-                setPreview(objectUrl)
-            } else {
-                console.log('ONLY \'.ico\' FILES ARE ALLOWED!!!')
-            }
-        }
-        // free memory when ever this component is unmounted
-        return () => URL.revokeObjectURL(objectUrl)
-    }, [selectedFile])
-
     useEffect(() => {
         if (imgRef.current) {
             setSizeWidth(imgRef.current.naturalWidth)
             setSizeHeight(imgRef.current.naturalHeight)
         }
-    }, [setSizeWidth, setSizeHeight, imgRef])
+    }, [imgRef])
+
+    useEffect(() => {
+        // const encodedData
+        window.btoa(previewImg)
+    }, [previewImg])
 
 
     const imageUpload = (event: ChangeEvent<HTMLInputElement>) => {
-        // debugger
-        // event.preventDefault()
-
         const reader = new FileReader()
-        const files = event.target.files
-        // const formData = new FormData(); // for send to back
+        const newFile = event.target.files && event.target.files[0]
 
-        if (!files || !files.length) {
-            setSelectedFile(null)
-            return
-        }
+        if (inputRef.current) {
+            const fileName = inputRef.current.value
+            const index = fileName.lastIndexOf('.') + 1;
+            const extFile = fileName.substring(index, fileName.length).toLowerCase();
+            if (extFile === 'ico') {
+                if (newFile) {
+                    setSelectedFile(newFile)
+                    setPreviewImg(window.URL.createObjectURL(newFile))
 
-        setSelectedFile(files[0])
-        // formData.append('newFile', files[0], files[0].name)
-        // setFileData(formData)
-
-        if (reader !== undefined && files[0] !== undefined) {
-            reader.onloadend = () => {
-                if (reader.result && inputRef.current) {
-                    const fileName = inputRef.current.value
-                    const index = fileName.lastIndexOf('.') + 1;
-                    const extFile = fileName.substring(index, fileName.length).toLowerCase();
-                    if (extFile === 'ico') {
-                        const encodedData = window.btoa((reader.result).toString())
-                        setImagePreview(encodedData)
-                    } else {
-                        console.log('ONLY \'.ico\' FILES ARE ALLOWED!!! in button')
+                    if (reader !== undefined) {
+                        reader.onload = () => {
+                            setPreviewImg(reader.result as string)
+                        }
+                        reader.readAsDataURL(newFile)
                     }
                 }
+            } else {
+                console.log('ONLY \'.ico\' FILES ARE ALLOWED!!!')
             }
-            reader.readAsDataURL(files[0])
+
         }
     }
 
@@ -100,7 +75,7 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     return (
         <>
             <div className={style.inputField}>
-                <img alt="" src={selectedFile ? preview : propertyValue} ref={imgRef}/>
+                <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
                 <input type="text" value={inputTextValue()} readOnly/>
                 <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
                        onChange={imageUpload}/>

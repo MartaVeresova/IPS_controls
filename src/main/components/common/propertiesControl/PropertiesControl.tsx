@@ -18,6 +18,7 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
 
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
     const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(false)
+    const [previewImg, setPreviewImg] = useState<string>('')
 
     const onImageClick = () => {
         setIsImageFieldExpanded(!isImageFieldExpanded)
@@ -33,12 +34,12 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
         <>
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
-                    {field.propertyName === 'Изображение' && field.propertyValue &&
+                    {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
                     <label tabIndex={0} className={style.icon} onClick={onImageClick}>⌵</label>}
                     <input type="text" value={field.propertyName} readOnly/>
 
                     <div className={style.sizeField} hidden={!isImageFieldExpanded}>
-                        {field.propertyName === 'Изображение' && field.propertyValue &&
+                        {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
                         <label tabIndex={0} className={style.icon} onClick={onSizeClick}>⌵</label>}
                         <input type="text" value="Size" readOnly/>
 
@@ -59,7 +60,9 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                     {field.fieldType === 'openFileInput' &&
                     <OpenFileInput propertyValue={field.propertyValue}
                                    isImageFieldExpanded={isImageFieldExpanded}
-                                   isSizeFieldExpanded={isSizeFieldExpanded}/>}
+                                   isSizeFieldExpanded={isSizeFieldExpanded}
+                                   previewImg={previewImg}
+                                   setPreviewImg={setPreviewImg}/>}
 
                     {field.fieldType === 'yesNoDropDown' &&
                     <YesNoDropDown propertyValue={field.propertyValue}/>}
