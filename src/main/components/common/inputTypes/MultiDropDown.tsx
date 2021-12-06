@@ -68,7 +68,6 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                            ? 'Все'
                            : selectOption.map(el => el.name)}
                 />
-
                 <label tabIndex={0} className={style.icon} onClick={onInputClick}>⌵</label>
 
                 <div hidden={!isDropDownListOpened}>

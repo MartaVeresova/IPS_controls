@@ -58,7 +58,6 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
         }
         dataArr = captionAttributeData.map(el => ({id: el.id, name: el.displayName}))
         // setID = setSelectedCaptionAttributeId
-        console.log(selectedId)
     }
 
     if (propertyName === 'Связь по умолчанию') {
@@ -81,7 +80,6 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
         }
         dataArr = defaultRelationData.map(el => ({id: el.id, name: el.name}))
         // setID = setSelectedDefaultRelationTypeId
-        console.log(selectedId)
     }
 
 

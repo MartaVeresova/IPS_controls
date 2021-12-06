@@ -24,7 +24,9 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
         setIsSizeFieldExpanded(false)
     }
 
-    const onSizeClick = () => setIsSizeFieldExpanded(!isSizeFieldExpanded)
+    const onSizeClick = () => {
+        setIsSizeFieldExpanded(!isSizeFieldExpanded)
+    }
 
 
     return (
@@ -32,12 +34,12 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
                     {field.propertyName === 'Изображение' && field.propertyValue &&
-                    <label tabIndex={0} onClick={onImageClick}>⌵</label>}
+                    <label tabIndex={0} className={style.icon} onClick={onImageClick}>⌵</label>}
                     <input type="text" value={field.propertyName} readOnly/>
 
                     <div className={style.sizeField} hidden={!isImageFieldExpanded}>
                         {field.propertyName === 'Изображение' && field.propertyValue &&
-                        <label tabIndex={0} onClick={onSizeClick}>⌵</label>}
+                        <label tabIndex={0} className={style.icon} onClick={onSizeClick}>⌵</label>}
                         <input type="text" value="Size" readOnly/>
 
                         <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>
@@ -71,7 +73,6 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
 
                     {field.fieldType === 'enumDropDown' &&
                     <EnumDropDown propertyValue={field.propertyValue}/>}
-
                 </div>
             </div>
         </>

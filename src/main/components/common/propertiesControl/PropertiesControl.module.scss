@@ -1,10 +1,10 @@
 Input {
   //padding-left: 5px;
   border: 0;
-}
 
-Input:focus {
-  outline: none;
+  &:focus {
+    outline: none;
+  }
 }
 
 .propertyDisplay {
@@ -18,24 +18,35 @@ Input:focus {
     position: relative;
     //z-index: 1;
 
-    label {
+    .icon {
       background-color: transparent;
-      height: 23px;
-      width: 20px;
+      height: 7px;
+      width: 15px;
       position: absolute;
+      top: 10px;
+      left: 6px;
       cursor: pointer;
       font-size: 20px;
-      padding: 6px;
-      text-align: center;
-      line-height: 10px;
+      line-height: 0;
+
+      &:hover {
+        font-weight: bold;
+      }
     }
 
-    label:hover {
-      font-weight: bold;
-    }
+    //.iconActive {
+    //  background-color: red;
+    //  transition: transform .3s linear;
+    //  transform: rotate(-180deg);
+    //  transform-origin: 50% 50%;
+    //}
 
-    .sizeField Label {
-      padding-left: 25px;
+
+    .sizeField .icon {
+      //position: absolute;
+      //background-color: transparent;
+      top: 37px;
+      left: 26px;
     }
 
     .sizeField Input {
@@ -43,7 +54,6 @@ Input:focus {
       width: 100%;
       padding-left: 50px;
       color: gray;
-
     }
 
     .widthHeightFields Input {
@@ -58,12 +68,12 @@ Input:focus {
     padding-left: 25px;
     font-size: 20px;
     border: 1px solid gray;
-  }
 
-  .propertyName input:focus {
-    background-color: #428bca;
-    color: white;
-    caret-color: transparent;
+    &:focus {
+      background-color: #428bca;
+      color: white;
+      caret-color: transparent;
+    }
   }
 
   .propertyValue {
@@ -71,14 +81,12 @@ Input:focus {
     flex-direction: column;
     width: 50%;
 
-  }
-
-  .propertyValue Input {
-    padding-left: 5px;
-    border: 1px solid gray;
+    Input {
+      padding-left: 5px;
+      border: 1px solid gray;
+    }
   }
 }
-
 
 //.icon {
 //  width: 10px;

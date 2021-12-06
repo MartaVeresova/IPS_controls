@@ -34,7 +34,7 @@ export const captionAttribute: CaptionAttributeType[] = [
     {id: 17493, displayName: 'Режим использования списка типов файлов архива'},
     {id: 17487, displayName: 'Создавать версии документов в архиве'},
     {id: 1030, displayName: 'Структура архива'},
-    {id: 1017, displayName: 'Файловый шкаф'}
+    {id: 1017, displayName: 'Файловый шкаф'},
 ]
 
 export const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
@@ -46,7 +46,7 @@ export const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
     {id: "F", name: "Общая"},
     {id: "G", name: "Производство"},
     {id: "H", name: "Управление НСИ"},
-    {id: "I", name: "SubjectArea_test1_ui"}
+    {id: "I", name: "SubjectArea_test1_ui"},
 ]
 
     const propertyValueSection: ObjectTypesType = {
