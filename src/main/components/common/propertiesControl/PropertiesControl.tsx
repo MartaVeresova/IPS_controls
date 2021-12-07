@@ -35,12 +35,12 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
                     {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                    <label tabIndex={0} className={style.icon} onClick={onImageClick}>⌵</label>}
+                        <div tabIndex={0} className={style.icon} onClick={onImageClick}>{`${isImageFieldExpanded ? '﹥' : '⌵'}`}</div>}
                     <input type="text" value={field.propertyName} readOnly/>
 
                     <div className={style.sizeField} hidden={!isImageFieldExpanded}>
                         {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                        <label tabIndex={0} className={style.icon} onClick={onSizeClick}>⌵</label>}
+                        <div tabIndex={0} className={style.icon} onClick={onSizeClick}>⌵</div>}
                         <input type="text" value="Size" readOnly/>
 
                         <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>

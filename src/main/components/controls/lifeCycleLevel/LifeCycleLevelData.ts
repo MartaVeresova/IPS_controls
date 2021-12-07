@@ -25,7 +25,7 @@ const propertyValueSection: LifeCycleLevelType = {
     isDefault: false,
     litera: 'litera',
     name: 'Test11331222323',
-    assignedSubjectAreaTypes: ['B', 'C'],
+    assignedSubjectAreaIds: ['B', 'C'],
     storageId: 'storageId',
 }
 
@@ -68,7 +68,7 @@ export const lifeCycleLevelData: PropertyDataType[] = [
     },
     {
         propertyName: 'Предметная область',
-        propertyValue: propertyValueSection.assignedSubjectAreaTypes,
+        propertyValue: propertyValueSection.assignedSubjectAreaIds,
         fieldType: 'multiDropDown',
     },
     {

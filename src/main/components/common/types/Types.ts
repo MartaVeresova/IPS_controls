@@ -67,6 +67,6 @@ export type LifeCycleLevelType = {
     isDefault: boolean
     litera: string
     name: string
-    assignedSubjectAreaTypes: string[]
+    assignedSubjectAreaIds: string[]
     storageId: string
 }
