@@ -2,6 +2,7 @@ import React, {FC, memo} from 'react';
 import style from './LifeCycleLevel.module.scss'
 import {PropertiesControl} from '../../common/propertiesControl/PropertiesControl';
 import {lifeCycleLevelData} from './LifeCycleLevelData';
+import {Pointer} from '../../common/Pointer';
 
 
 export const LifeCycleLevel: FC = memo(() => {
@@ -18,6 +19,7 @@ export const LifeCycleLevel: FC = memo(() => {
             <div className={style.tabControlContainer}>
                 {lifeCycleLevelData.map(field => <PropertiesControl key={field.propertyName} field={field}/>)}
             </div>
+            <Pointer />
         </>
     )
 })

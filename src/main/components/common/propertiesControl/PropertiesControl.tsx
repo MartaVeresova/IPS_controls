@@ -34,8 +34,10 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
         <>
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
+
                     {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                        <div tabIndex={0} className={style.icon} onClick={onImageClick}>{`${isImageFieldExpanded ? '﹥' : '⌵'}`}</div>}
+                    <div tabIndex={0} className={style.icon}
+                         onClick={onImageClick}>{`${isImageFieldExpanded ? '﹥' : '⌵'}`}</div>}
                     <input type="text" value={field.propertyName} readOnly/>
 
                     <div className={style.sizeField} hidden={!isImageFieldExpanded}>

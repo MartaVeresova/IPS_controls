@@ -27,7 +27,7 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
             setName(item)
             setIsDropDownListOpened(false)
         }
-        return <li key={index} onClick={onOptionClick} tabIndex={index}>{item}</li>
+        return <div key={index} onClick={onOptionClick} tabIndex={index}>{item}</div>
     })
 
     return (
@@ -39,9 +39,9 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
                        readOnly/>
                 <label tabIndex={0} onClick={onInputClick}>⌵</label>
                 <div hidden={!isDropDownListOpened}>
-                    <ul className={style.dropDownListOpened}>
+                    <div className={style.dropDownListOpened}>
                         {options}
-                    </ul>
+                    </div>
                 </div>
             </form>
         </>

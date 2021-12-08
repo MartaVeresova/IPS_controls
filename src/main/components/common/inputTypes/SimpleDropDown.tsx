@@ -19,7 +19,7 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
     const [captionAttributeData, setCaptionAttributeData] = useState<CaptionAttributeType[]>([])
     const [defaultRelationData, setDefaultRelationData] = useState<DefaultRelationTypeType[]>([])
-    const [name, setName] = useState('') //name чекнутого элемента
+    const [checkedName, setCheckedName] = useState('') //name чекнутого элемента
     const [selectedId, setSelectedId] = useState<number>(propertyValue)//id чек.элемента, sent to server
 
     const formRef = useRef<HTMLFormElement | null>(null)
@@ -33,10 +33,10 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
 
     if (propertyName === 'Атрибут-описатель') {
         //имитация post за инитиализ.значением по айдишке
-        if (name === '') {
+        if (checkedName === '') {
             const selectedItem = captionAttribute.find(findSelectedItem)
             if (selectedItem) {
-                setName(selectedItem.displayName)
+                setCheckedName(selectedItem.displayName)
             }
         }
         onInputClick = () => {
@@ -54,10 +54,10 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
 
     if (propertyName === 'Связь по умолчанию') {
         //имитация post за инитиализ.значением по айдишке
-        if (name === '') {
+        if (checkedName === '') {
             const selectedItem = defaultRelationType.find(findSelectedItem)
             if (selectedItem) {
-                setName(selectedItem.name)
+                setCheckedName(selectedItem.name)
             }
         }
         onInputClick = () => {
@@ -76,12 +76,12 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
 
     const options = dataArr.map((item, index) => {
         const onOptionClick = () => {
-            setName(item.name)
+            setCheckedName(item.name)
             setSelectedId(item.id)
             setIsDropDownListOpened(false)
         }
         return (
-            <li key={index} onClick={onOptionClick} tabIndex={index}>{item.name}</li>
+            <div key={index} onClick={onOptionClick} tabIndex={index}>{item.name}</div>
         )
     })
 
@@ -90,14 +90,14 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
         <>
             <form className={style.dropDown} ref={formRef}>
                 <input type="text"
-                       value={name}
+                       value={checkedName}
                        onClick={onInputClick}
                        readOnly/>
                 <label tabIndex={0} onClick={onInputClick}>⌵</label>
                 <div hidden={!isDropDownListOpened}>
-                    <ul className={style.dropDownListOpened}>
+                    <div className={style.dropDownListOpened}>
                         {options}
-                    </ul>
+                    </div>
                 </div>
             </form>
         </>

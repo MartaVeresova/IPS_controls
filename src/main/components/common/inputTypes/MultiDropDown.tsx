@@ -1,7 +1,8 @@
-import React, {FC, memo, useRef, useState} from 'react';
+import React, {FC, memo, useEffect, useRef, useState} from 'react';
 import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 import {assignedSubjectAreaTypes} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
+import {AssignedSubjectAreaType} from '../types/Types';
 
 type PropsType = {
     propertyValue: string[]
@@ -9,84 +10,92 @@ type PropsType = {
 
 export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
-    const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-    const [checkedArray, setCheckedArray] = useState(propertyValue) //массив чекнутых айди
-    const [checkedAll, setCheckedAll] = useState(false)
-    const formRef = useRef<HTMLFormElement | null>(null)
+        const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
+        const [checkedItems, setCheckedItems] = useState<string[]>(propertyValue) //массив чекнутых айди
+        const [data, setData] = useState<AssignedSubjectAreaType[]>([]) //массив всех элементов
+        const [isCheckedAll, setIsCheckedAll] = useState(false)
 
-    useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
+        const formRef = useRef<HTMLFormElement | null>(null)
+        useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
 
-    const onInputClick = () => {
-        setIsDropDownListOpened(!isDropDownListOpened)
-    }
+        console.log(checkedItems)
+        useEffect(() => {
+            setData(assignedSubjectAreaTypes)
+        }, [])
 
-    const onAllOptionsChange = () => {
-        if (checkedAll) {
-            setCheckedAll(false)
-            setCheckedArray([])
-        }
-        if (!checkedAll) {
-            setCheckedAll(true)
-            setCheckedArray(assignedSubjectAreaTypes.map(el => el.id))
-        }
-    }
-
-    const inputValue = () => {
-        let nameArray: string[] = []
-        assignedSubjectAreaTypes.forEach(el => {
-            if (checkedArray.some(elem => elem === el.id)) {
-                nameArray.push(el.name)
+        const onInputClick = () => {
+            //имитация post за списком для дропдауна
+            if (!isDropDownListOpened) {
+                setData(assignedSubjectAreaTypes)
+                setIsDropDownListOpened(true)
             }
-        })
-        return nameArray.join(', ')
-    }
+            if (isDropDownListOpened) {
+                setIsDropDownListOpened(false)
+            }
+        }
 
+        const onAllOptionsChange = () => {
+            if (isCheckedAll) {
+                setIsCheckedAll(false)
+                setCheckedItems([data[0].id])
+            }
+            if (!isCheckedAll) {
+                setIsCheckedAll(true)
+                setCheckedItems(data.map(el => el.id))
+            }
+        }
 
-    return (
-        <>
-            <form className={style.multiselect} ref={formRef}>
-                <input type="text"
-                       readOnly
-                       onClick={onInputClick}
-                       value={checkedAll ? 'Все' : inputValue()}
-                />
-                <label tabIndex={0} className={style.icon} onClick={onInputClick}>⌵</label>
+        const inputValue = () => {
+            let nameArray: string[] = []
+            assignedSubjectAreaTypes.forEach(el => {
+                if (checkedItems.some(elem => elem === el.id)) {
+                    nameArray.push(el.name)
+                }
+            })
+            return nameArray.join(', ')
+        }
 
-                <div hidden={!isDropDownListOpened}>
-                    <ul className={style.dropDownListOpened}>
+        return (
+            <>
+                <form className={style.multiselect} ref={formRef}>
+                    <input type="text"
+                           readOnly
+                           onClick={onInputClick}
+                           value={isCheckedAll ? 'Все' : inputValue()}
+                    />
+                    <div tabIndex={0} className={style.icon} onClick={onInputClick}>⌵</div>
 
-                        <label tabIndex={0} className={style.list} onChange={onAllOptionsChange}>
-                            <input type="checkbox"
-                                   checked={checkedAll}
-                                   readOnly/>
-                            Все
-                        </label>
-
-                        {assignedSubjectAreaTypes.map(({id, name}, index) => {
-                            const checked = checkedArray.some(el => el === id)
-                            const onLabelChange = () => {
-                                if (checked) {
-                                    setCheckedArray(checkedArray.filter(el => el !== id))
-                                    setCheckedAll(false)
-                                } else {
-                                    const newArray = [...checkedArray]
-                                    newArray.push(id)
-                                    setCheckedArray(newArray)
-                                }
-                            }
-                            return <label tabIndex={0} key={id} className={style.list}
-                                          onChange={onLabelChange}>
-                                <input type="checkbox"
-                                       checked={checked}
-                                       readOnly/>
-                                {name}
+                    <div hidden={!isDropDownListOpened}>
+                        <div className={style.dropDownListOpened}>
+                            <label tabIndex={0} className={style.list} onChange={onAllOptionsChange}>
+                                <input type="checkbox" checked={isCheckedAll} readOnly/>
+                                Все
                             </label>
-                        })}
-                    </ul>
-                </div>
-            </form>
-        </>
-    )
-})
 
-// const [checkedState, setCheckedState] = useState(new Array(assignedSubjectArea.length).fill(false))
+                            {data.map(({id, name}) => {
+                                const checked = checkedItems.some(el => el === id)
+                                const onLabelChange = () => {
+                                    if (checked && checkedItems.length > 1) {
+                                        setCheckedItems(checkedItems.filter(el => el !== id))
+                                        setIsCheckedAll(false)
+                                    }
+                                    if (!checked) {
+                                        const newArray = [...checkedItems]
+                                        newArray.push(id)
+                                        setCheckedItems(newArray)
+                                    }
+                                }
+                                return (
+                                    <label tabIndex={0} key={id} className={style.list} onChange={onLabelChange}>
+                                        <input type="checkbox" checked={checked} readOnly/>
+                                        {name}
+                                    </label>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </form>
+            </>
+        )
+    }
+)

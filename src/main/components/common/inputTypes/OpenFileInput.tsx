@@ -16,7 +16,6 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     // const [previewImg, setPreviewImg] = useState<string>('')
     const [sizeWidth, setSizeWidth] = useState<string | number>('')
     const [sizeHeight, setSizeHeight] = useState<string | number>('')
-
     const inputRef = useRef<HTMLInputElement | null>(null)
     const imgRef = createRef<HTMLImageElement>()
 
@@ -53,10 +52,7 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
                         reader.readAsDataURL(newFile)
                     }
                 }
-            } else {
-                console.log('ONLY \'.ico\' FILES ARE ALLOWED!!!')
-            }
-
+            } else console.log('ONLY \'.ico\' FILES ARE ALLOWED!!!')
         }
     }
 
@@ -93,36 +89,3 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
         </>
     )
 })
-
-// useEffect(() => {
-//     let elem = document.getElementsByTagName('img')
-//     console.log(elem)
-//     let theCSSprop = window.getComputedStyle(elem[0]).width;
-//     console.log((parseInt(theCSSprop)).toString())
-//     // @ts-ignore
-//     document.getElementById('output').innerHTML = (parseInt(theCSSprop)).toString();
-// }, [])
-
-
-// const onChange = (e: any) => {
-//     const files = e.target.files
-//     console.log("file", files[0]);
-//     let file = files[0];
-//     if (file) {
-//         const reader = new FileReader();
-//         reader.onload = _handleReaderLoaded
-//         reader.readAsBinaryString(file)
-//     }
-// }
-
-// const onFileSubmit = (e: any) => {
-//     setIsLoading(true);
-//     e.preventDefault()
-//     console.log('bine', base64)
-//     let payload = {image: base64}
-//     console.log('payload', payload)
-//
-//     setTimeout(() => {
-//         setIsLoading(false)
-//     }, 2000)
-// }
