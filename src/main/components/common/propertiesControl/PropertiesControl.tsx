@@ -8,6 +8,7 @@ import {PropertyDataType} from '../types/Types';
 import {SimpleDropDown} from '../inputTypes/SimpleDropDown';
 import {EnumDropDown} from '../inputTypes/EnumDropDown';
 import {OpenFileInput} from '../inputTypes/OpenFileInput';
+import {Pointer} from '../Pointer';
 
 
 type PropsType = {
@@ -35,9 +36,18 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
 
-                    {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                    <div tabIndex={0} className={style.icon}
-                         onClick={onImageClick}>{`${isImageFieldExpanded ? '﹥' : '⌵'}`}</div>}
+                    {
+                        field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
+
+                            // <Pointer onImageClick={onImageClick}
+                            //          isImageFieldExpanded={isImageFieldExpanded}/>
+
+                        <div tabIndex={0} className={style.icon} onClick={onImageClick}>
+                            {`${isImageFieldExpanded ? '﹥' : '⌵'}`}
+                        </div>
+                    }
+
+
                     <input type="text" value={field.propertyName} readOnly/>
 
                     <div className={style.sizeField} hidden={!isImageFieldExpanded}>

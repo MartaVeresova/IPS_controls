@@ -1,12 +1,28 @@
 .pointer {
-  font-size: 40px;
+  font-size: 30px;
   font-family: sans-serif;
+  background-color: transparent;
+  height: 7px;
+  width: 15px;
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  cursor: pointer;
+  line-height: 0;
 
   &:hover {
     cursor: pointer;
   }
+}
 
-  &:checked {
-    background-color: red;
+.activePointer {
+  font-size: 30px;
+  font-family: sans-serif;
+  transition: transform .3s linear;
+  transform: rotate(-180deg);
+  //transform-origin: 50% 50%;
+
+  &:hover {
+    cursor: pointer;
   }
 }

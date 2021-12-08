@@ -18,10 +18,15 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
         const formRef = useRef<HTMLFormElement | null>(null)
         useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
 
-        console.log(checkedItems)
         useEffect(() => {
             setData(assignedSubjectAreaTypes)
         }, [])
+
+
+        if (!isDropDownListOpened && !checkedItems.length) {
+            setIsCheckedAll(true)
+            setCheckedItems(data.map(el => el.id))
+        }
 
         const onInputClick = () => {
             //имитация post за списком для дропдауна
@@ -31,13 +36,18 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
             }
             if (isDropDownListOpened) {
                 setIsDropDownListOpened(false)
+                if (!checkedItems.length) {
+                    setIsCheckedAll(true)
+                    setCheckedItems(data.map(el => el.id))
+                }
             }
         }
 
         const onAllOptionsChange = () => {
             if (isCheckedAll) {
                 setIsCheckedAll(false)
-                setCheckedItems([data[0].id])
+                // setCheckedItems([data[0].id])
+                setCheckedItems([])
             }
             if (!isCheckedAll) {
                 setIsCheckedAll(true)
@@ -75,7 +85,8 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                             {data.map(({id, name}) => {
                                 const checked = checkedItems.some(el => el === id)
                                 const onLabelChange = () => {
-                                    if (checked && checkedItems.length > 1) {
+                                    // if (checked && checkedItems.length > 1) {
+                                    if (checked) {
                                         setCheckedItems(checkedItems.filter(el => el !== id))
                                         setIsCheckedAll(false)
                                     }

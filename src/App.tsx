@@ -11,16 +11,18 @@ export const App: FC = observer(() => {
     const [isObjectTypesOpen, setIsObjectTypesOpen] = useState<boolean>(false)
 
     return (
-        <div className={style.wrap}>
-            <div className={style.treeMenu}>
-                <RootTree setIsLifeCycleLevelOpen={setIsLifeCycleLevelOpen}
-                          setIsObjectTypesOpen={setIsObjectTypesOpen}
-                          isObjectTypesOpen={isObjectTypesOpen}
-                />
+        <>
+            <div className={style.wrap}>
+                <div className={style.treeMenu}>
+                    <RootTree setIsLifeCycleLevelOpen={setIsLifeCycleLevelOpen}
+                              setIsObjectTypesOpen={setIsObjectTypesOpen}
+                              isObjectTypesOpen={isObjectTypesOpen}
+                    />
+                </div>
+                {isLifeCycleLevelOpen && <div><LifeCycleLevel/></div>}
+                {isObjectTypesOpen && <div><ObjectTypes/></div>}
             </div>
-            {isLifeCycleLevelOpen && <div><LifeCycleLevel/></div>}
-            {isObjectTypesOpen && <div><ObjectTypes/></div>}
-        </div>
+        </>
     )
 })
 

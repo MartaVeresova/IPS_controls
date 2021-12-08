@@ -19,7 +19,6 @@ export const LifeCycleLevel: FC = memo(() => {
             <div className={style.tabControlContainer}>
                 {lifeCycleLevelData.map(field => <PropertiesControl key={field.propertyName} field={field}/>)}
             </div>
-            <Pointer />
         </>
     )
 })
