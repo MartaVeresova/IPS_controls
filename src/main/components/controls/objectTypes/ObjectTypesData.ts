@@ -90,7 +90,7 @@ export const objectTypesData: PropertyDataType[] = [
     {
         propertyName: 'Версионность',
         propertyValue: propertyValueSection.versionMode,
-        fieldType: 'simpleDropDown',
+        fieldType: 'enumDropDown',
     },
     {
         propertyName: 'Включать новые версии в текущий контекст редактирования',

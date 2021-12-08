@@ -1,72 +1,52 @@
-import React, {FC, memo, useRef, useState} from 'react';
-import style from './EnumDropDown.module.scss';
-import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
+import React, {FC, memo, useEffect, useState} from 'react';
+import {GeneralDropDown} from '../GeneralDropDown';
 
 type PropsType = {
-    propertyValue: VersionModeType
+    propertyValue: string
 }
 type VersionModeType = 'notComputableValue' | 'storedValue' | 'multiVersion'
 type VersionModeValueType = 'Абстрактный тип' | 'Неверсионный тип' | 'Версионный тип'
-type VersionModeDataType = {
-    notComputableValue: VersionModeValueType
-    storedValue: VersionModeValueType
-    multiVersion: VersionModeValueType
-}
 
-const versionModeData: VersionModeDataType = {
-    notComputableValue: 'Абстрактный тип',
-    storedValue: 'Неверсионный тип',
-    multiVersion: 'Версионный тип',
+enum versionMode {
+    notComputableValue = 'Абстрактный тип',
+    storedValue = 'Неверсионный тип',
+    multiVersion = 'Версионный тип',
 }
+const data: Array<string[]> = Object.entries(versionMode)
+
 
 export const EnumDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
-
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
+    const [checkedName, setCheckedName] = useState<string>('') //name чекнутого элемента
+    const [selectedName, setSelectedName] = useState<string>(propertyValue) //sent to server
 
-//propertyValue-приходит с сервера, selectOption-отправляю на сервер
-//     const [name, setName] = useState<string>(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
-    const [selectOption, setSelectOption] = useState<VersionModeType>(propertyValue)
-    const formRef = useRef<HTMLFormElement | null>(null)
+    useEffect(() => {
+        data.forEach(([key, value]) => {
+            if ([key, value][0] === propertyValue) setCheckedName(value)
+        })
+    }, [propertyValue])
 
-    useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
     const onInputClick = () => setIsDropDownListOpened(!isDropDownListOpened)
 
-    // const options = dataArr.map((item, index) => {
-    //     const onOptionClick = () => {
-    //         setName(item.name)
-    //         // setID(item.id)
-    //         setSelectedId(item.id)
-    //         setIsDropDownListOpened(false)
-    //     }
-    //     return (
-    //         <li key={index} onClick={onOptionClick} tabIndex={index}>{item.name}</li>
-    //     )
-    // })
+    const options = data.map(([key, value]) => {
+        const onOptionClick = () => {
+            setSelectedName([key, value][0])
+            setCheckedName([key, value][1])
+            setIsDropDownListOpened(false)
+        }
+        return <div key={key} tabIndex={0} onClick={onOptionClick}>{value}</div>
+    })
 
 
     return (
         <>
-            {/*<form className={style.dropDown} ref={formRef}>*/}
-            {/*    <input type="text"*/}
-            {/*           value={name}*/}
-            {/*           onClick={onInputClick}*/}
-            {/*           readOnly/>*/}
-            {/*    <label tabIndex={0} onClick={onInputClick}>⌵</label>*/}
-            {/*    <div hidden={!isDropDownListOpened}>*/}
-            {/*        <ul className={style.dropDownListOpened}>*/}
-            {/*            {options}*/}
-            {/*        </ul>*/}
-            {/*    </div>*/}
-            {/*</form>*/}
+            <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
+                             setIsDropDownListOpened={setIsDropDownListOpened}
+                             checkedName={checkedName}
+                             onInputClick={onInputClick}>
+                {options}
+            </GeneralDropDown>
         </>
     )
 })
-
-
-// enum VersionMode {
-//     'Абстрактный тип' = 'notComputableValue', //абстрактный тип
-//     'Неверсионный тип' = 'storedValue', //неверсионный тип
-//     'Версионный тип' = 'multiVersion', //версионный тип
-// }
-// const versionModeNames = Object.keys(VersionMode)

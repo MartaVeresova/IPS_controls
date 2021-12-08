@@ -1,8 +1,7 @@
-import React, {FC, memo, useRef, useState} from 'react';
-import style from './SimpleDropDown.module.scss';
-import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
+import React, {FC, memo, useState} from 'react';
 import {captionAttribute, defaultRelationType} from '../../controls/objectTypes/ObjectTypesData';
 import {CaptionAttributeType, DefaultRelationTypeType} from '../types/Types';
+import {GeneralDropDown} from '../GeneralDropDown';
 
 type PropsType = {
     propertyValue: number //id чекнутого элемента
@@ -22,10 +21,7 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
     const [checkedName, setCheckedName] = useState('') //name чекнутого элемента
     const [selectedId, setSelectedId] = useState<number>(propertyValue)//id чек.элемента, sent to server
 
-    const formRef = useRef<HTMLFormElement | null>(null)
-    useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
-
-    let onInputClick
+    let onInputClick: () => void = () => {}
     let dataArr: DataType[] = []
     // let {onInputClick, data, setID} = simplify(propertyName)
 
@@ -88,18 +84,15 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
 
     return (
         <>
-            <form className={style.dropDown} ref={formRef}>
-                <input type="text"
-                       value={checkedName}
-                       onClick={onInputClick}
-                       readOnly/>
-                <label tabIndex={0} onClick={onInputClick}>⌵</label>
-                <div hidden={!isDropDownListOpened}>
-                    <div className={style.dropDownListOpened}>
-                        {options}
-                    </div>
-                </div>
-            </form>
+            <GeneralDropDown
+                isDropDownListOpened={isDropDownListOpened}
+                setIsDropDownListOpened={setIsDropDownListOpened}
+                checkedName={checkedName}
+                onInputClick={onInputClick}
+
+            >
+                {options}
+            </GeneralDropDown>
         </>
     )
 })

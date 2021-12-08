@@ -22,12 +22,6 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
             setData(assignedSubjectAreaTypes)
         }, [])
 
-
-        if (!isDropDownListOpened && !checkedItems.length) {
-            setIsCheckedAll(true)
-            setCheckedItems(data.map(el => el.id))
-        }
-
         const onInputClick = () => {
             //имитация post за списком для дропдауна
             if (!isDropDownListOpened) {
@@ -36,17 +30,12 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
             }
             if (isDropDownListOpened) {
                 setIsDropDownListOpened(false)
-                if (!checkedItems.length) {
-                    setIsCheckedAll(true)
-                    setCheckedItems(data.map(el => el.id))
-                }
             }
         }
 
         const onAllOptionsChange = () => {
             if (isCheckedAll) {
                 setIsCheckedAll(false)
-                // setCheckedItems([data[0].id])
                 setCheckedItems([])
             }
             if (!isCheckedAll) {
@@ -62,16 +51,22 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                     nameArray.push(el.name)
                 }
             })
-            return nameArray.join(', ')
+            if (!nameArray.length && !isDropDownListOpened) {
+                return 'Поле обязательно'
+            } else {
+                return nameArray.join(', ')
+            }
         }
 
         return (
             <>
-                <form className={style.multiselect} ref={formRef}>
+                <form className={style.dropDown} ref={formRef}>
                     <input type="text"
                            readOnly
                            onClick={onInputClick}
                            value={isCheckedAll ? 'Все' : inputValue()}
+                           className={!checkedItems.length && !isDropDownListOpened ? style.error : style.input}
+                        // className={style.input}
                     />
                     <div tabIndex={0} className={style.icon} onClick={onInputClick}>⌵</div>
 
@@ -85,7 +80,6 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                             {data.map(({id, name}) => {
                                 const checked = checkedItems.some(el => el === id)
                                 const onLabelChange = () => {
-                                    // if (checked && checkedItems.length > 1) {
                                     if (checked) {
                                         setCheckedItems(checkedItems.filter(el => el !== id))
                                         setIsCheckedAll(false)

@@ -1,6 +1,5 @@
-import React, {FC, memo, useRef, useState} from 'react';
-import style from './YesNoDropDown.module.scss';
-import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
+import React, {FC, memo, useEffect, useState} from 'react';
+import {GeneralDropDown} from '../GeneralDropDown';
 
 type PropsType = {
     propertyValue: boolean
@@ -8,23 +7,22 @@ type PropsType = {
 type YesNoType = 'да' | 'нет'
 const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
-
 export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
-    const initialValue = propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1]
-
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-    const [name, setName] = useState<string>(initialValue)
-    const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //propertyValue-response, selectedOption-for sent to back
-    const formRef = useRef<HTMLFormElement | null>(null)
+    const [checkedName, setCheckedName] = useState<string>('')
+    const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //sent to server
 
-    useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
+    useEffect(() => {
+        setCheckedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
+    },[propertyValue])
+
     const onInputClick = () => setIsDropDownListOpened(!isDropDownListOpened)
 
     const options = yesNoDropDownData.map((item, index) => {
         const onOptionClick = () => {
             setSelectedOption(item === yesNoDropDownData[0])
-            setName(item)
+            setCheckedName(item)
             setIsDropDownListOpened(false)
         }
         return <div key={index} onClick={onOptionClick} tabIndex={index}>{item}</div>
@@ -32,18 +30,12 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
     return (
         <>
-            <form className={style.dropDown} ref={formRef}>
-                <input type="text"
-                       value={name}
-                       onClick={onInputClick}
-                       readOnly/>
-                <label tabIndex={0} onClick={onInputClick}>⌵</label>
-                <div hidden={!isDropDownListOpened}>
-                    <div className={style.dropDownListOpened}>
-                        {options}
-                    </div>
-                </div>
-            </form>
+            <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
+                             setIsDropDownListOpened={setIsDropDownListOpened}
+                             checkedName={checkedName}
+                             onInputClick={onInputClick}>
+                {options}
+            </GeneralDropDown>
         </>
     )
 })

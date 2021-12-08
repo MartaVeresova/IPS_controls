@@ -1,5 +1,4 @@
 Input {
-  //padding-left: 5px;
   border: 0;
 
   &:focus {
@@ -82,8 +81,8 @@ Input {
     width: 50%;
 
     Input {
-      padding-left: 5px;
-      border: 1px solid gray;
+      //padding-left: 5px;
+      //border: 1px solid gray;
     }
   }
 }
