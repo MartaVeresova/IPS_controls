@@ -16,16 +16,12 @@ export type PropertyDataType = {
 }
 
 //ObjectTypes
-export type AssignedSubjectAreaType = {
+export type MultiType = {
     id: string
-    name: string
+    displayName: string
 }
-export type DefaultRelationTypeType = {
-    id: number
-    name: string
-}
-export type CaptionAttributeType = {
-    id: number
+export type SimpleType = {
+    id: number | null
     displayName: string
 }
 export type ObjectTypesType = {
@@ -68,5 +64,5 @@ export type LifeCycleLevelType = {
     litera: string
     name: string
     assignedSubjectAreaIds: string[]
-    storageId: string
+    storageId: number | null
 }

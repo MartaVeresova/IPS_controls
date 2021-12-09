@@ -2,7 +2,7 @@ import React, {FC, memo, useEffect, useRef, useState} from 'react';
 import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 import {assignedSubjectAreaTypes} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
-import {AssignedSubjectAreaType} from '../types/Types';
+import {MultiType} from '../types/Types';
 
 type PropsType = {
     propertyValue: string[]
@@ -12,7 +12,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
         const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
         const [checkedItems, setCheckedItems] = useState<string[]>(propertyValue) //массив чекнутых айди
-        const [data, setData] = useState<AssignedSubjectAreaType[]>([]) //массив всех элементов
+        const [data, setData] = useState<MultiType[]>([]) //массив всех элементов
         const [isCheckedAll, setIsCheckedAll] = useState(false)
 
         const formRef = useRef<HTMLFormElement | null>(null)
@@ -48,7 +48,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
             let nameArray: string[] = []
             assignedSubjectAreaTypes.forEach(el => {
                 if (checkedItems.some(elem => elem === el.id)) {
-                    nameArray.push(el.name)
+                    nameArray.push(el.displayName)
                 }
             })
             if (!nameArray.length && !isDropDownListOpened) {
@@ -77,7 +77,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                                 Все
                             </label>
 
-                            {data.map(({id, name}) => {
+                            {data.map(({id, displayName}) => {
                                 const checked = checkedItems.some(el => el === id)
                                 const onLabelChange = () => {
                                     if (checked) {
@@ -91,9 +91,9 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                                     }
                                 }
                                 return (
-                                    <label tabIndex={0} key={id} className={style.list} onChange={onLabelChange}>
+                                    <label key={id} tabIndex={0} className={style.list} onChange={onLabelChange}>
                                         <input type="checkbox" checked={checked} readOnly/>
-                                        {name}
+                                        {displayName}
                                     </label>
                                 )
                             })}

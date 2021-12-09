@@ -25,7 +25,7 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
             setCheckedName(item)
             setIsDropDownListOpened(false)
         }
-        return <div key={index} onClick={onOptionClick} tabIndex={index}>{item}</div>
+        return <div key={item} onClick={onOptionClick} tabIndex={index}>{item}</div>
     })
 
     return (

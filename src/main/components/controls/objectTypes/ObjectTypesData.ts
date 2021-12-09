@@ -1,26 +1,20 @@
-import {
-    AssignedSubjectAreaType,
-    CaptionAttributeType,
-    DefaultRelationTypeType,
-    ObjectTypesType,
-    PropertyDataType
-} from '../../common/types/Types';
+import {MultiType, ObjectTypesType, PropertyDataType, SimpleType} from '../../common/types/Types';
 
 
 //данные с сервака
-export const defaultRelationType: DefaultRelationTypeType[] = [
-    {id: 0, name: 'Аналоги'},
-    {id: 1, name: 'Вложения'},
-    {id: 2, name: 'Документация на изделие'},
-    {id: 3, name: 'Дополняет извещение'},
-    {id: 4, name: 'Журнал изменений на изделие'},
-    {id: 5, name: 'Избранное IMBASE'},
-    {id: 6, name: 'Изделие-заготовка'},
-    {id: 7, name: 'Изменяемые объекты'},
-    {id: 8, name: 'Изменяется по извещению'},
+export const defaultRelationType: SimpleType[] = [
+    {id: 0, displayName: 'Аналоги'},
+    {id: 1, displayName: 'Вложения'},
+    {id: 2, displayName: 'Документация на изделие'},
+    {id: 3, displayName: 'Дополняет извещение'},
+    {id: 4, displayName: 'Журнал изменений на изделие'},
+    {id: 5, displayName: 'Избранное IMBASE'},
+    {id: 6, displayName: 'Изделие-заготовка'},
+    {id: 7, displayName: 'Изменяемые объекты'},
+    {id: 8, displayName: 'Изменяется по извещению'},
 ]
 
-export const captionAttribute: CaptionAttributeType[] = [
+export const captionAttribute: SimpleType[] = [
     {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},
     {id: 18033, displayName: 'Автоматически размещающиеся в архиве типы документов'},
     {id: 1056, displayName: 'Глобальные идентификаторы типов объектов'},
@@ -37,19 +31,19 @@ export const captionAttribute: CaptionAttributeType[] = [
     {id: 1017, displayName: 'Файловый шкаф'},
 ]
 
-export const assignedSubjectAreaTypes: AssignedSubjectAreaType[] = [
-    {id: "A", name: "Конструкторская подготовка"},
-    {id: "B", name: "Архитектура и строительство"},
-    {id: "C", name: "Отладка"},
-    {id: "D", name: "Администрирование системы"},
-    {id: "E", name: "Технологическая подготовка"},
-    {id: "F", name: "Общая"},
-    {id: "G", name: "Производство"},
-    {id: "H", name: "Управление НСИ"},
-    {id: "I", name: "SubjectArea_test1_ui"},
+export const assignedSubjectAreaTypes: MultiType[] = [
+    {id: 'A', displayName: 'Конструкторская подготовка'},
+    {id: 'B', displayName: 'Архитектура и строительство'},
+    {id: 'C', displayName: 'Отладка'},
+    {id: 'D', displayName: 'Администрирование системы'},
+    {id: 'E', displayName: 'Технологическая подготовка'},
+    {id: 'F', displayName: 'Общая'},
+    {id: 'G', displayName: 'Производство'},
+    {id: 'H', displayName: 'Управление НСИ'},
+    {id: 'I', displayName: 'SubjectArea_test1_ui'},
 ]
 
-    const propertyValueSection: ObjectTypesType = {
+const propertyValueSection: ObjectTypesType = {
     id: 2039,
     globalKey: '037c4a0e-d1b4-4531-97dd-72cc5f7962d4',
     name: 'name_create',
