@@ -3,6 +3,7 @@ import {captionAttribute, defaultRelationType} from '../../controls/objectTypes/
 import {GeneralDropDown} from '../GeneralDropDown';
 import {SimpleType} from '../types/Types';
 import {storage} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
+import {trimmedString} from '../../utils/trimmedString';
 
 type PropsType = {
     propertyValue: number //id чекнутого элемента
@@ -68,10 +69,10 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
             setIsDropDownListOpened(false)
         }
         return (
-            <div key={item.displayName} onClick={onOptionClick} tabIndex={index}>{item.displayName}</div>
+            // <div key={item.displayName} onClick={onOptionClick} tabIndex={index} title={item.displayName}>{trimmedString(item.displayName, 62)}</div>
+        <div key={item.displayName} onClick={onOptionClick} tabIndex={index} title={item.displayName}>{item.displayName}</div>
         )
     })
-
 
     return (
         <>

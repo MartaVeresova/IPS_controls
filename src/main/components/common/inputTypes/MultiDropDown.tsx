@@ -3,6 +3,7 @@ import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 import {assignedSubjectAreaTypes} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
 import {MultiType} from '../types/Types';
+import {Pointer} from '../Pointer';
 
 type PropsType = {
     propertyValue: string[]
@@ -66,9 +67,9 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                            onClick={onInputClick}
                            value={isCheckedAll ? 'Все' : inputValue()}
                            className={!checkedItems.length && !isDropDownListOpened ? style.error : style.input}
-                        // className={style.input}
+                           title={isCheckedAll ? 'Все' : inputValue()}
                     />
-                    <div tabIndex={0} className={style.icon} onClick={onInputClick}>⌵</div>
+                    <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
 
                     <div hidden={!isDropDownListOpened}>
                         <div className={style.dropDownListOpened}>

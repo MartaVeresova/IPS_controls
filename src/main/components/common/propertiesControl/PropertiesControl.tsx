@@ -1,4 +1,4 @@
-import React, {FC, memo, useState} from 'react';
+import React, {FC, memo, SyntheticEvent, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {EditableInput} from '../inputTypes/EditableInput';
 import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
@@ -30,36 +30,35 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
         setIsSizeFieldExpanded(!isSizeFieldExpanded)
     }
 
+    const onInputSelect = (e: SyntheticEvent<HTMLInputElement, Event>) => {
+        e.preventDefault()
+    }
 
     return (
         <>
             <div key={field.propertyName} className={style.propertyDisplay}>
                 <div className={style.propertyName}>
 
+                    <input type="text" value={field.propertyName} onDoubleClick={onImageClick} onSelect={onInputSelect}
+                           readOnly/>
                     {
                         field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
+                        <>
+                            <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
+                                     type="imageFieldIcon"/>
+                            <div className={style.sizeField} hidden={!isImageFieldExpanded}>
+                                <input type="text" value="Size" onDoubleClick={onSizeClick} readOnly/>
+                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
+                                         type="sizeFieldIcon"/>
 
-                            // <Pointer onImageClick={onImageClick}
-                            //          isImageFieldExpanded={isImageFieldExpanded}/>
-
-                        <div tabIndex={0} className={style.icon} onClick={onImageClick}>
-                            {`${isImageFieldExpanded ? '﹥' : '⌵'}`}
-                        </div>
+                                <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>
+                                    <input type="text" value="Width" readOnly/>
+                                    <input type="text" value="Height" readOnly/>
+                                </div>
+                            </div>
+                        </>
                     }
 
-
-                    <input type="text" value={field.propertyName} readOnly/>
-
-                    <div className={style.sizeField} hidden={!isImageFieldExpanded}>
-                        {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                        <div tabIndex={0} className={style.icon} onClick={onSizeClick}>⌵</div>}
-                        <input type="text" value="Size" readOnly/>
-
-                        <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>
-                            <input type="text" value="Width" readOnly/>
-                            <input type="text" value="Height" readOnly/>
-                        </div>
-                    </div>
                 </div>
 
                 <div className={style.propertyValue}>

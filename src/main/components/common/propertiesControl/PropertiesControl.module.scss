@@ -17,35 +17,49 @@ Input {
     position: relative;
     //z-index: 1;
 
+
+
     .icon {
-      background-color: transparent;
-      height: 7px;
-      width: 15px;
+      text-align: center;
+      //background-color: red;
+      width: 16px;
+      height: 16px;
       position: absolute;
-      top: 10px;
+      top: 0;
+      bottom: 0;
       left: 6px;
+      margin: auto 0;
       cursor: pointer;
-      font-size: 20px;
-      line-height: 0;
+      font-size: 18px;
+      line-height: 10px;
+      transition: transform .3s linear;
+      transform: rotate(-90deg);
 
       &:hover {
         font-weight: bold;
       }
     }
 
-    //.iconActive {
-    //  background-color: red;
-    //  transition: transform .3s linear;
-    //  transform: rotate(-180deg);
-    //  transform-origin: 50% 50%;
-    //}
+    .iconActive {
+      @extend .icon;
+      margin: 0;
+      top: 5.5px;
+      transform: rotate(0deg);
+    }
 
 
     .sizeField .icon {
-      //position: absolute;
-      background-color: transparent;
-      top: 37px;
-      left: 26px;
+      @extend .icon;
+      background-color: red;
+      //top: 37px;
+      //left: 26px;
+
+      .iconActive {
+        @extend .icon;
+        margin: 0;
+        top: 5.5px;
+        transform: rotate(0deg);
+      }
     }
 
     .sizeField Input {

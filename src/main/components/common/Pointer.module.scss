@@ -1,28 +1,86 @@
-.pointer {
-  font-size: 30px;
-  font-family: sans-serif;
-  background-color: transparent;
-  height: 7px;
-  width: 15px;
+.imageFieldIconOff {
+  text-align: center;
+  //background-color: red;
+  width: 23px;
+  height: 23px;
   position: absolute;
-  top: 10px;
-  left: 6px;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  margin: auto 0;
   cursor: pointer;
-  line-height: 0;
+  font-size: 20px;
+  line-height: 17px;
+  transition: transform .3s linear;
+  transform: rotate(-90deg);
 
   &:hover {
-    cursor: pointer;
+    font-weight: bold;
   }
 }
 
-.activePointer {
-  font-size: 30px;
-  font-family: sans-serif;
+.imageFieldIconOn {
+  @extend .imageFieldIconOff;
+  margin: 0;
+  top: 2px;
+  transform: rotate(0deg);
+}
+
+.sizeFieldIconOff {
+  text-align: center;
+  //background-color: red;
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 22px;
+  margin: auto 0;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 17px;
   transition: transform .3s linear;
-  transform: rotate(-180deg);
-  //transform-origin: 50% 50%;
+  transform: rotate(-90deg);
 
   &:hover {
-    cursor: pointer;
+    font-weight: bold;
   }
+}
+
+.sizeFieldIconOn {
+  @extend .sizeFieldIconOff;
+  margin: 0;
+  top: 29px;
+  transform: rotate(0deg);
+}
+
+
+.dropDownOff {
+  text-align: center;
+  //background-color: red;
+  width: 23px;
+  height: 23px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 2px;
+  margin: auto 0;
+  //outline: 0;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 17px;
+  transition: transform .3s linear;
+  //transform: rotate(-90deg);
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+.dropDownOn {
+  @extend .dropDownOff;
+  margin: 0;
+  top: 1.5px;
+  transform: rotate(180deg);
+
 }

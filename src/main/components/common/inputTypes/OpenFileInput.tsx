@@ -16,8 +16,12 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     // const [previewImg, setPreviewImg] = useState<string>('')
     const [sizeWidth, setSizeWidth] = useState<string | number>('')
     const [sizeHeight, setSizeHeight] = useState<string | number>('')
+
+    const [isButtonShow, setIsButtonShow] = useState(false)
+
     const inputRef = useRef<HTMLInputElement | null>(null)
     const imgRef = createRef<HTMLImageElement>()
+
 
     useEffect(() => {
         if (imgRef.current) {
@@ -67,7 +71,6 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
         inputRef && inputRef.current && inputRef.current.click()
     }
 
-
     return (
         <>
             <div className={style.inputField}>
@@ -76,6 +79,7 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
                 <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
                        onChange={imageUpload}/>
                 <button onClick={onButtonClick}>...</button>
+
             </div>
 
             <div className={style.openImageField} hidden={!isImageFieldExpanded}>

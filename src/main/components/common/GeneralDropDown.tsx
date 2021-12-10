@@ -1,6 +1,7 @@
 import React, {FC, useRef} from 'react';
 import style from './GeneralDropDown.module.scss';
 import {useOnClickOutside} from '../../hooks/useOnClickOutside';
+import {Pointer} from './Pointer';
 
 type PropsType = {
     isDropDownListOpened: boolean
@@ -23,8 +24,10 @@ export const GeneralDropDown: FC<PropsType> = (props) => {
                 <input type="text"
                        value={checkedName}
                        onClick={onInputClick}
+                       title={checkedName}
                        readOnly/>
-                <label tabIndex={0} onClick={onInputClick}>⌵</label>
+                <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type='dropDown' />
+                {/*<label tabIndex={0} onClick={onInputClick}>⌵</label>*/}
 
                 <div hidden={!isDropDownListOpened}>
                     <div className={style.dropDownListOpened}>
