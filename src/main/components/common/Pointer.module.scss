@@ -1,77 +1,79 @@
 .imageFieldIconOff {
-  text-align: center;
-  //background-color: red;
-  width: 23px;
-  height: 23px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 2px;
-  margin: auto 0;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 17px;
-  transition: transform .3s linear;
-  transform: rotate(-90deg);
-
-  &:hover {
-    font-weight: bold;
-  }
+  //text-align: center;
+  ////background-color: red;
+  //width: 23px;
+  //height: 23px;
+  //position: absolute;
+  //top: 0;
+  //bottom: 0;
+  //left: 2px;
+  //margin: auto 0;
+  //cursor: pointer;
+  //font-size: 20px;
+  //line-height: 18px;
+  //transition: transform .3s linear;
+  //transform: rotate(-90deg);
+  //
+  //&:hover {
+  //  font-weight: bold;
+  //}
 }
 
 .imageFieldIconOn {
-  @extend .imageFieldIconOff;
-  margin: 0;
-  top: 2px;
-  transform: rotate(0deg);
+  //@extend .imageFieldIconOff;
+  //margin: 0;
+  //top: 2px;
+  //transform: rotate(0deg);
 }
 
-.sizeFieldIconOff {
-  text-align: center;
-  //background-color: red;
-  width: 23px;
-  height: 23px;
-  position: absolute;
-  top: 50%;
-  bottom: 0;
-  left: 22px;
-  margin: auto 0;
-  cursor: pointer;
-  font-size: 20px;
-  line-height: 17px;
-  transition: transform .3s linear;
-  transform: rotate(-90deg);
 
-  &:hover {
-    font-weight: bold;
-  }
+.sizeFieldIconOff {
+  //text-align: center;
+  ////background-color: red;
+  ////color: black;
+  //width: 23px;
+  //height: 23px;
+  //position: absolute;
+  //top: 25px;
+  //bottom: 0;
+  //left: 22px;
+  //margin: auto 0;
+  //cursor: pointer;
+  //font-size: 20px;
+  //line-height: 18px;
+  //transition: transform .3s linear;
+  //transform: rotate(-90deg);
+
+  //&:hover {
+  //  font-weight: bold;
+  //}
 }
 
 .sizeFieldIconOn {
-  @extend .sizeFieldIconOff;
-  margin: 0;
-  top: 29px;
-  transform: rotate(0deg);
+  //@extend .sizeFieldIconOff;
+  //margin: 0;
+  //top: 26px;
+  //transform: rotate(0deg);
 }
 
 
 .dropDownOff {
-  text-align: center;
-  //background-color: red;
-  width: 23px;
-  height: 23px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 2px;
-  margin: auto 0;
-  //outline: 0;
   cursor: pointer;
-  font-size: 18px;
-  line-height: 17px;
   transition: transform .3s linear;
+  //text-align: center;
+  ////background-color: red;
+  //width: 23px;
+  //height: 23px;
+  //position: absolute;
+  //top: 0;
+  //bottom: 0;
+  //right: 2px;
+  //margin: auto 0;
+  ////outline: 0;
+  //font-size: 18px;
+  //line-height: 18px;
   //transform: rotate(-90deg);
-
+  //
   &:hover {
     font-weight: bold;
   }
@@ -79,8 +81,8 @@
 
 .dropDownOn {
   @extend .dropDownOff;
-  margin: 0;
-  top: 1.5px;
+  //margin: 0;
+  //top: 2px;
   transform: rotate(180deg);
 
 }

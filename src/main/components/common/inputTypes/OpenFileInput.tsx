@@ -74,21 +74,22 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     return (
         <>
             <div className={style.inputField}>
-                <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
-                <input type="text" value={inputTextValue()} readOnly/>
+                <div className={style.wrap}>
+                    <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
+                    <div>{inputTextValue()}</div>
+                </div>
                 <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
                        onChange={imageUpload}/>
                 <button onClick={onButtonClick}>...</button>
-
             </div>
 
-            <div className={style.openImageField} hidden={!isImageFieldExpanded}>
-                <input type="text" value={`${sizeWidth}x${sizeHeight}`} readOnly/>
-                <div className={style.widthHeightValueFields} hidden={!isSizeFieldExpanded}>
-                    <input type="text" value={sizeWidth} readOnly/>
-                    <input type="text" value={sizeHeight} readOnly/>
-                </div>
-            </div>
+            {/*<div className={style.openImageField} hidden={!isImageFieldExpanded}>*/}
+            {/*    {`${sizeWidth}x${sizeHeight}`}*/}
+            {/*</div>*/}
+            {/*<div hidden={!isSizeFieldExpanded}>*/}
+            {/*    <div className={style.widthHeightValueFields} tabIndex={0}>{sizeWidth}</div>*/}
+            {/*    <div className={style.widthHeightValueFields} tabIndex={0}>{sizeHeight}</div>*/}
+            {/*</div>*/}
 
         </>
     )

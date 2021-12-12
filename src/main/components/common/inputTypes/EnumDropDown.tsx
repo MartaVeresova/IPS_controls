@@ -1,5 +1,6 @@
 import React, {FC, memo, useEffect, useState} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
+import style from '../GeneralDropDown.module.scss';
 
 type PropsType = {
     propertyValue: string
@@ -35,7 +36,7 @@ export const EnumDropDown: FC<PropsType> = memo(({propertyValue}) => {
             setCheckedName([key, value][1])
             setIsDropDownListOpened(false)
         }
-        return <div key={key} tabIndex={0} onClick={onOptionClick}>{value}</div>
+        return <div key={key} className={style.listItem} tabIndex={0} onClick={onOptionClick}>{value}</div>
     })
 
 

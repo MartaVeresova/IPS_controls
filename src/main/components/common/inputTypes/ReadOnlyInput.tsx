@@ -9,7 +9,9 @@ export const ReadOnlyInput: FC<PropsType> = memo(({propertyValue}) => {
 
     return (
         <>
-            <input type="text" className={style.readOnlyInput} value={propertyValue} readOnly/>
+            <div className={style.readOnlyInput} title={propertyValue}>
+                {propertyValue}
+            </div>
         </>
     )
 })

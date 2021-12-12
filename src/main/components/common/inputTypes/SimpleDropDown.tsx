@@ -3,7 +3,7 @@ import {captionAttribute, defaultRelationType} from '../../controls/objectTypes/
 import {GeneralDropDown} from '../GeneralDropDown';
 import {SimpleType} from '../types/Types';
 import {storage} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
-import {trimmedString} from '../../utils/trimmedString';
+import style from '../GeneralDropDown.module.scss'
 
 type PropsType = {
     propertyValue: number //id чекнутого элемента
@@ -62,15 +62,16 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
         }
     }
 
-    const options = data.map((item, index) => {
+    const options = data.map(item => {
         const onOptionClick = () => {
             setCheckedName(item.displayName)
             setSelectedId(item.id)
             setIsDropDownListOpened(false)
         }
         return (
-            // <div key={item.displayName} onClick={onOptionClick} tabIndex={index} title={item.displayName}>{trimmedString(item.displayName, 62)}</div>
-        <div key={item.displayName} onClick={onOptionClick} tabIndex={index} title={item.displayName}>{item.displayName}</div>
+            <div key={item.displayName} className={style.listItem} tabIndex={0}
+                 onClick={onOptionClick}
+                 title={item.displayName}>{item.displayName}</div>
         )
     })
 

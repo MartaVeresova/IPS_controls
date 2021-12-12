@@ -1,4 +1,4 @@
-import React, {FC, memo, SyntheticEvent, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {EditableInput} from '../inputTypes/EditableInput';
 import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
@@ -22,44 +22,53 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
     const [previewImg, setPreviewImg] = useState<string>('')
 
     const onImageClick = () => {
-        setIsImageFieldExpanded(!isImageFieldExpanded)
-        setIsSizeFieldExpanded(false)
+        if (field.propertyName === 'Изображение') {
+            setIsImageFieldExpanded(!isImageFieldExpanded)
+            setIsSizeFieldExpanded(false)
+        }
     }
 
     const onSizeClick = () => {
         setIsSizeFieldExpanded(!isSizeFieldExpanded)
     }
 
-    const onInputSelect = (e: SyntheticEvent<HTMLInputElement, Event>) => {
-        e.preventDefault()
-    }
 
     return (
         <>
-            <div key={field.propertyName} className={style.propertyDisplay}>
+            <div className={style.propertyDisplay}>
                 <div className={style.propertyName}>
-
-                    <input type="text" value={field.propertyName} onDoubleClick={onImageClick} onSelect={onInputSelect}
-                           readOnly/>
-                    {
-                        field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                        <>
+                    <div className={style.nameField} tabIndex={0} onDoubleClick={onImageClick}>
+                        {
+                            field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
                             <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
                                      type="imageFieldIcon"/>
-                            <div className={style.sizeField} hidden={!isImageFieldExpanded}>
-                                <input type="text" value="Size" onDoubleClick={onSizeClick} readOnly/>
-                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
-                                         type="sizeFieldIcon"/>
-
-                                <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>
-                                    <input type="text" value="Width" readOnly/>
-                                    <input type="text" value="Height" readOnly/>
-                                </div>
-                            </div>
-                        </>
-                    }
-
+                        }
+                        {field.propertyName}
+                    </div>
                 </div>
+                <div style={{display: 'flex'}}>fds</div>
+                <div className={style.nestedItems}>
+                    {
+                        field.propertyName === 'Изображение' &&
+                        isImageFieldExpanded &&
+
+                        <div className={style.sizeField} tabIndex={0} onDoubleClick={onSizeClick}>
+                            <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
+                                     type="sizeFieldIcon"/>
+                            Size
+                        </div>
+                    }
+                    {
+                        field.propertyName === 'Изображение' &&
+                        isSizeFieldExpanded &&
+
+                        <div>
+                            <div className={style.widthHeightFields} tabIndex={0}>Width</div>
+                            <div className={style.widthHeightFields} tabIndex={0}>Height</div>
+                        </div>
+                    }
+                </div>
+
 
                 <div className={style.propertyValue}>
                     {field.fieldType === 'editableInput' &&

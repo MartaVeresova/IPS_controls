@@ -1,5 +1,6 @@
 import React, {FC, memo, useEffect, useState} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
+import style from '../GeneralDropDown.module.scss';
 
 type PropsType = {
     propertyValue: boolean
@@ -13,19 +14,20 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
     const [checkedName, setCheckedName] = useState<string>('')
     const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //sent to server
 
+    console.log(selectedOption)
     useEffect(() => {
         setCheckedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
-    },[propertyValue])
+    }, [propertyValue])
 
     const onInputClick = () => setIsDropDownListOpened(!isDropDownListOpened)
 
-    const options = yesNoDropDownData.map((item, index) => {
+    const options = yesNoDropDownData.map(item => {
         const onOptionClick = () => {
             setSelectedOption(item === yesNoDropDownData[0])
             setCheckedName(item)
             setIsDropDownListOpened(false)
         }
-        return <div key={item} onClick={onOptionClick} tabIndex={index}>{item}</div>
+        return <div key={item} className={style.listItem} tabIndex={0} onClick={onOptionClick}>{item}</div>
     })
 
     return (

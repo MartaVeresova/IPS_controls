@@ -16,8 +16,8 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
         const [data, setData] = useState<MultiType[]>([]) //массив всех элементов
         const [isCheckedAll, setIsCheckedAll] = useState(false)
 
-        const formRef = useRef<HTMLFormElement | null>(null)
-        useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
+        const dropDownRef = useRef<HTMLDivElement | null>(null)
+        useOnClickOutside(dropDownRef, () => setIsDropDownListOpened(false))
 
         useEffect(() => {
             setData(assignedSubjectAreaTypes)
@@ -61,15 +61,14 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
         return (
             <>
-                <form className={style.dropDown} ref={formRef}>
-                    <input type="text"
-                           readOnly
-                           onClick={onInputClick}
-                           value={isCheckedAll ? 'Все' : inputValue()}
-                           className={!checkedItems.length && !isDropDownListOpened ? style.error : style.input}
-                           title={isCheckedAll ? 'Все' : inputValue()}
-                    />
-                    <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
+                <div className={style.wrap} ref={dropDownRef}>
+                    <div className={!checkedItems.length && !isDropDownListOpened ? style.error : style.container}
+                         onClick={onInputClick} title={isCheckedAll ? 'Все' : inputValue()}>
+                        <div className={style.value}>
+                            {isCheckedAll ? 'Все' : inputValue()}
+                        </div>
+                        <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
+                    </div>
 
                     <div hidden={!isDropDownListOpened}>
                         <div className={style.dropDownListOpened}>
@@ -100,7 +99,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                             })}
                         </div>
                     </div>
-                </form>
+                </div>
             </>
         )
     }

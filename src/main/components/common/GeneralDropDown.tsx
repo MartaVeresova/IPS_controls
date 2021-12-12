@@ -11,30 +11,27 @@ type PropsType = {
 }
 
 
-export const GeneralDropDown: FC<PropsType> = (props) => {
+export const GeneralDropDown: FC<PropsType> = props => {
 
     const {isDropDownListOpened, setIsDropDownListOpened, checkedName, onInputClick, children} = props
 
-    const formRef = useRef<HTMLFormElement | null>(null)
+    const formRef = useRef<HTMLDivElement | null>(null)
     useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
+
 
     return (
         <>
-            <form className={style.dropDown} ref={formRef}>
-                <input type="text"
-                       value={checkedName}
-                       onClick={onInputClick}
-                       title={checkedName}
-                       readOnly/>
-                <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type='dropDown' />
-                {/*<label tabIndex={0} onClick={onInputClick}>⌵</label>*/}
-
+            <div className={style.wrap} tabIndex={0} ref={formRef}>
+                <div className={style.container} onClick={onInputClick} tabIndex={0} title={checkedName}>
+                    <div className={style.checkedName}>{checkedName}</div>
+                    <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
+                </div>
                 <div hidden={!isDropDownListOpened}>
-                    <div className={style.dropDownListOpened}>
+                    <div className={style.dropDownList}>
                         {children}
                     </div>
                 </div>
-            </form>
+            </div>
         </>
     )
 }
