@@ -1,50 +1,62 @@
-.inputField {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 3px 0 5px;
-
-  .wrap {
+  .inputField {
     display: flex;
     flex-direction: row;
-  }
+    justify-content: space-between;
 
-  Img {
-    width: 23px;
-    height: 23px;
-    margin-right: 3px;
-  }
+    width: 100%;
+    padding: 0 3px 0 5px;
+    align-items: center;
 
-  Input[type='file'] {
-    display: none;
-  }
 
-  Button {
-    width: 25px;
+    .wrap {
+      display: flex;
+      flex-direction: row;
 
-    &:hover {
-      cursor: pointer;
-      border-radius: 2px;
-      border: 1.6px solid #474747;
+      Img {
+        width: 23px;
+        height: 23px;
+        margin-right: 3px;
+      }
+    }
+
+    Input[type='file'] {
+      display: none;
+    }
+
+    Button {
+      width: 25px;
+
+      &:hover {
+        cursor: pointer;
+        border-radius: 2px;
+        border: 1.6px solid #474747;
+      }
     }
   }
-}
 
-.openImageField {
-  //width: 100%;
-  //padding-left: 5px;
-  //font-size: 20px;
-  //color: gray;
-  ////border: 1px solid gray;
-}
 
-.widthHeightValueFields {
-  //width: 100%;
-  //padding-left: 5px;
-  //color: gray;
-  ////border: 1px solid gray;
-}
+//.openImageField {
+//  width: 100%;
+//  //padding-left: 5px;
+//  //font-size: 20px;
+//  //color: gray;
+//  border-top: 1px solid gray;
+//  border-bottom: 1px solid gray;
+//}
+//
+//.widthHeightValueFields {
+//
+//  & div:nth-child(1) {
+//    border-bottom: 1px solid gray;
+//  }
+//
+//  & div {
+//    width: 100%;
+//    //padding-left: 5px;
+//    //color: gray;
+//    //border: 1px solid gray;
+//  }
+//}
 
 
 
