@@ -90,8 +90,13 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                                         setCheckedItems(newArray)
                                     }
                                 }
+
+                                let className = 'list'
+                                if (checked) {
+                                    className = 'checkedItem'
+                                }
                                 return (
-                                    <label key={id} className={style.list} onChange={onLabelChange}>
+                                    <label key={id} className={style[className]} onChange={onLabelChange}>
                                         <input type="checkbox" checked={checked} readOnly/>
                                         <div className={style.listItem}>
                                             {displayName}

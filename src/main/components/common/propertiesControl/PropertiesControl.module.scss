@@ -20,7 +20,6 @@
       &:focus {
         background-color: #428bca;
         color: white;
-        //caret-color: transparent;
       }
 
       .allProp {
@@ -37,7 +36,7 @@
       color: gray;
 
       .size {
-        padding-left: 50px;
+        padding-left: 45px;
         height: 30px;
         outline: 1px solid gray;
         border-top: 1px solid gray;
@@ -46,7 +45,6 @@
         &:focus {
           background-color: #428bca;
           color: white;
-          //caret-color: transparent;
         }
       }
 
@@ -58,7 +56,6 @@
         &:focus {
           background-color: #428bca;
           color: white;
-          //caret-color: transparent;
         }
       }
     }

@@ -61,3 +61,8 @@
   text-overflow: ellipsis;
   padding-left: 10px;
 }
+
+.checkedItem {
+  @extend .listItem;
+  background-color: #c7c7c7;
+}

@@ -21,8 +21,8 @@
 .sizeFieldIconOff {
   position: absolute;
   top: -2px;
-  left: 28px;
-  color: black;
+  left: 25px;
+  //color: black;
   cursor: pointer;
   transition: transform .3s linear;
   transform: rotate(-90deg) translate(-10%, -10%);
@@ -36,6 +36,7 @@
   @extend .sizeFieldIconOff;
   transform: rotate(0deg);
 }
+
 
 .dropDownOff {
   cursor: pointer;
