@@ -73,24 +73,24 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
 
     return (
         <>
-            <div className={style.container}>
+            <div className={style.container} tabIndex={0}>
                 <div className={style.inputField}>
                     <div className={style.wrap}>
                         <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
                         <div>{inputTextValue()}</div>
                     </div>
-                    <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
+                    <input type="file" name="file" id="file" ref={inputRef} accept=".ico"
                            onChange={imageUpload}/>
-                    <button onClick={onButtonClick}>...</button>
+                    <button onClick={onButtonClick} tabIndex={0}>...</button>
                 </div>
             </div>
             <div className={style.field} hidden={!isImageFieldExpanded}>
-                <div className={style.openImageField}>
+                <div className={style.openImageField} tabIndex={0}>
                     {`${sizeWidth}x${sizeHeight}`}
                 </div>
                 <div className={style.widthHeightValueFields} hidden={!isSizeFieldExpanded}>
-                    <div>{sizeWidth}</div>
-                    <div>{sizeHeight}</div>
+                    <div tabIndex={0}>{sizeWidth}</div>
+                    <div tabIndex={0}>{sizeHeight}</div>
                 </div>
             </div>
         </>

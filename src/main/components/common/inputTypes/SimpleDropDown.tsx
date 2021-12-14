@@ -69,7 +69,7 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
             setIsDropDownListOpened(false)
         }
         return (
-            <div key={item.displayName} className={style.listItem} tabIndex={0}
+            <div key={item.displayName} className={style.listItem}
                  onClick={onOptionClick}
                  title={item.displayName}>{item.displayName}</div>
         )

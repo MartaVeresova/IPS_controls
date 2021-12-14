@@ -59,7 +59,7 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                                 Size
                             </div>
 
-                            <div hidden={!isSizeFieldExpanded}>
+                            <div hidden={!isSizeFieldExpanded} >
                                 <div className={style.widthHeightFields} tabIndex={0}>Width</div>
                                 <div className={style.widthHeightFields} tabIndex={0}>Height</div>
                             </div>

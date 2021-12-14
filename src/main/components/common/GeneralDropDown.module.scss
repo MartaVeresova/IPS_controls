@@ -10,6 +10,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &:active, &:focus, &:hover {
+      outline: none;
+      border: none;
+    }
   }
 
   .checkedName {

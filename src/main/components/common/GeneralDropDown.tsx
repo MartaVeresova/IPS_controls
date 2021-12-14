@@ -21,8 +21,8 @@ export const GeneralDropDown: FC<PropsType> = props => {
 
     return (
         <>
-            <div className={style.wrap} tabIndex={0} ref={formRef}>
-                <div className={style.container} onClick={onInputClick} tabIndex={0} title={checkedName}>
+            <div className={style.wrap} ref={formRef}>
+                <div className={style.container} onClick={onInputClick} title={checkedName} tabIndex={0}>
                     <div className={style.checkedName}>{checkedName}</div>
                     <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
                 </div>

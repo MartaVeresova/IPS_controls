@@ -24,7 +24,7 @@ export const EditableInput: FC<PropsType> = memo(({propertyValue}) => {
 
     return (
         <>
-            <div className={style.editableInput}>
+            <div className={style.editableInput} tabIndex={0}>
                 {!editMode
                     ? <div onClick={onDivClick} title={inputValue}>{inputValue}</div>
                     : <input type="text" value={inputValue} onChange={onInputChange} onBlur={onInputBlur} autoFocus/>}

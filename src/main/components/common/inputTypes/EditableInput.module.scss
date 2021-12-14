@@ -1,24 +1,28 @@
 .editableInput {
   width: 100%;
   padding-left: 10px;
+  //height: 30px;
 
   & div {
+    //height: 100%;
+    //display: flex;
+    //align-items: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  input {
+  & input {
     width: 100%;
-    height: 26px;
+    //height: 100%;
+    height: 23px;
     font-size: 20px;
     outline: none;
-    background-color: white;
     border: none;
+  }
 
-    &:active, :hover, :focus {
-      outline: none;
-      border: none;
-    }
+  &:active, &:focus, &:hover {
+    outline: none;
+    border: none;
   }
 }

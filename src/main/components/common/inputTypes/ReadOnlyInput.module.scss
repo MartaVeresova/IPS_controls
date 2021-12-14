@@ -4,4 +4,9 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+
+  &:active, &:focus, &:hover {
+    outline: none;
+    border: none;
+  }
 }

@@ -1,6 +1,11 @@
 .container {
   padding: 0 7px 0 10px;
 
+  &:active, &:focus, &:hover {
+    outline: none;
+    border: none;
+  }
+
   .inputField {
     display: flex;
     justify-content: space-between;
@@ -37,7 +42,6 @@
 .field {
   line-height: 30px;
   color: gray;
-
 
   .openImageField {
     outline: 1px solid gray;

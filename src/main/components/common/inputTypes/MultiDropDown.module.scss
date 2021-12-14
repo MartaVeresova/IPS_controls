@@ -11,6 +11,10 @@
     height: 30px;
     padding: 0 10px 0 10px;
 
+    &:active, &:focus, &:hover {
+      outline: none;
+    }
+
     .value {
       overflow: hidden;
       white-space: nowrap;
