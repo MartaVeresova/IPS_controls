@@ -1,16 +1,13 @@
-div {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
 .propertyDisplay {
   display: flex;
   flex-direction: row;
 
   .propertyName {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     width: 50%;
     outline: 1px solid gray;
 
@@ -20,6 +17,11 @@ div {
       flex-direction: column;
       justify-content: center;
 
+      &:focus {
+        background-color: #428bca;
+        color: white;
+        caret-color: transparent;
+      }
 
       .allProp {
         white-space: nowrap;
@@ -27,12 +29,6 @@ div {
         text-overflow: ellipsis;
         padding-left: 25px;
         position: relative;
-
-        &:focus {
-          //background-color: #428bca;
-          //color: white;
-          //caret-color: transparent;
-        }
       }
     }
 
@@ -46,12 +42,24 @@ div {
         outline: 1px solid gray;
         border-top: 1px solid gray;
         position: relative;
+
+        &:focus {
+          background-color: #428bca;
+          color: white;
+          caret-color: transparent;
+        }
       }
 
       .widthHeightFields {
         padding-left: 65px;
         height: 30px;
         outline: 1px solid gray;
+
+        &:focus {
+          background-color: #428bca;
+          color: white;
+          caret-color: transparent;
+        }
       }
     }
   }

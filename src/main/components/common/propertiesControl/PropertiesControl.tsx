@@ -38,11 +38,12 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
         <>
             <div className={style.propertyDisplay}>
                 <div className={style.propertyName}>
-                    <div className={style.wrap}>
+                    <div className={style.wrap} tabIndex={0}>
                         <div className={style.allProp} onDoubleClick={onImageClick}>
                             {
                                 field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                                    <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick} type={'imageFieldIcon'} />
+                                <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
+                                         type={'imageFieldIcon'}/>
                             }
                             {field.propertyName}
                         </div>
@@ -52,14 +53,15 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                     {
                         field.propertyName === 'Изображение' &&
                         <div className={style.sizeField} hidden={!isImageFieldExpanded}>
-                            <div className={style.size} onDoubleClick={onSizeClick}>
-                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick} type={'sizeFieldIcon'} />
+                            <div className={style.size} tabIndex={0} onDoubleClick={onSizeClick}>
+                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
+                                         type={'sizeFieldIcon'}/>
                                 Size
                             </div>
 
                             <div hidden={!isSizeFieldExpanded}>
-                                <div className={style.widthHeightFields}>Width</div>
-                                <div className={style.widthHeightFields}>Height</div>
+                                <div className={style.widthHeightFields} tabIndex={0}>Width</div>
+                                <div className={style.widthHeightFields} tabIndex={0}>Height</div>
                             </div>
                         </div>
                     }
