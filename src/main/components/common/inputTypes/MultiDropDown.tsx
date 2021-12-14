@@ -93,7 +93,9 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                                 return (
                                     <label key={id} tabIndex={0} className={style.list} onChange={onLabelChange}>
                                         <input type="checkbox" checked={checked} readOnly/>
-                                        {displayName}
+                                        <div className={style.listItem}>
+                                            {displayName}
+                                        </div>
                                     </label>
                                 )
                             })}

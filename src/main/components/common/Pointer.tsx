@@ -1,10 +1,12 @@
 import React, {FC} from 'react'
 import style from './Pointer.module.scss';
 
+type PointerType = 'imageFieldIcon' | 'sizeFieldIcon' | 'dropDown'
+
 type PropsType = {
     isFieldExpanded: boolean
     onIconClick: () => void
-    type: string
+    type: PointerType
 }
 
 export const Pointer: FC<PropsType> = ({onIconClick, isFieldExpanded, type}) => {
@@ -36,8 +38,7 @@ export const Pointer: FC<PropsType> = ({onIconClick, isFieldExpanded, type}) => 
 
     return (
         <>
-            <label className={pointerStyle()}
-                   onClick={onIconClick}>&#9013;</label>
+            <label className={pointerStyle()} onClick={onIconClick}>&#9013;</label>
         </>
     )
 }

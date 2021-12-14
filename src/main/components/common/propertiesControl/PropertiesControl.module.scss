@@ -8,66 +8,60 @@ div {
 
 .propertyDisplay {
   display: flex;
+  flex-direction: row;
 
-  .propertyNameImage {
-    min-height: 40px;
+  .propertyName {
     width: 50%;
+    outline: 1px solid gray;
 
-    .nameField {
+    .wrap {
+      height: 30px;
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      //justify-content: center;
-      width: 100%;
-      border: 1px solid gray;
-      height: 40px;
-      padding-left: 25px;
+      flex-direction: column;
+      justify-content: center;
+
+
+      .allProp {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-left: 25px;
+        position: relative;
+
+        &:focus {
+          //background-color: #428bca;
+          //color: white;
+          //caret-color: transparent;
+        }
+      }
     }
 
     .sizeField {
-      //background-color: red;
-      width: 50%;
-      //height: 100%;
-      padding-left: 50px;
-      //color: gray;
-    }
+      line-height: 30px;
+      color: gray;
 
-    .widthHeightFields div {
-      width: 100%;
-      //height: 27px;
-      padding-left: 70px;
-      //color: gray;
-    }
-  }
+      .size {
+        padding-left: 50px;
+        height: 30px;
+        outline: 1px solid gray;
+        border-top: 1px solid gray;
+        position: relative;
+      }
 
-  .propertyName {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    //justify-content: center;
-    width: 50%;
-    border: 1px solid gray;
-    height: 40px;
-    padding-left: 25px;
-
-    & div {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      &:focus {
-        //background-color: #428bca;
-        //color: white;
-        //caret-color: transparent;
+      .widthHeightFields {
+        padding-left: 65px;
+        height: 30px;
+        outline: 1px solid gray;
       }
     }
   }
 
   .propertyValue {
     width: 50%;
-    border: 1px solid gray;
-    height: 40px;
+    outline: 1px solid gray;
+    min-height: 30px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
 }

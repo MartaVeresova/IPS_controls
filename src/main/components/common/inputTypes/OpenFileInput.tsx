@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, memo, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, createRef, FC, memo, useEffect, useRef, useState} from 'react';
 import style from './OpenFileInput.module.scss'
 
 type PropsType = {
@@ -7,28 +7,28 @@ type PropsType = {
     isSizeFieldExpanded: boolean
     previewImg: string
     setPreviewImg: (value: string) => void
-    imgRef: any
+    // imgRef: any
 }
 
 
 export const OpenFileInput: FC<PropsType> = memo((props) => {
-    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded, previewImg, setPreviewImg, imgRef} = props
+    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded, previewImg, setPreviewImg} = props
 
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     // const [previewImg, setPreviewImg] = useState<string>('')
-    // const [sizeWidth, setSizeWidth] = useState<string | number>('')
-    // const [sizeHeight, setSizeHeight] = useState<string | number>('')
+    const [sizeWidth, setSizeWidth] = useState<string | number>('')
+    const [sizeHeight, setSizeHeight] = useState<string | number>('')
 
     const inputRef = useRef<HTMLInputElement | null>(null)
-    // const imgRef = createRef<HTMLImageElement>()
+    const imgRef = createRef<HTMLImageElement>()
 
 
-    // useEffect(() => {
-    //     if (imgRef.current) {
-    //         setSizeWidth(imgRef.current.naturalWidth)
-    //         setSizeHeight(imgRef.current.naturalHeight)
-    //     }
-    // }, [imgRef])
+    useEffect(() => {
+        if (imgRef.current) {
+            setSizeWidth(imgRef.current.naturalWidth)
+            setSizeHeight(imgRef.current.naturalHeight)
+        }
+    }, [imgRef])
 
     useEffect(() => {
         // const encodedData
@@ -73,39 +73,26 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
 
     return (
         <>
-            {/*<div className={style.container}>*/}
-            {/*    <div className={style.inputField}>*/}
-            {/*        <div className={style.wrap}>*/}
-            {/*            <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>*/}
-            {/*            <div>{inputTextValue()}</div>*/}
-            {/*        </div>*/}
-            {/*        <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"*/}
-            {/*               onChange={imageUpload}/>*/}
-            {/*        <button onClick={onButtonClick}>...</button>*/}
-            {/*    </div>*/}
-            {/*    <div>*/}
-            {/*        <div className={style.openImageField}>*/}
-            {/*            {`${sizeWidth}x${sizeHeight}`}*/}
-            {/*        </div>*/}
-            {/*        <div className={style.widthHeightValueFields}>*/}
-            {/*            <div>{sizeWidth}</div>*/}
-            {/*            <div>{sizeHeight}</div>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-
-
-            <div className={style.inputField}>
-                <div className={style.wrap}>
-                    <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
-                    <div>{inputTextValue()}</div>
+            <div className={style.container}>
+                <div className={style.inputField}>
+                    <div className={style.wrap}>
+                        <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
+                        <div>{inputTextValue()}</div>
+                    </div>
+                    <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
+                           onChange={imageUpload}/>
+                    <button onClick={onButtonClick}>...</button>
                 </div>
-                <input tabIndex={0} type="file" name="file" id="file" ref={inputRef} accept=".ico"
-                       onChange={imageUpload}/>
-                <button onClick={onButtonClick}>...</button>
             </div>
-
-
+            <div className={style.field} hidden={!isImageFieldExpanded}>
+                <div className={style.openImageField}>
+                    {`${sizeWidth}x${sizeHeight}`}
+                </div>
+                <div className={style.widthHeightValueFields} hidden={!isSizeFieldExpanded}>
+                    <div>{sizeWidth}</div>
+                    <div>{sizeHeight}</div>
+                </div>
+            </div>
         </>
     )
 })

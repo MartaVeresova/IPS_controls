@@ -1,4 +1,4 @@
-import React, {createRef, FC, memo, useEffect, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {EditableInput} from '../inputTypes/EditableInput';
 import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
@@ -20,19 +20,10 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
     const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(false)
     const [previewImg, setPreviewImg] = useState<string>('')
-    const [sizeWidth, setSizeWidth] = useState<string | number>('')
-    const [sizeHeight, setSizeHeight] = useState<string | number>('')
-    const imgRef = createRef<HTMLImageElement>()
 
-    useEffect(() => {
-        if (imgRef.current) {
-            setSizeWidth(imgRef.current.naturalWidth)
-            setSizeHeight(imgRef.current.naturalHeight)
-        }
-    }, [imgRef])
 
     const onImageClick = () => {
-        if (field.propertyName === 'Изображение') {
+        if (field.propertyValue || previewImg !== '') {
             setIsImageFieldExpanded(!isImageFieldExpanded)
             setIsSizeFieldExpanded(false)
         }
@@ -46,60 +37,35 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
     return (
         <>
             <div className={style.propertyDisplay}>
-
-                {field.propertyName === 'Изображение'
-                    ?
-                    <div className={style.propertyNameImage}>
-                        <div className={style.nameField} tabIndex={0} onDoubleClick={onImageClick}>
-                            <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
-                                     type="imageFieldIcon"/>
+                <div className={style.propertyName}>
+                    <div className={style.wrap}>
+                        <div className={style.allProp} onDoubleClick={onImageClick}>
+                            {
+                                field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
+                                    <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick} type={'imageFieldIcon'} />
+                            }
                             {field.propertyName}
-
                         </div>
+                    </div>
 
-                        <div>
-                            <div className={style.sizeField} tabIndex={0} onDoubleClick={onSizeClick}>
-                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
-                                         type="sizeFieldIcon"/>
+
+                    {
+                        field.propertyName === 'Изображение' &&
+                        <div className={style.sizeField} hidden={!isImageFieldExpanded}>
+                            <div className={style.size} onDoubleClick={onSizeClick}>
+                                <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick} type={'sizeFieldIcon'} />
                                 Size
                             </div>
-                            <div  className={style.widthHeightFields}>
-                                <div tabIndex={0}>Width</div>
-                                <div tabIndex={0}>Height</div>
+
+                            <div hidden={!isSizeFieldExpanded}>
+                                <div className={style.widthHeightFields}>Width</div>
+                                <div className={style.widthHeightFields}>Height</div>
                             </div>
                         </div>
-                    </div>
-                    :
-                    <div className={style.propertyName}>
-                        <div tabIndex={0} onDoubleClick={onImageClick}>
-                            {field.propertyName}
-                        </div>
-                    </div>
-
-                }
+                    }
 
 
-                {/*<div className={style.nestedItems}>*/}
-                {/*    {*/}
-                {/*        field.propertyName === 'Изображение' &&*/}
-                {/*        isImageFieldExpanded &&*/}
-
-                {/*        <div className={style.sizeField} tabIndex={0} onDoubleClick={onSizeClick}>*/}
-                {/*            <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}*/}
-                {/*                     type="sizeFieldIcon"/>*/}
-                {/*            Size*/}
-                {/*        </div>*/}
-                {/*    }*/}
-                {/*    {*/}
-                {/*        field.propertyName === 'Изображение' &&*/}
-                {/*        isSizeFieldExpanded &&*/}
-
-                {/*        <div>*/}
-                {/*            <div className={style.widthHeightFields} tabIndex={0}>Width</div>*/}
-                {/*            <div className={style.widthHeightFields} tabIndex={0}>Height</div>*/}
-                {/*        </div>*/}
-                {/*    }*/}
-                {/*</div>*/}
+                </div>
 
 
                 <div className={style.propertyValue}>
@@ -114,8 +80,7 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                                    isImageFieldExpanded={isImageFieldExpanded}
                                    isSizeFieldExpanded={isSizeFieldExpanded}
                                    previewImg={previewImg}
-                                   setPreviewImg={setPreviewImg}
-                                   imgRef={imgRef}/>}
+                                   setPreviewImg={setPreviewImg}/>}
 
                     {field.fieldType === 'yesNoDropDown' &&
                     <YesNoDropDown propertyValue={field.propertyValue}/>}
