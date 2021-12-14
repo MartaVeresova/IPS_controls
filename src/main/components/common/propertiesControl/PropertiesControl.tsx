@@ -43,7 +43,7 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                             {
                                 field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
                                 <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
-                                         type={'imageFieldIcon'}/>
+                                         type='imageFieldIcon'/>
                             }
                             {field.propertyName}
                         </div>
@@ -55,7 +55,7 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
                         <div className={style.sizeField} hidden={!isImageFieldExpanded}>
                             <div className={style.size} tabIndex={0} onDoubleClick={onSizeClick}>
                                 <Pointer isFieldExpanded={isSizeFieldExpanded} onIconClick={onSizeClick}
-                                         type={'sizeFieldIcon'}/>
+                                         type='sizeFieldIcon'/>
                                 Size
                             </div>
 

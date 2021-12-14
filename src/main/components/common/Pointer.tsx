@@ -11,34 +11,33 @@ type PropsType = {
 
 export const Pointer: FC<PropsType> = ({onIconClick, isFieldExpanded, type}) => {
 
-    const pointerStyle = () => {
-        if (type === 'imageFieldIcon') {
-            if (!isFieldExpanded) {
-                return style.imageFieldIconOff
-            } else {
-                return style.imageFieldIconOn
-            }
+    let className = ''
+    if (type === 'imageFieldIcon') {
+        if (!isFieldExpanded) {
+            className = 'imageFieldIconOff'
+        } else {
+            className = 'imageFieldIconOn'
         }
-        if (type === 'sizeFieldIcon') {
-            if (!isFieldExpanded) {
-                return style.sizeFieldIconOff
-            } else {
-                return style.sizeFieldIconOn
-            }
+    }
+    if (type === 'sizeFieldIcon') {
+        if (!isFieldExpanded) {
+            className = 'sizeFieldIconOff'
+        } else {
+            className = 'sizeFieldIconOn'
         }
-        if (type === 'dropDown') {
-            if (!isFieldExpanded) {
-                return style.dropDownOff
-            } else {
-                return style.dropDownOn
-            }
+    }
+    if (type === 'dropDown') {
+        if (!isFieldExpanded) {
+            className = 'dropDownOff'
+        } else {
+            className = 'dropDownOn'
         }
     }
 
 
     return (
         <>
-            <label className={pointerStyle()} onClick={onIconClick}>&#9013;</label>
+            <label className={style[className]} onClick={onIconClick}>&#9013;</label>
         </>
     )
 }
