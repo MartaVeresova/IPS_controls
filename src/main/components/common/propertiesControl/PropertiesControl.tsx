@@ -69,7 +69,6 @@ export const PropertiesControl: FC<PropsType> = memo(({field}) => {
 
                 </div>
 
-
                 <div className={style.propertyValue}>
                     {field.fieldType === 'editableInput' &&
                     <EditableInput propertyValue={field.propertyValue}/>}

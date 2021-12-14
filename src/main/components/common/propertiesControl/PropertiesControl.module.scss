@@ -9,6 +9,8 @@
     -ms-user-select: none;
     user-select: none;
     width: 50%;
+    min-width: 200px;
+    max-width: 1000px;
     outline: 1px solid gray;
 
     .wrap {
@@ -62,11 +64,13 @@
   }
 
   .propertyValue {
-    width: 50%;
-    outline: 1px solid gray;
-    min-height: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 50%;
+    min-width: 200px;
+    max-width: 1000px;
+    min-height: 30px;
+    outline: 1px solid gray;
   }
 }
