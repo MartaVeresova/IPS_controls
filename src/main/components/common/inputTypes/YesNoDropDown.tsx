@@ -14,7 +14,6 @@ export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
     const [checkedName, setCheckedName] = useState<string>('')
     const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //sent to server
 
-    console.log(selectedOption)
     useEffect(() => {
         setCheckedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
     }, [propertyValue])
