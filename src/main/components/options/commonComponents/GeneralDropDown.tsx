@@ -1,6 +1,6 @@
 import React, {FC, useRef} from 'react';
 import style from './GeneralDropDown.module.scss';
-import {useOnClickOutside} from '../../hooks/useOnClickOutside';
+import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
 import {Pointer} from './Pointer';
 
 type PropsType = {

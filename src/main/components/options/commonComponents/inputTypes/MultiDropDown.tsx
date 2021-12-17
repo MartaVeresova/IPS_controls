@@ -1,8 +1,8 @@
 import React, {FC, memo, useEffect, useRef, useState} from 'react';
 import style from './MultiDropDown.module.scss'
-import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
-import {assignedSubjectAreaTypes} from '../controls/lifeCycleLevel/LifeCycleLevelData';
-import {MultiType} from '../types/Types';
+import {useOnClickOutside} from '../../../../hooks/useOnClickOutside';
+import {assignedSubjectAreaTypes} from '../../controls/properties/lifeCycleLevel/LifeCycleLevelData';
+import {MultiType} from '../../types/Types';
 import {Pointer} from '../Pointer';
 
 type PropsType = {

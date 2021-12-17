@@ -2,7 +2,7 @@ import React, {FC, memo, MouseEvent, useRef, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {PropertiesControlLeft} from './PropertiesControlLeft';
 import {PropertiesControlRight} from './PropertiesControlRight';
-import {PropertyDataType} from '../types/Types';
+import {PropertyDataType} from '../../types/Types';
 
 
 type PropsType = {
@@ -34,19 +34,17 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
             }
 
             if (propNameRef.current && propDisplayRef.current && newLeft) {
-
-                // console.log((propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth)
-                // console.log(Math.floor(propDisplayRef.current.offsetWidth))
-
                 propNameRef.current.style.width = ((propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
             }
-            if (propValueRef.current && propDisplayRef.current && propNameRef.current && newLeft) {
 
+            if (propValueRef.current && propDisplayRef.current && propNameRef.current && newLeft) {
                 // console.log((propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth)
                 // propValueRef.current.style.width = ((propValueRef.current.offsetWidth - newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
                 propValueRef.current.style.width = (100 - (propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
             }
+            console.log(propDisplayRef.current?.style.width)
             console.log(propNameRef.current?.style.width)
+            console.log(propValueRef.current?.style.width)
         }
     }
     const onMouseUp = () => {

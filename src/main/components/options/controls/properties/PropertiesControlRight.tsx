@@ -1,13 +1,13 @@
 import React, {FC, memo} from 'react';
-import {EditableInput} from '../inputTypes/EditableInput';
-import {ReadOnlyInput} from '../inputTypes/ReadOnlyInput';
-import {MultiDropDown} from '../inputTypes/MultiDropDown';
-import {YesNoDropDown} from '../inputTypes/YesNoDropDown';
-import {SimpleDropDown} from '../inputTypes/SimpleDropDown';
-import {EnumDropDown} from '../inputTypes/EnumDropDown';
-import {OpenFileInput} from '../inputTypes/OpenFileInput';
-import {PropertyDataType} from '../types/Types';
-import style from './PropertiesControl.module.scss'
+import {EditableInput} from '../../commonComponents/inputTypes/EditableInput';
+import {ReadOnlyInput} from '../../commonComponents/inputTypes/ReadOnlyInput';
+import {MultiDropDown} from '../../commonComponents/inputTypes/MultiDropDown';
+import {YesNoDropDown} from '../../commonComponents/inputTypes/YesNoDropDown';
+import {SimpleDropDown} from '../../commonComponents/inputTypes/SimpleDropDown';
+import {EnumDropDown} from '../../commonComponents/inputTypes/EnumDropDown';
+import {OpenFileInput} from '../../commonComponents/inputTypes/OpenFileInput';
+import {PropertyDataType} from '../../types/Types';
+import style from './PropertiesControlRight.module.scss'
 
 
 type PropsType = {

@@ -1,7 +1,7 @@
 import React, {FC, memo} from 'react';
-import style from './PropertiesControl.module.scss'
-import {Pointer} from '../Pointer';
-import {PropertyDataType} from '../types/Types';
+import style from './PropertiesControlLeft.module.scss'
+import {Pointer} from '../../commonComponents/Pointer';
+import {PropertyDataType} from '../../types/Types';
 
 
 type PropsType = {

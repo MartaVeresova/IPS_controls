@@ -1,4 +1,4 @@
-import {MultiType, ObjectTypesType, PropertyDataType, SimpleType} from '../../types/Types';
+import {MultiType, ObjectTypesType, PropertyDataType, SimpleType} from '../../../types/Types';
 
 
 //данные с сервака
