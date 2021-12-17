@@ -1,11 +1,15 @@
 import React, {FC, memo, MouseEvent, useRef, useState} from 'react';
-import style from './LifeCycleLevel.module.scss'
-import {lifeCycleLevelData} from './LifeCycleLevelData';
-import {PropertiesControlLeft} from '../../common/propertiesControl/PropertiesControlLeft';
-import {PropertiesControlRight} from '../../common/propertiesControl/PropertiesControlRight';
+import style from './PropertiesControl.module.scss'
+import {PropertiesControlLeft} from './PropertiesControlLeft';
+import {PropertiesControlRight} from './PropertiesControlRight';
+import {PropertyDataType} from '../types/Types';
 
 
-export const LifeCycleLevel: FC = memo(() => {
+type PropsType = {
+    data: PropertyDataType[]
+}
+
+export const PropertiesControl: FC<PropsType> = memo(({data}) => {
     // const {propertiesControl} = useStore()
 
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
@@ -28,19 +32,6 @@ export const LifeCycleLevel: FC = memo(() => {
             if (draggableRef.current) {
                 newLeft = e.clientX - draggableRef.current.getBoundingClientRect().left
             }
-            console.log(newLeft)
-
-            // if (draggableRef.current && draggableRef.current.getBoundingClientRect().left < e.clientX + 200) {
-            //     newLeft = 0
-            // }
-
-            if (newLeft && newLeft < -3) {
-                newLeft = 0
-            }
-
-            // if (newLeft && propValueRef.current && newLeft > propValueRef.current.getBoundingClientRect().left) {
-            //     newLeft = propValueRef.current.getBoundingClientRect().left
-            // }
 
             if (propNameRef.current && propDisplayRef.current && newLeft) {
 
@@ -55,6 +46,7 @@ export const LifeCycleLevel: FC = memo(() => {
                 // propValueRef.current.style.width = ((propValueRef.current.offsetWidth - newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
                 propValueRef.current.style.width = (100 - (propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
             }
+            console.log(propNameRef.current?.style.width)
         }
     }
     const onMouseUp = () => {
@@ -67,21 +59,16 @@ export const LifeCycleLevel: FC = memo(() => {
     return (
         <>
             {/*TabControl*/}
-            <div className={style.tabControlButtons}>
-                <button>Свойства</button>
-                <button>Безопасность</button>
-                <button>Действия над объектом</button>
-            </div>
             <div className={style.tabControlContainer} onMouseMove={onMouseMove} onMouseUp={onMouseUp}
                  ref={propDisplayRef}>
                 <div className={style.name} ref={propNameRef}>
-                    {lifeCycleLevelData.map(field => <PropertiesControlLeft key={field.propertyName}
-                                                                            field={field}
-                                                                            isImageFieldExpanded={isImageFieldExpanded}
-                                                                            setIsImageFieldExpanded={setIsImageFieldExpanded}
-                                                                            isSizeFieldExpanded={isSizeFieldExpanded}
-                                                                            setIsSizeFieldExpanded={setIsSizeFieldExpanded}
-                                                                            previewImg={previewImg}
+                    {data.map(field => <PropertiesControlLeft key={field.propertyName}
+                                                              field={field}
+                                                              isImageFieldExpanded={isImageFieldExpanded}
+                                                              setIsImageFieldExpanded={setIsImageFieldExpanded}
+                                                              isSizeFieldExpanded={isSizeFieldExpanded}
+                                                              setIsSizeFieldExpanded={setIsSizeFieldExpanded}
+                                                              previewImg={previewImg}
                     />)}
                 </div>
 
@@ -90,12 +77,12 @@ export const LifeCycleLevel: FC = memo(() => {
                 </div>
 
                 <div className={style.value} ref={propValueRef}>
-                    {lifeCycleLevelData.map(field => <PropertiesControlRight key={field.propertyValue}
-                                                                             field={field}
-                                                                             isImageFieldExpanded={isImageFieldExpanded}
-                                                                             isSizeFieldExpanded={isSizeFieldExpanded}
-                                                                             previewImg={previewImg}
-                                                                             setPreviewImg={setPreviewImg}/>)}
+                    {data.map(field => <PropertiesControlRight key={field.propertyValue}
+                                                               field={field}
+                                                               isImageFieldExpanded={isImageFieldExpanded}
+                                                               isSizeFieldExpanded={isSizeFieldExpanded}
+                                                               previewImg={previewImg}
+                                                               setPreviewImg={setPreviewImg}/>)}
                 </div>
             </div>
         </>

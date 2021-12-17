@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import style from './App.module.scss'
 import {observer} from 'mobx-react-lite';
-import {LifeCycleLevel} from './main/components/controls/lifeCycleLevel/LifeCycleLevel';
+import {LifeCycleLevel} from './main/components/common/controls/lifeCycleLevel/LifeCycleLevel';
 import {RootTree} from './main/components/RootTree';
-import {ObjectTypes} from './main/components/controls/objectTypes/ObjectTypes';
+import {ObjectTypes} from './main/components/common/controls/objectTypes/ObjectTypes';
 
 
 export const App: FC = observer(() => {

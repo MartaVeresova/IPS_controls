@@ -1,0 +1,52 @@
+.propertyName {
+  outline: 1px solid gray;
+
+  .wrap {
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:focus {
+      background-color: #428bca;
+      color: white;
+    }
+
+    .allProp {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 25px;
+      position: relative;
+    }
+  }
+
+  .additionalField {
+    line-height: 30px;
+    color: gray;
+
+    .sizeField {
+      padding-left: 45px;
+      height: 30px;
+      outline: 1px solid gray;
+      border-top: 1px solid gray;
+      position: relative;
+
+      &:focus {
+        background-color: #428bca;
+        color: white;
+      }
+    }
+
+    .widthHeightFields {
+      padding-left: 65px;
+      height: 30px;
+      outline: 1px solid gray;
+
+      &:focus {
+        background-color: #428bca;
+        color: white;
+      }
+    }
+  }
+}

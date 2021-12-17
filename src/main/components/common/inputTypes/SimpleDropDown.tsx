@@ -1,8 +1,8 @@
 import React, {FC, memo, useEffect, useState} from 'react';
-import {captionAttribute, defaultRelationType} from '../../controls/objectTypes/ObjectTypesData';
+import {captionAttribute, defaultRelationType} from '../controls/objectTypes/ObjectTypesData';
 import {GeneralDropDown} from '../GeneralDropDown';
 import {SimpleType} from '../types/Types';
-import {storage} from '../../controls/lifeCycleLevel/LifeCycleLevelData';
+import {storage} from '../controls/lifeCycleLevel/LifeCycleLevelData';
 import style from '../GeneralDropDown.module.scss'
 
 type PropsType = {
