@@ -11,9 +11,33 @@
 
 .tabControlContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   width: 60vw;
+  min-width: 400px;
   font-size: 20px;
   outline: 1px solid gray;
   border: 1px solid gray;
+
+  .name {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 50%;
+    min-width: 200px;
+    max-width: 1000px;
+  }
+
+  .draggable {
+    cursor: col-resize;
+    width: 3px;
+    background-color: red;
+  }
+
+  .value {
+    width: 50%;
+    min-width: 200px;
+    max-width: 1000px;
+  }
 }

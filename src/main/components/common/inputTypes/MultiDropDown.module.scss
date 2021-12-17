@@ -1,4 +1,4 @@
-.wrap {
+.block {
   width: 100%;
   position: relative;
   color: #474747;
@@ -28,7 +28,7 @@
     color: red;
   }
 
-  .dropDownListOpened {
+  .dropDownList {
     width: 100%;
     position: absolute;
     z-index: 2;

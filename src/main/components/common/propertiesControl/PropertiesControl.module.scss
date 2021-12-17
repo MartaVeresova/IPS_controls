@@ -1,77 +1,60 @@
-.propertyDisplay {
-  display: flex;
-  flex-direction: row;
+.propertyName {
+  outline: 1px solid gray;
 
-  .propertyName {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    width: 600px;
-    min-width: 200px;
-    max-width: 1000px;
-    outline: 1px solid gray;
-    //position: relative;
+  .wrap {
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    .wrap {
+    &:focus {
+      background-color: #428bca;
+      color: white;
+    }
+
+    .allProp {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-left: 25px;
+      position: relative;
+    }
+  }
+
+  .additionalField {
+    line-height: 30px;
+    color: gray;
+
+    .sizeField {
+      padding-left: 45px;
       height: 30px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      outline: 1px solid gray;
+      border-top: 1px solid gray;
+      position: relative;
 
       &:focus {
         background-color: #428bca;
         color: white;
       }
-
-      .allProp {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding-left: 25px;
-        position: relative;
-      }
     }
 
-    .sizeField {
-      line-height: 30px;
-      color: gray;
+    .widthHeightFields {
+      padding-left: 65px;
+      height: 30px;
+      outline: 1px solid gray;
 
-      .size {
-        padding-left: 45px;
-        height: 30px;
-        outline: 1px solid gray;
-        border-top: 1px solid gray;
-        position: relative;
-
-        &:focus {
-          background-color: #428bca;
-          color: white;
-        }
-      }
-
-      .widthHeightFields {
-        padding-left: 65px;
-        height: 30px;
-        outline: 1px solid gray;
-
-        &:focus {
-          background-color: #428bca;
-          color: white;
-        }
+      &:focus {
+        background-color: #428bca;
+        color: white;
       }
     }
   }
+}
 
-  .propertyValue {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 600px;
-    min-width: 200px;
-    max-width: 1000px;
-    min-height: 30px;
-    outline: 1px solid gray;
-  }
+.propertyValue {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  outline: 1px solid gray;
+  min-height: 30px;
 }

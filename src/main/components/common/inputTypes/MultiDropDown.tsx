@@ -66,7 +66,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
 
         return (
             <>
-                <div className={style.wrap} ref={dropDownRef}>
+                <div className={style.block} ref={dropDownRef}>
                     <div className={style[className]} tabIndex={0}
                          onClick={onInputClick} title={isCheckedAll ? 'Все' : inputValue()}>
                         <div className={style.value}>
@@ -76,7 +76,7 @@ export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
                     </div>
 
                     <div hidden={!isDropDownListOpened}>
-                        <div className={style.dropDownListOpened}>
+                        <div className={style.dropDownList}>
                             <label className={style.list} onChange={onAllOptionsChange}>
                                 <input type="checkbox" checked={isCheckedAll} readOnly/>
                                 Все

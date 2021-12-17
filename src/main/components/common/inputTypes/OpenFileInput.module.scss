@@ -1,4 +1,4 @@
-.container {
+.block {
   padding: 0 7px 0 10px;
 
   &:active, &:focus, &:hover {
@@ -6,28 +6,28 @@
     border: none;
   }
 
-  .inputField {
+  .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 30px;
 
-    .wrap {
+    .inputField {
       display: flex;
       flex-direction: row;
 
-      Img {
+      img {
         width: 23px;
         height: 23px;
         margin-right: 5px;
       }
     }
 
-    Input[type='file'] {
+    input[type='file'] {
       display: none;
     }
 
-    Button {
+    button {
       width: 20px;
 
       &:hover {
@@ -39,7 +39,7 @@
   }
 }
 
-.field {
+.additionalField {
   line-height: 30px;
   color: gray;
 
@@ -50,7 +50,7 @@
     padding-left: 10px;
   }
 
-  .widthHeightValueFields div {
+  .widthHeightFields div {
     outline: 1px solid gray;
     height: 30px;
     padding-left: 10px;
