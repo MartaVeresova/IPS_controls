@@ -21,10 +21,16 @@
   }
 
   .draggable {
-    cursor: col-resize;
-    width: 3px;
-    //height: 270px;
-    background-color: transparent;
+    position: relative;
+
+    & div {
+      cursor: col-resize;
+      //background-color: red;
+      width: 9px;
+      height: 100%;
+      position: absolute;
+      left: -5px;
+    }
   }
 
   .value {

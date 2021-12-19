@@ -56,7 +56,7 @@ const propertyValueSection: ObjectTypesType = {
     captionAttributeId: 18206,
     isAbleToAddAnyAttributes: true,
     deletedObjectLifetimeInDays: 0,
-    objectTypeClassifiedOptionId: 1,
+    objectTypeClassifiedOptionId: 5555,
     isCurrentProjectEnabled: true,
     isNeedToCheckParentAccess: false,
     isLocalObjectType: true,

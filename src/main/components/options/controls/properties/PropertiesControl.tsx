@@ -22,43 +22,73 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
     const propValueRef = useRef<HTMLDivElement | null>(null)
     const propDisplayRef = useRef<HTMLDivElement | null>(null)
 
-    const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+
+    const onDraggableMouseDown = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
         setIsDraggable(true)
+
+        // let shiftX = e.clientY - thumb.getBoundingClientRect().left;
     }
-    const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+
+    const onDisplayMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         if (isDraggable) {
-            let newLeft
-            if (draggableRef.current) {
-                newLeft = e.clientX - draggableRef.current.getBoundingClientRect().left
+
+            let leftWidth
+            let rightWidth
+
+            const propName = propNameRef.current
+            const propValue = propValueRef.current
+            const propDisplay = propDisplayRef.current
+            const draggable = draggableRef.current
+
+
+            let display
+            if (propDisplay && propName) {
+                display = propDisplay.getBoundingClientRect().right - propDisplay.getBoundingClientRect().left
             }
 
-            if (propNameRef.current && propDisplayRef.current && newLeft) {
-                propNameRef.current.style.width = ((propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
+            if (propName && propDisplay) {
+                leftWidth = e.clientX - propDisplay.getBoundingClientRect().left
+                rightWidth = propDisplay.getBoundingClientRect().right - e.clientX
             }
 
-            if (propValueRef.current && propDisplayRef.current && propNameRef.current && newLeft) {
-                // console.log((propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth)
-                // propValueRef.current.style.width = ((propValueRef.current.offsetWidth - newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
-                propValueRef.current.style.width = (100 - (propNameRef.current.offsetWidth + newLeft) * 100 / propDisplayRef.current.offsetWidth).toString() + '%'
+            if (propName && leftWidth && display && draggable) {
+                // propName.style.width = leftWidth + 'px'
+                propName.style.width = leftWidth * 100 / display + '%'
             }
-            console.log(propDisplayRef.current?.style.width)
-            console.log(propNameRef.current?.style.width)
-            console.log(propValueRef.current?.style.width)
+
+            if (propValue && rightWidth && display && draggable) {
+                // propValue.style.width = rightWidth + 'px'
+                propValue.style.width = rightWidth * 100 / display + '%'
+            }
+
+            // курсор вышел менее, чем на 100px в обе стороны => отключить движение.
+            // if (leftWidth && leftWidth < 100) {
+            //     setIsDraggable(false)
+            // }
+            // if (propDisplay && e.clientX > propDisplay.getBoundingClientRect().right - 100) {
+            //     setIsDraggable(false)
+            // }
+            // if (propDisplay && e.clientY > propDisplay.getBoundingClientRect().bottom - 5) {
+            //     setIsDraggable(false)
+            // }
+            // console.log(e.clientY, propDisplay?.getBoundingClientRect().bottom)
         }
     }
-    const onMouseUp = () => {
+
+    const onDisplayMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
+        // setIsDraggable(false)
+    }
+
+    const onDisplayMouseUp = () => {
         setIsDraggable(false)
     }
-    const onDragStart = () => {
-        // return false
-    }
+
 
     return (
         <>
-            {/*TabControl*/}
-            <div className={style.tabControlContainer} onMouseMove={onMouseMove} onMouseUp={onMouseUp}
-                 ref={propDisplayRef}>
+            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
+                 onMouseOut={onDisplayMouseLeave} ref={propDisplayRef}>
                 <div className={style.name} ref={propNameRef}>
                     {data.map(field => <PropertiesControlLeft key={field.propertyName}
                                                               field={field}
@@ -70,12 +100,13 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
                     />)}
                 </div>
 
-                <div className={style.draggable} onMouseDown={onMouseDown} onDragStart={onDragStart} draggable
-                     ref={draggableRef}>
+                <div className={style.draggable}>
+                    <div onMouseDown={onDraggableMouseDown} ref={draggableRef}>
+                    </div>
                 </div>
 
                 <div className={style.value} ref={propValueRef}>
-                    {data.map(field => <PropertiesControlRight key={field.propertyValue}
+                    {data.map(field => <PropertiesControlRight key={field.propertyName}
                                                                field={field}
                                                                isImageFieldExpanded={isImageFieldExpanded}
                                                                isSizeFieldExpanded={isSizeFieldExpanded}
@@ -87,16 +118,3 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
     )
 })
 
-// // курсор вышел из слайдера => оставить бегунок в его границах.
-// if (newLeft && newLeft < 0) {
-//     newLeft = 0;
-// }
-
-// let rightEdge
-// if (dragNDropRef.current && propNameRef.current) {
-//     rightEdge = dragNDropRef.current.offsetWidth - propNameRef.current.offsetWidth;
-// }
-//
-// if (newLeft && rightEdge && newLeft > rightEdge) {
-//     newLeft = rightEdge;
-// }
