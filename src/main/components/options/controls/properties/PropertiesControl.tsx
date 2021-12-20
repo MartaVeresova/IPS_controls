@@ -26,8 +26,6 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
     const onDraggableMouseDown = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault()
         setIsDraggable(true)
-
-        // let shiftX = e.clientY - thumb.getBoundingClientRect().left;
     }
 
     const onDisplayMouseMove = (e: MouseEvent<HTMLDivElement>) => {
@@ -63,21 +61,13 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
             }
 
             // курсор вышел менее, чем на 100px в обе стороны => отключить движение.
-            // if (leftWidth && leftWidth < 100) {
-            //     setIsDraggable(false)
-            // }
-            // if (propDisplay && e.clientX > propDisplay.getBoundingClientRect().right - 100) {
-            //     setIsDraggable(false)
-            // }
-            // if (propDisplay && e.clientY > propDisplay.getBoundingClientRect().bottom - 5) {
-            //     setIsDraggable(false)
-            // }
-            // console.log(e.clientY, propDisplay?.getBoundingClientRect().bottom)
+            if (leftWidth && leftWidth < 100) {
+                setIsDraggable(false)
+            }
+            if (propDisplay && e.clientX > propDisplay.getBoundingClientRect().right - 100) {
+                setIsDraggable(false)
+            }
         }
-    }
-
-    const onDisplayMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
-        // setIsDraggable(false)
     }
 
     const onDisplayMouseUp = () => {
@@ -87,8 +77,7 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
 
     return (
         <>
-            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
-                 onMouseOut={onDisplayMouseLeave} ref={propDisplayRef}>
+            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp} ref={propDisplayRef}>
                 <div className={style.name} ref={propNameRef}>
                     {data.map(field => <PropertiesControlLeft key={field.propertyName}
                                                               field={field}
