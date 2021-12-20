@@ -47,7 +47,7 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
         //имитация post за списком для дропдауна
         if (!isDropDownListOpened) {
             if (propertyName === 'Атрибут-описатель') {
-                setData(captionAttribute)
+                setData([{id: null, displayName: ''}, ...captionAttribute])
             }
             if (propertyName === 'Связь по умолчанию') {
                 setData(defaultRelationType)
@@ -94,26 +94,3 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
     )
 })
 
-// let {onInputClick, data, setID} = simplify(propertyName)
-
-// //имитация post за инитиализ.значением по айдишке
-// useEffect(() => {
-//     const selectedItem = defaultRelationType.find(el => el.id === propertyValue ? el : '')
-//     selectedItem && setSelectedDefaultRelationTypeName(selectedItem.name)
-// }, [propertyValue, setSelectedDefaultRelationTypeName])
-//
-// //имитация post за списком для дропдауна
-// useEffect(() => {
-//     if (isDropDownListOpened) {
-//         setDefaultRelationData(defaultRelationType)
-//     }
-// }, [isDropDownListOpened])
-
-
-// let setID = (id) => {
-//     dispatch(atrubuteAC(id))
-// }
-
-// let setID = (id) => {
-//     dispatch(Связь по умолчаниюAC(id))
-// }
