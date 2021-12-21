@@ -1,7 +1,7 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import {App} from './App';
-import {RootStore} from './main/store';
+import {RootStore} from './main/components/store';
 
 const store = RootStore.create({})
 
