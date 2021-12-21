@@ -68,14 +68,8 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
             setSelectedId(item.id)
             setIsDropDownListOpened(false)
         }
-
-        let className = 'listItem'
-        if (item.displayName === checkedName) {
-            className = 'checkedItem'
-        }
-
         return (
-            <div key={item.displayName} className={style[className]}
+            <div key={item.displayName} className={item.displayName === checkedName ? style.checkedItem : style.listItem}
                  onClick={onOptionClick} title={item.displayName}>{item.displayName}</div>
         )
     })

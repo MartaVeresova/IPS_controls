@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
 
+  //добавила в проект
   ::selection {
     background-color: #e2e2e2;
   }
@@ -20,6 +21,7 @@
   flex-direction: row;
   justify-content: left;
 
+  //нет в проекте
   .treeMenu {
     min-width: 400px;
     font-size: 11px;

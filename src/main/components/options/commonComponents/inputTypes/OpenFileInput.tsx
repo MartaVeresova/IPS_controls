@@ -7,7 +7,6 @@ type PropsType = {
     isSizeFieldExpanded: boolean
     previewImg: string
     setPreviewImg: (value: string) => void
-    // imgRef: any
 }
 
 
