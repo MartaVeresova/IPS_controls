@@ -1,14 +1,13 @@
-import React, {FC, useState} from 'react';
+import React, {FC, memo, useState} from 'react';
 import style from './App.module.scss'
-import {observer} from 'mobx-react-lite';
-import {LifeCycleLevel} from './main/components/options/controls/properties/lifeCycleLevel/LifeCycleLevel';
 import {RootTree} from './main/components/RootTree';
-import {ObjectTypes} from './main/components/options/controls/properties/objectTypes/ObjectTypes';
+import {PropertiesControl} from './main/components/options/controls/properties/PropertiesControl';
 
 
-export const App: FC = observer(() => {
+export const App: FC = memo(() => {
     const [isLifeCycleLevelOpen, setIsLifeCycleLevelOpen] = useState<boolean>(false)
     const [isObjectTypesOpen, setIsObjectTypesOpen] = useState<boolean>(false)
+
 
     return (
         <>
@@ -19,8 +18,10 @@ export const App: FC = observer(() => {
                               isObjectTypesOpen={isObjectTypesOpen}
                     />
                 </div>
-                {isLifeCycleLevelOpen && <div><LifeCycleLevel/></div>}
-                {isObjectTypesOpen && <div><ObjectTypes/></div>}
+                {isLifeCycleLevelOpen &&
+                    <div><PropertiesControl type={'lifeCycleLevelType'}/></div>}
+                {isObjectTypesOpen &&
+                    <div><PropertiesControl type={'objectTypesType'}/></div>}
             </div>
         </>
     )

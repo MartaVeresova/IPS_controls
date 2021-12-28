@@ -36,7 +36,7 @@ export const EnumDropDown: FC<PropsType> = memo(({propertyValue}) => {
             setCheckedName([key, value][1])
             setIsDropDownListOpened(false)
         }
-        return <div key={key} className={value === checkedName ? style.checkedItem : style.listItem} onClick={onOptionClick}>{value}</div>
+        return <div key={key} className={value === checkedName ? style.selectedItem : style.listItem} onClick={onOptionClick}>{value}</div>
     })
 
 
@@ -44,7 +44,7 @@ export const EnumDropDown: FC<PropsType> = memo(({propertyValue}) => {
         <>
             <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
                              setIsDropDownListOpened={setIsDropDownListOpened}
-                             checkedName={checkedName}
+                             selectedName={checkedName}
                              onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>

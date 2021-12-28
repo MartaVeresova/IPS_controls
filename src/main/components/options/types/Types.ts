@@ -8,14 +8,19 @@ export type FieldTypes =
     | 'simpleDropDown'
     | 'enumDropDown'
 
-
 export type PropertyDataType = {
+    propertyName: string
+    propertyValue: any
+    valueName: string
+    fieldType: FieldTypes
+}
+
+export type PropertyDataType2 = {
     propertyName: string
     propertyValue: any
     fieldType: FieldTypes
 }
 
-//ObjectTypes
 export type MultiType = {
     id: string
     displayName: string
@@ -24,6 +29,8 @@ export type SimpleType = {
     id: number | null
     displayName: string
 }
+
+//ObjectTypes
 export type ObjectTypesType = {
     id: number
     globalKey: string
@@ -52,7 +59,7 @@ export type ObjectTypesType = {
     isForumEnabled: boolean
     isExtendedAudit: boolean
     isEnableWebEdit: boolean
-    assignedSubjectAreaTypes: string[]
+    assignedSubjectAreaIds: string[]
 }
 
 //LifeCycleLevel

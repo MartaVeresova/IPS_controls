@@ -1,39 +1,40 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
+import {observer} from 'mobx-react-lite';
+import {useStore} from '../../../hooks/useStore';
 
 type PropsType = {
     propertyValue: boolean
+    valueName: string
 }
 type YesNoType = 'да' | 'нет'
 const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
-export const YesNoDropDown: FC<PropsType> = memo(({propertyValue}) => {
-
+export const YesNoDropDown: FC<PropsType> = observer(({propertyValue, valueName}) => {
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-    const [checkedName, setCheckedName] = useState<string>('')
-    const [selectedOption, setSelectedOption] = useState<boolean>(propertyValue) //sent to server
+    const {yesNoDropDown} = useStore()
 
     useEffect(() => {
-        setCheckedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
-    }, [propertyValue])
+        yesNoDropDown.setSelectedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
+    }, [yesNoDropDown, propertyValue])
 
     const onInputClick = () => setIsDropDownListOpened(!isDropDownListOpened)
 
     const options = yesNoDropDownData.map(item => {
         const onOptionClick = () => {
-            setSelectedOption(item === yesNoDropDownData[0])
-            setCheckedName(item)
+            yesNoDropDown.setSelectedName(item)
+            yesNoDropDown.setSelectedOption(item === yesNoDropDownData[0])
             setIsDropDownListOpened(false)
         }
-        return <div key={item} className={item === checkedName ? style.checkedItem : style.listItem} onClick={onOptionClick}>{item}</div>
+        return <div key={item} className={item === yesNoDropDown.selectedName ? style.selectedItem : style.listItem} onClick={onOptionClick}>{item}</div>
     })
 
     return (
         <>
             <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
                              setIsDropDownListOpened={setIsDropDownListOpened}
-                             checkedName={checkedName}
+                             selectedName={yesNoDropDown.selectedName}
                              onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>

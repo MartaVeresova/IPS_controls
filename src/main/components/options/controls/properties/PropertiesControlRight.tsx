@@ -1,4 +1,4 @@
-import React, {FC, memo} from 'react';
+import React, {FC} from 'react';
 import {EditableInput} from '../../commonComponents/inputTypes/EditableInput';
 import {ReadOnlyInput} from '../../commonComponents/inputTypes/ReadOnlyInput';
 import {MultiDropDown} from '../../commonComponents/inputTypes/MultiDropDown';
@@ -6,8 +6,10 @@ import {YesNoDropDown} from '../../commonComponents/inputTypes/YesNoDropDown';
 import {SimpleDropDown} from '../../commonComponents/inputTypes/SimpleDropDown';
 import {EnumDropDown} from '../../commonComponents/inputTypes/EnumDropDown';
 import {OpenFileInput} from '../../commonComponents/inputTypes/OpenFileInput';
-import {PropertyDataType} from '../../types/Types';
 import style from './PropertiesControlRight.module.scss'
+import {observer} from 'mobx-react-lite';
+import {PropertyDataType} from '../../types/Types';
+import {useStore} from '../../../hooks/useStore';
 
 
 type PropsType = {
@@ -18,7 +20,7 @@ type PropsType = {
     setPreviewImg: (value: string) => void
 }
 
-export const PropertiesControlRight: FC<PropsType> = memo(props => {
+export const PropertiesControlRight: FC<PropsType> = observer(props => {
     const {field, isImageFieldExpanded, isSizeFieldExpanded, previewImg, setPreviewImg} = props
 
 
@@ -26,30 +28,31 @@ export const PropertiesControlRight: FC<PropsType> = memo(props => {
         <>
             <div className={style.propertyValue}>
                 {field.fieldType === 'editableInput' &&
-                <EditableInput propertyValue={field.propertyValue}/>}
+                    <EditableInput propertyValue={field.propertyValue}/>}
 
                 {field.fieldType === 'readOnlyInput' &&
-                <ReadOnlyInput propertyValue={field.propertyValue}/>}
+                    <ReadOnlyInput propertyValue={field.propertyValue}/>}
 
                 {field.fieldType === 'openFileInput' &&
-                <OpenFileInput propertyValue={field.propertyValue}
-                               isImageFieldExpanded={isImageFieldExpanded}
-                               isSizeFieldExpanded={isSizeFieldExpanded}
-                               previewImg={previewImg}
-                               setPreviewImg={setPreviewImg}/>}
+                    <OpenFileInput propertyValue={field.propertyValue}
+                                   isImageFieldExpanded={isImageFieldExpanded}
+                                   isSizeFieldExpanded={isSizeFieldExpanded}
+                                   previewImg={previewImg}
+                                   setPreviewImg={setPreviewImg}/>}
 
                 {field.fieldType === 'yesNoDropDown' &&
-                <YesNoDropDown propertyValue={field.propertyValue}/>}
+                    <YesNoDropDown propertyValue={field.propertyValue}
+                                   valueName={field.valueName}/>}
 
                 {field.fieldType === 'multiDropDown' &&
-                <MultiDropDown propertyValue={field.propertyValue}/>}
+                    <MultiDropDown propertyValue={field.propertyValue}/>}
 
                 {field.fieldType === 'simpleDropDown' &&
-                <SimpleDropDown propertyValue={field.propertyValue}
-                                propertyName={field.propertyName}/>}
+                    <SimpleDropDown propertyValue={field.propertyValue}
+                                    valueName={field.valueName}/>}
 
                 {field.fieldType === 'enumDropDown' &&
-                <EnumDropDown propertyValue={field.propertyValue}/>}
+                    <EnumDropDown propertyValue={field.propertyValue}/>}
             </div>
         </>
     )

@@ -1,17 +1,20 @@
-import React, {FC, memo, useEffect, useState} from 'react';
-import {captionAttribute, defaultRelationType} from '../../controls/properties/objectTypes/ObjectTypesData';
+import React, {FC, useEffect, useState} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
-import {SimpleType} from '../../types/Types';
-import {storage} from '../../controls/properties/lifeCycleLevel/LifeCycleLevelData';
 import style from '../GeneralDropDown.module.scss'
+import {observer} from 'mobx-react-lite';
+import {captionAttribute, defaultRelationType} from '../../controls/properties/objectTypes/ObjectTypesData';
+import {storage} from '../../controls/properties/lifeCycleLevel/LifeCycleLevelData';
+import {SimpleType} from '../../types/Types';
 
 type PropsType = {
-    propertyValue: number //id чекнутого элемента
-    propertyName: string
+    propertyValue: number
+    // displayName: string //name чекнутого элемента
+    // getSelectedItem: (propertyValue: number, value: string) => void
+    // setSelectedItem: (valueId: number | null, valueName: string) => void
+    valueName: string
 }
 
-export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}) => {
-
+export const SimpleDropDown: FC<PropsType> = observer(({propertyValue, valueName}) => {
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
     const [data, setData] = useState<SimpleType[]>([])
     const [checkedName, setCheckedName] = useState<string>('') //name чекнутого элемента
@@ -20,39 +23,31 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
     useEffect(() => {
         //имитация post за инитиализ.значением по айдишке
         if (checkedName === '') {
-            if (propertyName === 'Атрибут-описатель') {
-                const selectedItem = captionAttribute.find(findSelectedItem)
-                if (selectedItem) {
-                    setCheckedName(selectedItem.displayName)
-                }
-            }
-            if (propertyName === 'Связь по умолчанию') {
-                const selectedItem = defaultRelationType.find(findSelectedItem)
-                if (selectedItem) {
-                    setCheckedName(selectedItem.displayName)
-                }
-            }
-            if (propertyName === 'Файловый шкаф') {
-                const selectedItem = storage.find(findSelectedItem)
-                if (selectedItem) {
-                    setCheckedName(selectedItem.displayName)
-                }
-            }
+        let selectedItem
+        if (valueName === 'captionAttributeId') {
+            selectedItem = captionAttribute.find(findSelectedItem)
+        } else if (valueName === 'defaultRelationTypeId') {
+            selectedItem = defaultRelationType.find(findSelectedItem)
+        } else if (valueName === 'storageId') {
+            selectedItem = storage.find(findSelectedItem)
         }
-    }, [propertyName])
+        if (selectedItem) {
+            setCheckedName(selectedItem.displayName)
+        }
+        }
+    }, [valueName])
 
     const findSelectedItem = (el: SimpleType) => el.id === propertyValue ? el : ''
 
     const onInputClick = () => {
-        //имитация post за списком для дропдауна
         if (!isDropDownListOpened) {
-            if (propertyName === 'Атрибут-описатель') {
+            if (valueName === 'captionAttributeId') {
                 setData([{id: null, displayName: ''}, ...captionAttribute])
             }
-            if (propertyName === 'Связь по умолчанию') {
+            if (valueName === 'defaultRelationTypeId') {
                 setData(defaultRelationType)
             }
-            if (propertyName === 'Файловый шкаф') {
+            if (valueName === 'storageId') {
                 setData([{id: null, displayName: ''}, ...storage])
             }
             setIsDropDownListOpened(true)
@@ -69,7 +64,8 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
             setIsDropDownListOpened(false)
         }
         return (
-            <div key={item.displayName} className={item.displayName === checkedName ? style.checkedItem : style.listItem}
+            <div key={item.displayName}
+                 className={item.displayName === checkedName  ? style.selectedItem : style.listItem}
                  onClick={onOptionClick} title={item.displayName}>{item.displayName}</div>
         )
     })
@@ -79,7 +75,7 @@ export const SimpleDropDown: FC<PropsType> = memo(({propertyValue, propertyName}
             <GeneralDropDown
                 isDropDownListOpened={isDropDownListOpened}
                 setIsDropDownListOpened={setIsDropDownListOpened}
-                checkedName={checkedName}
+                selectedName={checkedName }
                 onInputClick={onInputClick}
             >
                 {options}

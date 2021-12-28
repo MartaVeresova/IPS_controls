@@ -1,7 +1,11 @@
-import {useContext} from "react";
+import {useContext} from 'react';
 import {StoreContext} from '../../../index';
 
 
 export const useStore = () => {
-    return useContext(StoreContext)
+    const store = useContext(StoreContext);
+    if (store === null) {
+        throw new Error('Store cannot be null, please add a context provider');
+    }
+    return store;
 }

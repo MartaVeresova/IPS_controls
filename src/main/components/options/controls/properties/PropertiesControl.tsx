@@ -1,26 +1,49 @@
-import React, {FC, memo, MouseEvent, useRef, useState} from 'react';
+import React, {FC, MouseEvent, useEffect, useRef, useState} from 'react';
 import style from './PropertiesControl.module.scss'
 import {PropertiesControlLeft} from './PropertiesControlLeft';
 import {PropertiesControlRight} from './PropertiesControlRight';
-import {PropertyDataType} from '../../types/Types';
+import {observer} from 'mobx-react-lite';
+import {lifeCycleLevelData} from './lifeCycleLevel/LifeCycleLevelData';
+import {useStore} from '../../../hooks/useStore';
+import {objectTypesData} from './objectTypes/ObjectTypesData';
 
 
 type PropsType = {
-    data: PropertyDataType[]
+    type: string
+    // data: PropertyDataType[]
 }
 
-export const PropertiesControl: FC<PropsType> = memo(({data}) => {
-    // const {propertiesControl} = useStore()
+export const PropertiesControl: FC<PropsType> = observer(({type}) => {
 
     const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
     const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(false)
-    const [previewImg, setPreviewImg] = useState<string>('')
     const [isDraggable, setIsDraggable] = useState<boolean>(false)
+    const [previewImg, setPreviewImg] = useState<string>('')
 
     const draggableRef = useRef<HTMLDivElement | null>(null)
     const propNameRef = useRef<HTMLDivElement | null>(null)
     const propValueRef = useRef<HTMLDivElement | null>(null)
     const propDisplayRef = useRef<HTMLDivElement | null>(null)
+
+    const {propertyControl} = useStore()
+
+    useEffect(() => {
+        if (type === 'lifeCycleLevelType') {
+            propertyControl.getLifeCycleLevelData()
+        }
+        if (type === 'objectTypesType') {
+            propertyControl.getObjectTypesData()
+        }
+    }, [type, propertyControl])
+
+    useEffect(() => {
+        if (type === 'lifeCycleLevelType') {
+            propertyControl.init(lifeCycleLevelData)
+        }
+        if (type === 'objectTypesType') {
+            propertyControl.init(objectTypesData)
+        }
+    }, [type, propertyControl])
 
 
     const onDraggableMouseDown = (e: MouseEvent<HTMLDivElement>) => {
@@ -51,12 +74,10 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
             }
 
             if (propName && leftWidth && display && draggable) {
-                // propName.style.width = leftWidth + 'px'
                 propName.style.width = leftWidth * 100 / display + '%'
             }
 
             if (propValue && rightWidth && display && draggable) {
-                // propValue.style.width = rightWidth + 'px'
                 propValue.style.width = rightWidth * 100 / display + '%'
             }
 
@@ -74,18 +95,23 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
         setIsDraggable(false)
     }
 
+    const onButtonClick = () => {
+        propertyControl.sent()
+    }
+
 
     return (
         <>
-            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp} ref={propDisplayRef}>
+            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
+                 ref={propDisplayRef}>
                 <div className={style.name} ref={propNameRef}>
-                    {data.map(field => <PropertiesControlLeft key={field.propertyName}
-                                                              field={field}
-                                                              isImageFieldExpanded={isImageFieldExpanded}
-                                                              setIsImageFieldExpanded={setIsImageFieldExpanded}
-                                                              isSizeFieldExpanded={isSizeFieldExpanded}
-                                                              setIsSizeFieldExpanded={setIsSizeFieldExpanded}
-                                                              previewImg={previewImg}
+                    {propertyControl.propertyData.map(field => <PropertiesControlLeft key={field.propertyName}
+                                                                                      field={field}
+                                                                                      isImageFieldExpanded={isImageFieldExpanded}
+                                                                                      setIsImageFieldExpanded={setIsImageFieldExpanded}
+                                                                                      isSizeFieldExpanded={isSizeFieldExpanded}
+                                                                                      setIsSizeFieldExpanded={setIsSizeFieldExpanded}
+                                                                                      previewImg={previewImg}
                     />)}
                 </div>
 
@@ -95,13 +121,16 @@ export const PropertiesControl: FC<PropsType> = memo(({data}) => {
                 </div>
 
                 <div className={style.value} ref={propValueRef}>
-                    {data.map(field => <PropertiesControlRight key={field.propertyName}
-                                                               field={field}
-                                                               isImageFieldExpanded={isImageFieldExpanded}
-                                                               isSizeFieldExpanded={isSizeFieldExpanded}
-                                                               previewImg={previewImg}
-                                                               setPreviewImg={setPreviewImg}/>)}
+                    {propertyControl.propertyData.map(field => <PropertiesControlRight key={field.propertyName}
+                                                                                       field={field}
+                                                                                       isImageFieldExpanded={isImageFieldExpanded}
+                                                                                       isSizeFieldExpanded={isSizeFieldExpanded}
+                                                                                       previewImg={previewImg}
+                                                                                       setPreviewImg={setPreviewImg}/>)}
                 </div>
+            </div>
+            <div>
+                <button style={{margin: '15px', width: '50px'}} onClick={onButtonClick}>sent</button>
             </div>
         </>
     )

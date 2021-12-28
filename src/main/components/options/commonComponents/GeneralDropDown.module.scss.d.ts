@@ -1,10 +1,10 @@
 declare const styles: {
     readonly "wrap": string;
     readonly "container": string;
-    readonly "checkedName": string;
+    readonly "selectedName": string;
     readonly "dropDownList": string;
     readonly "listItem": string;
-    readonly "checkedItem": string;
+    readonly "selectedItem": string;
 };
 export = styles;
 

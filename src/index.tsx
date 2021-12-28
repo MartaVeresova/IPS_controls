@@ -1,11 +1,13 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
 import {App} from './App';
-import {RootStore} from './main/components/store';
+import {RootInstance, RootModel} from './main/components/store';
+import {getSnapshot} from 'mobx-state-tree';
 
-const store = RootStore.create({})
+const store = RootModel.create({})
 
-export const StoreContext = createContext(store)
+export const StoreContext = createContext<RootInstance>(store)
+console.log(getSnapshot(store))
 
 ReactDOM.render(
     <React.StrictMode>

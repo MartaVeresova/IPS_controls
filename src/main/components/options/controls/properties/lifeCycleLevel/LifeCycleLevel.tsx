@@ -1,23 +1,22 @@
-import React, {FC, memo} from 'react';
-import style from './LifeCycleLevel.module.scss'
-import {PropertiesControl} from '../PropertiesControl';
-import {lifeCycleLevelData} from './LifeCycleLevelData';
+import React, {FC} from 'react';
+import {observer} from 'mobx-react-lite';
 
 
-export const LifeCycleLevel: FC = memo(() => {
-    // const {propertiesControl} = useStore()
+export const LifeCycleLevel: FC = observer(() => {
+    // const {propertyControl} = useStore()
+
+    // useEffect(() => {
+    //     propertyControl.getLifeCycleLevelData()
+    // }, [propertyControl])
+    //
+    // useEffect(() => {
+    //     propertyControl.init(lifeCycleLevelData)
+    // }, [propertyControl])
 
     return (
         <>
-            {/*TabControl*/}
-            <div className={style.tabControlButtons}>
-                <button>Свойства</button>
-                <button>Безопасность</button>
-                <button>Действия над объектом</button>
-            </div>
-
             <div>
-                <PropertiesControl data={lifeCycleLevelData}/>
+                {/*<PropertiesControl data={lifeCycleLevelData}/>*/}
             </div>
         </>
     )

@@ -3,16 +3,8 @@
   font-family: sans-serif;
   margin: 0;
   padding: 0;
-
-  //добавила в проект
-  ::selection {
-    background-color: #e2e2e2;
-  }
-  ::-moz-selection {
-    background-color: #e2e2e2;
-  }
-
 }
+
 .wrap {
   width: 60vw;
   max-height: 200px;

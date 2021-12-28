@@ -1,4 +1,4 @@
-import React, {FC, useRef} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import style from './GeneralDropDown.module.scss';
 import {useOnClickOutside} from '../../hooks/useOnClickOutside';
 import {Pointer} from './Pointer';
@@ -6,14 +6,13 @@ import {Pointer} from './Pointer';
 type PropsType = {
     isDropDownListOpened: boolean
     setIsDropDownListOpened: (value: boolean) => void
-    checkedName: string
+    selectedName: string
     onInputClick: () => void
 }
 
 
 export const GeneralDropDown: FC<PropsType> = props => {
-
-    const {isDropDownListOpened, setIsDropDownListOpened, checkedName, onInputClick, children} = props
+    const {isDropDownListOpened, setIsDropDownListOpened, selectedName, onInputClick, children} = props
 
     const formRef = useRef<HTMLDivElement | null>(null)
     useOnClickOutside(formRef, () => setIsDropDownListOpened(false))
@@ -22,8 +21,8 @@ export const GeneralDropDown: FC<PropsType> = props => {
     return (
         <>
             <div className={style.wrap} ref={formRef}>
-                <div className={style.container} onClick={onInputClick} title={checkedName} tabIndex={0}>
-                    <div className={style.checkedName}>{checkedName}</div>
+                <div className={style.container} onClick={onInputClick} title={selectedName} tabIndex={0}>
+                    <div className={style.selectedName}>{selectedName}</div>
                     <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
                 </div>
                 <div hidden={!isDropDownListOpened}>

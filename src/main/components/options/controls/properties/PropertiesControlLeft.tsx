@@ -40,11 +40,9 @@ export const PropertiesControlLeft: FC<PropsType> = memo(props => {
             <div className={style.propertyName}>
                 <div className={style.wrap} tabIndex={0}>
                     <div className={style.allProp} onDoubleClick={onImageClick}>
-                        {
-                            field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
-                            <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
-                                     type="imageFieldIcon"/>
-                        }
+                        {field.propertyName === 'Изображение' && (field.propertyValue || previewImg !== '') &&
+                                <Pointer isFieldExpanded={isImageFieldExpanded} onIconClick={onImageClick}
+                                         type="imageFieldIcon"/>}
                         {field.propertyName}
                     </div>
                 </div>
