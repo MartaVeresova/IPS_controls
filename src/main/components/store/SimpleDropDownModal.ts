@@ -1,79 +1,56 @@
-import {cast, Instance, types} from 'mobx-state-tree';
+import {cast, getParent, hasParent, Instance, types} from 'mobx-state-tree';
+
 
 export interface SelectedItemType {
     id: number | null
     displayName: string
 }
 
-type SimpleType = {
-    id: number | null
-    displayName: string
-}
-
-export const SimpleDropDownItemModel = types
-    .model('SimpleDropDownItem', {
-        // id: types.optional(types.maybeNull(types.identifierNumber), -1),
+export const SimpleDropDownDataItemModel = types
+    .model('SimpleDropDownDataItem', {
         id: types.optional(types.maybeNull(types.number), null),
         displayName: types.optional(types.string, ''),
     })
-    .actions(self => {
-            return {
-                // getSelectedItem(value: string): void {
-                //     let selectedItem: SelectedItemType[] = []
-                //     if (value === 'captionAttributeId') {
-                //         selectedItem = [{id: 7, displayName: 'Описание'}] //post request for checked elem
-                //     }
-                //     if (value === 'defaultRelationTypeId') {
-                //         selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}] //post request for checked elem
-                //     }
-                //     if (value === 'storageId') {
-                //         selectedItem = [{id: null, displayName: ''}] //post request for checked elem
-                //     }
-                //     self.displayName = selectedItem[0].displayName
-                //     self.id = selectedItem[0].id
-                // },
-                // setSelectedItem(selectedId: number | null, selectedName: string): void {
-                //     self.id = selectedId
-                //     self.displayName = selectedName
-                // },
-            }
-        }
-    )
+
 
 export const SimpleDropDownModel = types
     .model('SimpleDropDown', {
-        simpleDropDownList: types.optional(types.array(SimpleDropDownItemModel), []),
-        selectedElement: types.safeReference(SimpleDropDownItemModel),
+        simpleDropDownList: types.optional(types.array(SimpleDropDownDataItemModel), []),
     })
     .actions(self => {
         let selectedItem: SelectedItemType[] = []
+        let dropDownList: SelectedItemType[] = []
         return {
-            getSelectedItem(id: number, value: string): void {
-
+            getSimpleDropDownSelectedItem(id: number, value: string): void {
                 if (value === 'captionAttributeId') {
-                    selectedItem = [{id: 7, displayName: 'Описание'}] //post request for checked elem
+                    selectedItem = [{id: 7, displayName: 'Описание'}] //post request for selected elem
                 }
                 if (value === 'defaultRelationTypeId') {
-                    selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}] //post request for checked elem
+                    selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}] //post request for selected elem
                 }
                 if (value === 'storageId') {
-                    selectedItem = [{id: null, displayName: ''}] //post request for checked elem
+                    selectedItem = [{id: 8, displayName: 'DOCUMS'}] //post request for selected elem
                 }
-                if (self.selectedElement) {
-                    self.selectedElement.id = selectedItem[0].id
-                    self.selectedElement.displayName = selectedItem[0].displayName
-                }
+                self.simpleDropDownList = cast([...self.simpleDropDownList, ...selectedItem])
+                // console.log(JSON.stringify(self.simpleDropDownList))
             },
-            setSelectedItem(selectedId: number | null, selectedName: string): void {
-                if (self.selectedElement) {
-                    self.selectedElement.id = selectedId
-                    self.selectedElement.displayName = selectedName
+            setSimpleDropDownSelectedItem2(id: number | null, fieldName: string): void {
+
+                // self.propertyData.forEach(item => {
+                //     if (item.fieldName === fieldName) {
+                //         item.propertyValue = id
+                //     }
+                // })
+                if (hasParent(self)) {
+                    let parent = getParent(self)
+
+                    console.log(getParent(self))
                 }
+                // console.log(JSON.parse(JSON.stringify(parent)).propertyValue)
             },
-            getDropDownList(value: string): void { //get request for list
-                let checkedItem: SimpleType[] = []
-                if (value === 'captionAttributeId') {
-                    checkedItem = [
+            getSimpleDropDownList(id: number, fieldName: string): void { //get request for list
+                if (fieldName === 'captionAttributeId') {
+                    dropDownList = [
                         {id: null, displayName: ''},
                         {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},
                         {id: 18033, displayName: 'Автоматически размещающиеся в архиве типы документов'},
@@ -91,8 +68,8 @@ export const SimpleDropDownModel = types
                         {id: 1017, displayName: 'Файловый шкаф'},
                     ]
                 }
-                if (value === 'defaultRelationTypeId') {
-                    checkedItem = [
+                if (fieldName === 'defaultRelationTypeId') {
+                    dropDownList = [
                         {id: 0, displayName: 'Аналоги'},
                         {id: 1, displayName: 'Вложения'},
                         {id: 2, displayName: 'Документация на изделие'},
@@ -104,19 +81,22 @@ export const SimpleDropDownModel = types
                         {id: 8, displayName: 'Изменяется по извещению'},
                     ]
                 }
-                if (value === 'storageId') {
-                    checkedItem = [
+                if (fieldName === 'storageId') {
+                    dropDownList = [
                         {id: null, displayName: ''},
                         {id: 8, displayName: 'DOCUMS'},
                     ]
                 }
-                self.simpleDropDownList = cast(checkedItem)
+                self.simpleDropDownList = cast([...dropDownList])
+                // console.log(JSON.parse(JSON.stringify(self.simpleDropDownList)))
             },
+            openDropDownList(): void {
+
+            }
         }
     })
 
-
-export type SimpleDropDownItem = Instance<typeof SimpleDropDownItemModel>
+export type SimpleDropDownDataItem = Instance<typeof SimpleDropDownDataItemModel>
 export type SimpleDropDown = Instance<typeof SimpleDropDownModel>
 
-
+// onSnapshot(self.selectedElement, snapshot => console.log('snapshot: ', snapshot))

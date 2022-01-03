@@ -6,8 +6,7 @@ import {getSnapshot} from 'mobx-state-tree';
 
 const store = RootModel.create({})
 
-export const StoreContext = createContext<RootInstance>(store)
-console.log(getSnapshot(store))
+export const StoreContext = createContext<RootInstance>(store as RootInstance)
 
 ReactDOM.render(
     <React.StrictMode>

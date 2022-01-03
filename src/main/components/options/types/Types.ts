@@ -11,7 +11,7 @@ export type FieldTypes =
 export type PropertyDataType = {
     propertyName: string
     propertyValue: any
-    valueName: string
+    fieldName: string
     fieldType: FieldTypes
 }
 

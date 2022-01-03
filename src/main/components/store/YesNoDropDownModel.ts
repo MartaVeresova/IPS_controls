@@ -18,5 +18,4 @@ export const YesNoDropDownModel = types
         }
     )
 
-
 export type YesNoDropDown = Instance<typeof YesNoDropDownModel>

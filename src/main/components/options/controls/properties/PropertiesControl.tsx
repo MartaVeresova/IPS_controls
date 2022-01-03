@@ -4,13 +4,12 @@ import {PropertiesControlLeft} from './PropertiesControlLeft';
 import {PropertiesControlRight} from './PropertiesControlRight';
 import {observer} from 'mobx-react-lite';
 import {lifeCycleLevelData} from './lifeCycleLevel/LifeCycleLevelData';
-import {useStore} from '../../../hooks/useStore';
 import {objectTypesData} from './objectTypes/ObjectTypesData';
+import {useStore} from '../../../hooks/useStore';
 
 
 type PropsType = {
     type: string
-    // data: PropertyDataType[]
 }
 
 export const PropertiesControl: FC<PropsType> = observer(({type}) => {
@@ -105,14 +104,16 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
             <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
                  ref={propDisplayRef}>
                 <div className={style.name} ref={propNameRef}>
-                    {propertyControl.propertyData.map(field => <PropertiesControlLeft key={field.propertyName}
-                                                                                      field={field}
-                                                                                      isImageFieldExpanded={isImageFieldExpanded}
-                                                                                      setIsImageFieldExpanded={setIsImageFieldExpanded}
-                                                                                      isSizeFieldExpanded={isSizeFieldExpanded}
-                                                                                      setIsSizeFieldExpanded={setIsSizeFieldExpanded}
-                                                                                      previewImg={previewImg}
-                    />)}
+                    {propertyControl.propertyData.map(field =>
+                        <PropertiesControlLeft
+                            key={field.propertyName}
+                            field={field}
+                            isImageFieldExpanded={isImageFieldExpanded}
+                            setIsImageFieldExpanded={setIsImageFieldExpanded}
+                            isSizeFieldExpanded={isSizeFieldExpanded}
+                            setIsSizeFieldExpanded={setIsSizeFieldExpanded}
+                            previewImg={previewImg}
+                        />)}
                 </div>
 
                 <div className={style.draggable}>
@@ -121,12 +122,16 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                 </div>
 
                 <div className={style.value} ref={propValueRef}>
-                    {propertyControl.propertyData.map(field => <PropertiesControlRight key={field.propertyName}
-                                                                                       field={field}
-                                                                                       isImageFieldExpanded={isImageFieldExpanded}
-                                                                                       isSizeFieldExpanded={isSizeFieldExpanded}
-                                                                                       previewImg={previewImg}
-                                                                                       setPreviewImg={setPreviewImg}/>)}
+                    {propertyControl.propertyData.map(field =>
+                        <PropertiesControlRight
+                            key={field.propertyName}
+                            field={field}
+                            isImageFieldExpanded={isImageFieldExpanded}
+                            isSizeFieldExpanded={isSizeFieldExpanded}
+                            previewImg={previewImg}
+                            setPreviewImg={setPreviewImg}
+                            setSimpleDropDownSelectedItem={propertyControl.setSimpleDropDownSelectedItem}
+                            dropDownModel={field.dropDownModel}/>)}
                 </div>
             </div>
             <div>

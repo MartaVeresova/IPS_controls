@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef} from 'react';
+import React, {FC, useRef} from 'react';
 import style from './GeneralDropDown.module.scss';
 import {useOnClickOutside} from '../../hooks/useOnClickOutside';
 import {Pointer} from './Pointer';
@@ -6,7 +6,7 @@ import {Pointer} from './Pointer';
 type PropsType = {
     isDropDownListOpened: boolean
     setIsDropDownListOpened: (value: boolean) => void
-    selectedName: string
+    selectedName: string | undefined
     onInputClick: () => void
 }
 

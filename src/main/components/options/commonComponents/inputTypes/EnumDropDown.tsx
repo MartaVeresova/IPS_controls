@@ -1,50 +1,60 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
+import {observer} from 'mobx-react-lite';
+
 
 type PropsType = {
     propertyValue: string
+    fieldName: string
+    dropDownModel:
+        & { enumSelectedName: string }
+        & { enumSelectedOption: string }
+        & { setEnumDropDownSelectedItem: (name: string, option: string) => void }
 }
-type VersionModeType = 'notComputableValue' | 'storedValue' | 'multiVersion'
-type VersionModeValueType = 'Абстрактный тип' | 'Неверсионный тип' | 'Версионный тип'
 
 enum versionMode {
     notComputableValue = 'Абстрактный тип',
     storedValue = 'Неверсионный тип',
     multiVersion = 'Версионный тип',
 }
+
 const data: Array<string[]> = Object.entries(versionMode)
 
-
-export const EnumDropDown: FC<PropsType> = memo(({propertyValue}) => {
+export const EnumDropDown: FC<PropsType> = observer(props => {
+    const {propertyValue, fieldName, dropDownModel} = props
 
     const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-    const [checkedName, setCheckedName] = useState<string>('') //name чекнутого элемента
-    const [selectedName, setSelectedName] = useState<string>(propertyValue) //sent to server
 
     useEffect(() => {
         data.forEach(([key, value]) => {
-            if ([key, value][0] === propertyValue) setCheckedName(value)
+            if (key === propertyValue) {
+                // console.log(JSON.parse(JSON.stringify(dropDownModel)))
+                // dropDownModel.setEnumDropDownSelectedItem(key, value)
+            }
         })
-    }, [propertyValue])
+    }, [dropDownModel, propertyValue])
 
-    const onInputClick = () => setIsDropDownListOpened(!isDropDownListOpened)
+    const onInputClick = () => {
+        setIsDropDownListOpened(!isDropDownListOpened)
+    }
 
     const options = data.map(([key, value]) => {
         const onOptionClick = () => {
-            setSelectedName([key, value][0])
-            setCheckedName([key, value][1])
+            dropDownModel.setEnumDropDownSelectedItem([key, value][0], [key, value][1])
             setIsDropDownListOpened(false)
         }
-        return <div key={key} className={value === checkedName ? style.selectedItem : style.listItem} onClick={onOptionClick}>{value}</div>
+        return <div key={key}
+                    className={value === dropDownModel.enumSelectedName ? style.selectedItem : style.listItem}
+                    onClick={onOptionClick}>{value}</div>
     })
 
-
+    console.log(JSON.parse(JSON.stringify(dropDownModel)))
     return (
         <>
             <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
                              setIsDropDownListOpened={setIsDropDownListOpened}
-                             selectedName={checkedName}
+                             selectedName={dropDownModel.enumSelectedName}
                              onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>
