@@ -1,22 +1,17 @@
-import React, {ChangeEvent, createRef, FC, memo, useEffect, useRef, useState} from 'react';
+import React, {ChangeEvent, createRef, FC, useEffect, useRef} from 'react';
 import style from './OpenFileInput.module.scss'
+import {observer} from 'mobx-react-lite';
 
 type PropsType = {
     propertyValue: string
-    isImageFieldExpanded: boolean
-    isSizeFieldExpanded: boolean
-    previewImg: string
-    setPreviewImg: (value: string) => void
+    fieldName: string
+    setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
+    dropDownModel: any
 }
 
 
-export const OpenFileInput: FC<PropsType> = memo((props) => {
-    const {propertyValue, isImageFieldExpanded, isSizeFieldExpanded, previewImg, setPreviewImg} = props
-
-    const [selectedFile, setSelectedFile] = useState<File | null>(null)
-    // const [previewImg, setPreviewImg] = useState<string>('')
-    const [sizeWidth, setSizeWidth] = useState<string | number>('')
-    const [sizeHeight, setSizeHeight] = useState<string | number>('')
+export const OpenFileInput: FC<PropsType> = observer((props) => {
+    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
 
     const inputRef = useRef<HTMLInputElement | null>(null)
     const imgRef = createRef<HTMLImageElement>()
@@ -24,15 +19,14 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
 
     useEffect(() => {
         if (imgRef.current) {
-            setSizeWidth(imgRef.current.naturalWidth)
-            setSizeHeight(imgRef.current.naturalHeight)
+            dropDownModel.setSizeImage(imgRef.current.naturalWidth, imgRef.current.naturalHeight)
         }
-    }, [imgRef])
+    }, [dropDownModel, imgRef])
 
     useEffect(() => {
         // const encodedData
-        window.btoa(previewImg)
-    }, [previewImg])
+        window.btoa(propertyValue)
+    }, [propertyValue])
 
 
     const imageUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -45,12 +39,12 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
             const extFile = fileName.substring(index, fileName.length).toLowerCase();
             if (extFile === 'ico') {
                 if (newFile) {
-                    setSelectedFile(newFile)
-                    setPreviewImg(window.URL.createObjectURL(newFile))
+                    dropDownModel.setSelectedFile(newFile)
+                    setSelectedItem(window.URL.createObjectURL(newFile), fieldName)
 
                     if (reader !== undefined) {
                         reader.onload = () => {
-                            setPreviewImg(reader.result as string)
+                            setSelectedItem(reader.result as string, fieldName)
                         }
                         reader.readAsDataURL(newFile)
                     }
@@ -60,7 +54,7 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
     }
 
     const inputTextValue = () => {
-        if (selectedFile || propertyValue) {
+        if (dropDownModel.selectedFile || propertyValue) {
             return '(Значок)'
         }
         return '(отсутствует)'
@@ -70,12 +64,13 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
         inputRef && inputRef.current && inputRef.current.click()
     }
 
+
     return (
         <>
             <div className={style.block} tabIndex={0}>
                 <div className={style.container}>
                     <div className={style.inputField}>
-                        <img alt="" src={selectedFile ? previewImg : propertyValue} ref={imgRef}/>
+                        <img alt="" src={propertyValue} ref={imgRef}/>
                         <div>{inputTextValue()}</div>
                     </div>
                     <input type="file" name="file" id="file" ref={inputRef} accept=".ico"
@@ -83,13 +78,13 @@ export const OpenFileInput: FC<PropsType> = memo((props) => {
                     <button onClick={onButtonClick} tabIndex={0}>...</button>
                 </div>
             </div>
-            <div className={style.additionalField} hidden={!isImageFieldExpanded}>
+            <div className={style.additionalField} hidden={!dropDownModel.isImageFieldExpanded}>
                 <div className={style.openImageField} tabIndex={0}>
-                    {`${sizeWidth}x${sizeHeight}`}
+                    {`${dropDownModel.sizeWidth}x${dropDownModel.sizeHeight}`}
                 </div>
-                <div className={style.widthHeightFields} hidden={!isSizeFieldExpanded}>
-                    <div tabIndex={0}>{sizeWidth}</div>
-                    <div tabIndex={0}>{sizeHeight}</div>
+                <div className={style.widthHeightFields} hidden={!dropDownModel.isSizeFieldExpanded}>
+                    <div tabIndex={0}>{dropDownModel.sizeWidth}</div>
+                    <div tabIndex={0}>{dropDownModel.sizeHeight}</div>
                 </div>
             </div>
         </>

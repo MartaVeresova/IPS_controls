@@ -1,7 +1,7 @@
-import {cast, getParent, hasParent, Instance, types} from 'mobx-state-tree';
+import {cast, Instance, types} from 'mobx-state-tree';
 
 
-export interface SelectedItemType {
+export interface SimpleDropDownType {
     id: number | null
     displayName: string
 }
@@ -16,37 +16,23 @@ export const SimpleDropDownDataItemModel = types
 export const SimpleDropDownModel = types
     .model('SimpleDropDown', {
         simpleDropDownList: types.optional(types.array(SimpleDropDownDataItemModel), []),
+        isDropDownListOpened: types.optional(types.boolean, false),
     })
     .actions(self => {
-        let selectedItem: SelectedItemType[] = []
-        let dropDownList: SelectedItemType[] = []
+        let selectedItem: SimpleDropDownType[] = []
+        let dropDownList: SimpleDropDownType[] = []
         return {
-            getSimpleDropDownSelectedItem(id: number, value: string): void {
-                if (value === 'captionAttributeId') {
-                    selectedItem = [{id: 7, displayName: 'Описание'}] //post request for selected elem
+            getSimpleDropDownSelectedItem(id: number, fieldName: string): void {
+                if (fieldName === 'captionAttributeId') {
+                    selectedItem = [{id: 7, displayName: 'Описание'}]
                 }
-                if (value === 'defaultRelationTypeId') {
-                    selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}] //post request for selected elem
+                if (fieldName === 'defaultRelationTypeId') {
+                    selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}]
                 }
-                if (value === 'storageId') {
-                    selectedItem = [{id: 8, displayName: 'DOCUMS'}] //post request for selected elem
+                if (fieldName === 'storageId') {
+                    selectedItem = [{id: 8, displayName: 'DOCUMS'}]
                 }
                 self.simpleDropDownList = cast([...self.simpleDropDownList, ...selectedItem])
-                // console.log(JSON.stringify(self.simpleDropDownList))
-            },
-            setSimpleDropDownSelectedItem2(id: number | null, fieldName: string): void {
-
-                // self.propertyData.forEach(item => {
-                //     if (item.fieldName === fieldName) {
-                //         item.propertyValue = id
-                //     }
-                // })
-                if (hasParent(self)) {
-                    let parent = getParent(self)
-
-                    console.log(getParent(self))
-                }
-                // console.log(JSON.parse(JSON.stringify(parent)).propertyValue)
             },
             getSimpleDropDownList(id: number, fieldName: string): void { //get request for list
                 if (fieldName === 'captionAttributeId') {
@@ -88,11 +74,10 @@ export const SimpleDropDownModel = types
                     ]
                 }
                 self.simpleDropDownList = cast([...dropDownList])
-                // console.log(JSON.parse(JSON.stringify(self.simpleDropDownList)))
             },
-            openDropDownList(): void {
-
-            }
+            setIsDropDownListOpened(value: boolean): void {
+                self.isDropDownListOpened = value
+            },
         }
     })
 

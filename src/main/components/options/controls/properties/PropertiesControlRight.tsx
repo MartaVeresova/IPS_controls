@@ -8,33 +8,24 @@ import {EnumDropDown} from '../../commonComponents/inputTypes/EnumDropDown';
 import {OpenFileInput} from '../../commonComponents/inputTypes/OpenFileInput';
 import style from './PropertiesControlRight.module.scss';
 import {observer} from 'mobx-react-lite';
-import {PropertyDataType} from '../../types/Types';
+import {DataType} from '../../../store/PropertyModel';
 
 
 type PropsType = {
-    field: PropertyDataType
-    isImageFieldExpanded: boolean
-    isSizeFieldExpanded: boolean
-    previewImg: string
-    setPreviewImg: (value: string) => void
-    setSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void
+    field: DataType
+    setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     dropDownModel: any
 }
 
 export const PropertiesControlRight: FC<PropsType> = observer(props => {
-    const {
-        field,
-        dropDownModel,
-        isImageFieldExpanded,
-        isSizeFieldExpanded,
-        previewImg,
-        setPreviewImg,
-        setSimpleDropDownSelectedItem
-    } = props
+    const {field, setSelectedItem, dropDownModel} = props
 
     useEffect(() => {
         if (field.fieldType === 'simpleDropDown') {
             dropDownModel.getSimpleDropDownSelectedItem(field.propertyValue, field.fieldName)
+        }
+        if (field.fieldType === 'multiDropDown') {
+            dropDownModel.getMultiDropDownSelectedItem(field.propertyValue)
         }
     }, [dropDownModel, field])
 
@@ -43,34 +34,41 @@ export const PropertiesControlRight: FC<PropsType> = observer(props => {
         <>
             <div className={style.propertyValue}>
                 {field.fieldType === 'editableInput' &&
-                    <EditableInput propertyValue={field.propertyValue}/>}
+                    <EditableInput propertyValue={field.propertyValue}
+                                   fieldName={field.fieldName}
+                                   setSelectedItem={setSelectedItem}/>}
 
                 {field.fieldType === 'readOnlyInput' &&
                     <ReadOnlyInput propertyValue={field.propertyValue}/>}
 
                 {field.fieldType === 'openFileInput' &&
                     <OpenFileInput propertyValue={field.propertyValue}
-                                   isImageFieldExpanded={isImageFieldExpanded}
-                                   isSizeFieldExpanded={isSizeFieldExpanded}
-                                   previewImg={previewImg}
-                                   setPreviewImg={setPreviewImg}/>}
+                                   fieldName={field.fieldName}
+                                   setSelectedItem={setSelectedItem}
+                                   dropDownModel={dropDownModel}/>}
 
                 {field.fieldType === 'yesNoDropDown' &&
                     <YesNoDropDown propertyValue={field.propertyValue}
-                                   fieldName={field.fieldName}/>}
+                                   fieldName={field.fieldName}
+                                   setSelectedItem={setSelectedItem}
+                                   dropDownModel={dropDownModel}/>}
 
                 {field.fieldType === 'multiDropDown' &&
-                    <MultiDropDown propertyValue={field.propertyValue}/>}
+                    <MultiDropDown propertyValue={field.propertyValue}
+                                   fieldName={field.fieldName}
+                                   setSelectedItem={setSelectedItem}
+                                   dropDownModel={dropDownModel}/>}
 
                 {field.fieldType === 'simpleDropDown' &&
                     <SimpleDropDown propertyValue={field.propertyValue}
                                     fieldName={field.fieldName}
-                                    setSimpleDropDownSelectedItem={setSimpleDropDownSelectedItem}
+                                    setSelectedItem={setSelectedItem}
                                     dropDownModel={dropDownModel}/>}
 
                 {field.fieldType === 'enumDropDown' &&
                     <EnumDropDown propertyValue={field.propertyValue}
                                   fieldName={field.fieldName}
+                                  setSelectedItem={setSelectedItem}
                                   dropDownModel={dropDownModel}/>}
             </div>
         </>

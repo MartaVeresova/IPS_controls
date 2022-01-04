@@ -47,177 +47,177 @@ export const assignedSubjectAreaTypes: MultiType[] = [
 
 //данные на фронте
 export const objectTypesData: PropertyDataType[] = [
-    {
-        propertyName: 'Атрибут-описатель',
-        propertyValue: null,
-        fieldName: 'captionAttributeId',
-        fieldType: 'simpleDropDown',
-        // dropDownModel: {
-        //     simpleDropDownList: [
-        //         {id: 7, displayName: 'Описание'}
-        //     ]
-        // }
-    },
-    {
-        propertyName: 'Версионность',
-        propertyValue: null,
-        fieldName: 'versionMode',
-        fieldType: 'enumDropDown',
-    },
-    {
-        propertyName: 'Включать новые версии в текущий контекст редактирования',
-        propertyValue: null,
-        fieldName: 'isAutoContextEnabled',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Возможна рассылка уведомлений о действиях над объектами',
-        propertyValue: null,
-        fieldName: 'isNotificationsEnabled',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Время жизни удалённых объектов (дней)',
-        propertyValue: null,
-        fieldName: 'deletedObjectLifetimeInDays',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Глобальный идентификатор',
-        propertyValue: null,
-        fieldName: 'globalKey',
-        fieldType: 'readOnlyInput',
-    },
-    {
-        propertyName: 'Запрет создания объектов командами Навигатора',
-        propertyValue: null,
-        fieldName: 'isDisableManualCreate',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Запрет создания объектов по прототипу',
-        propertyValue: null,
-        fieldName: 'isDisablePrototyping',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Идентификатор',
-        propertyValue: null,
-        fieldName: 'id',
-        fieldType: 'readOnlyInput',
-    },
-    {
-        propertyName: 'Изображение',
-        propertyValue: null,
-        fieldName: 'icon',
-        fieldType: 'openFileInput',
-    },
-    {
-        propertyName: 'Имя объекта',
-        propertyValue: null,
-        fieldName: 'objectInstanceName',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Индексировать таблицу атрибутов',
-        propertyValue: null,
-        fieldName: 'isNeedToIndexAttributes',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Классификация создаваемых объектов',
-        propertyValue: null,
-        fieldName: 'classification',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Комментарий',
-        propertyValue: null,
-        fieldName: 'note_Create',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Краткое наименование',
-        propertyValue: null,
-        fieldName: 'shortName',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Локальный тип объектов',
-        propertyValue: null,
-        fieldName: 'isLocalObjectType',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Любой атрибут',
-        propertyValue: null,
-        fieldName: 'isAbleToAddAnyAttributes',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Мандатное разграничение доступа',
-        propertyValue: null,
-        fieldName: 'isMandateAccess',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Наименование',
-        propertyValue: null,
-        fieldName: 'name',
-        fieldType: 'editableInput',
-    },
-    {
-        propertyName: 'Наследование прав доступа',
-        propertyValue: null,
-        fieldName: 'isNeedToCheckParentAccess',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Объекты выпускаются в рамках текущего проекта',
-        propertyValue: null,
-        fieldName: 'isCurrentProjectEnabled',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Объекты доступны для обсуждения',
-        propertyValue: null,
-        fieldName: 'isForumEnabled',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Предметная область',
-        propertyValue: null,
-        fieldName: 'assignedSubjectAreaIds',
-        fieldType: 'multiDropDown',
-    },
-    {
-        propertyName: 'Разрешить редактирование объектов в IPS WebInterface',
-        propertyValue: null,
-        fieldName: 'isEnableWebEdit',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Разрешить создание итераций',
-        propertyValue: null,
-        fieldName: 'isAbleToCreateSnapshots',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Разрешить создание итераций в автоматическом режиме',
-        propertyValue: null,
-        fieldName: 'isAutoCreateSnapshots',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Расширенная регистрация событий в журнале',
-        propertyValue: null,
-        fieldName: 'isExtendedAudit',
-        fieldType: 'yesNoDropDown',
-    },
-    {
-        propertyName: 'Связь по умолчанию',
-        propertyValue: null,
-        fieldName: 'defaultRelationTypeId',
-        fieldType: 'simpleDropDown',
-    },
+    // {
+    //     propertyName: 'Атрибут-описатель',
+    //     propertyValue: null,
+    //     fieldName: 'captionAttributeId',
+    //     fieldType: 'simpleDropDown',
+    //     // dropDownModel: {
+    //     //     simpleDropDownList: [
+    //     //         {id: 6, displayName: 'xcvc'}
+    //     //     ]
+    //     // }
+    // },
+    // {
+    //     propertyName: 'Версионность',
+    //     propertyValue: null,
+    //     fieldName: 'versionMode',
+    //     fieldType: 'enumDropDown',
+    // },
+    // {
+    //     propertyName: 'Включать новые версии в текущий контекст редактирования',
+    //     propertyValue: null,
+    //     fieldName: 'isAutoContextEnabled',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Возможна рассылка уведомлений о действиях над объектами',
+    //     propertyValue: null,
+    //     fieldName: 'isNotificationsEnabled',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Время жизни удалённых объектов (дней)',
+    //     propertyValue: null,
+    //     fieldName: 'deletedObjectLifetimeInDays',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Глобальный идентификатор',
+    //     propertyValue: null,
+    //     fieldName: 'globalKey',
+    //     fieldType: 'readOnlyInput',
+    // },
+    // {
+    //     propertyName: 'Запрет создания объектов командами Навигатора',
+    //     propertyValue: null,
+    //     fieldName: 'isDisableManualCreate',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Запрет создания объектов по прототипу',
+    //     propertyValue: null,
+    //     fieldName: 'isDisablePrototyping',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Идентификатор',
+    //     propertyValue: null,
+    //     fieldName: 'id',
+    //     fieldType: 'readOnlyInput',
+    // },
+    // {
+    //     propertyName: 'Изображение',
+    //     propertyValue: null,
+    //     fieldName: 'icon',
+    //     fieldType: 'openFileInput',
+    // },
+    // {
+    //     propertyName: 'Имя объекта',
+    //     propertyValue: null,
+    //     fieldName: 'objectInstanceName',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Индексировать таблицу атрибутов',
+    //     propertyValue: null,
+    //     fieldName: 'isNeedToIndexAttributes',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Классификация создаваемых объектов',
+    //     propertyValue: null,
+    //     fieldName: 'classification',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Комментарий',
+    //     propertyValue: null,
+    //     fieldName: 'note_Create',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Краткое наименование',
+    //     propertyValue: null,
+    //     fieldName: 'shortName',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Локальный тип объектов',
+    //     propertyValue: null,
+    //     fieldName: 'isLocalObjectType',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Любой атрибут',
+    //     propertyValue: null,
+    //     fieldName: 'isAbleToAddAnyAttributes',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Мандатное разграничение доступа',
+    //     propertyValue: null,
+    //     fieldName: 'isMandateAccess',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Наименование',
+    //     propertyValue: null,
+    //     fieldName: 'name',
+    //     fieldType: 'editableInput',
+    // },
+    // {
+    //     propertyName: 'Наследование прав доступа',
+    //     propertyValue: null,
+    //     fieldName: 'isNeedToCheckParentAccess',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Объекты выпускаются в рамках текущего проекта',
+    //     propertyValue: null,
+    //     fieldName: 'isCurrentProjectEnabled',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Объекты доступны для обсуждения',
+    //     propertyValue: null,
+    //     fieldName: 'isForumEnabled',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Предметная область',
+    //     propertyValue: null,
+    //     fieldName: 'assignedSubjectAreaIds',
+    //     fieldType: 'multiDropDown',
+    // },
+    // {
+    //     propertyName: 'Разрешить редактирование объектов в IPS WebInterface',
+    //     propertyValue: null,
+    //     fieldName: 'isEnableWebEdit',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Разрешить создание итераций',
+    //     propertyValue: null,
+    //     fieldName: 'isAbleToCreateSnapshots',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Разрешить создание итераций в автоматическом режиме',
+    //     propertyValue: null,
+    //     fieldName: 'isAutoCreateSnapshots',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Расширенная регистрация событий в журнале',
+    //     propertyValue: null,
+    //     fieldName: 'isExtendedAudit',
+    //     fieldType: 'yesNoDropDown',
+    // },
+    // {
+    //     propertyName: 'Связь по умолчанию',
+    //     propertyValue: null,
+    //     fieldName: 'defaultRelationTypeId',
+    //     fieldType: 'simpleDropDown',
+    // },
 ]

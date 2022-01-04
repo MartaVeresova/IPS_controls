@@ -1,100 +1,99 @@
-import React, {FC, memo, useEffect, useRef, useState} from 'react';
+import React, {FC, useCallback, useRef} from 'react';
 import style from './MultiDropDown.module.scss'
 import {useOnClickOutside} from '../../../hooks/useOnClickOutside';
-import {assignedSubjectAreaTypes} from '../../controls/properties/lifeCycleLevel/LifeCycleLevelData';
-import {MultiType} from '../../types/Types';
 import {Pointer} from '../Pointer';
+import {MultiDropDownType} from '../../../store/MultiDropDownModel';
+import {observer} from 'mobx-react-lite';
 
 type PropsType = {
     propertyValue: string[]
+    fieldName: string
+    setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
+    dropDownModel: any
 }
 
-export const MultiDropDown: FC<PropsType> = memo(({propertyValue}) => {
-
-        const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
-        const [checkedItems, setCheckedItems] = useState<string[]>(propertyValue) //массив чекнутых айди
-        const [data, setData] = useState<MultiType[]>([]) //массив всех элементов
-        const [isCheckedAll, setIsCheckedAll] = useState(false)
+export const MultiDropDown: FC<PropsType> = observer(props => {
+        const {
+            propertyValue,
+            fieldName,
+            setSelectedItem,
+            dropDownModel
+        } = props
 
         const dropDownRef = useRef<HTMLDivElement | null>(null)
-        useOnClickOutside(dropDownRef, () => setIsDropDownListOpened(false))
+        useOnClickOutside(dropDownRef, () => dropDownModel.setIsDropDownListOpened(false))
 
-        useEffect(() => {
-            setData(assignedSubjectAreaTypes)
-        }, [])
+        const onInputClick = useCallback(() => {
+            if (!dropDownModel.isDropDownListOpened) {
+                dropDownModel.getMultiDropDownList(propertyValue)
+            }
+            dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
+        }, [dropDownModel, propertyValue])
 
-        const onInputClick = () => {
-            //имитация post за списком для дропдауна
-            if (!isDropDownListOpened) {
-                setData(assignedSubjectAreaTypes)
-                setIsDropDownListOpened(true)
-            }
-            if (isDropDownListOpened) {
-                setIsDropDownListOpened(false)
-            }
-        }
 
         const onAllOptionsChange = () => {
-            if (isCheckedAll) {
-                setIsCheckedAll(false)
-                setCheckedItems([])
+            if (dropDownModel.isCheckedAll) {
+                setSelectedItem([], fieldName)
             }
-            if (!isCheckedAll) {
-                setIsCheckedAll(true)
-                setCheckedItems(data.map(el => el.id))
+            if (!dropDownModel.isCheckedAll) {
+                setSelectedItem(dropDownModel.multiDropDownList.map((item: MultiDropDownType) => item.id), fieldName)
             }
+            dropDownModel.setIsCheckedAll(!dropDownModel.isCheckedAll)
         }
 
         const inputValue = () => {
             let nameArray: string[] = []
-            assignedSubjectAreaTypes.forEach(el => {
-                if (checkedItems.some(elem => elem === el.id)) {
-                    nameArray.push(el.displayName)
+            dropDownModel.multiDropDownList.forEach((item: MultiDropDownType) => {
+                if (propertyValue.some(elem => elem === item.id)) {
+                    nameArray.push(item.displayName)
                 }
             })
-            if (!nameArray.length && !isDropDownListOpened) {
+            if (!nameArray.length && !dropDownModel.isDropDownListOpened) {
                 return 'Поле обязательно'
             } else {
                 return nameArray.join(', ')
             }
         }
 
-
         return (
             <>
                 <div className={style.block} ref={dropDownRef}>
-                    <div className={!checkedItems.length && !isDropDownListOpened ? style.error : style.container} tabIndex={0}
-                         onClick={onInputClick} title={isCheckedAll ? 'Все' : inputValue()}>
+                    <div
+                        className={!propertyValue.length && !dropDownModel.isDropDownListOpened ? style.error : style.container}
+                        tabIndex={0}
+                        onClick={onInputClick} title={dropDownModel.isCheckedAll ? 'Все' : inputValue()}>
                         <div className={style.value}>
-                            {isCheckedAll ? 'Все' : inputValue()}
+                            {dropDownModel.isCheckedAll ? 'Все' : inputValue()}
                         </div>
-                        <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
+                        <Pointer isFieldExpanded={dropDownModel.isDropDownListOpened} onIconClick={onInputClick}
+                                 type="dropDown"/>
                     </div>
 
-                    <div hidden={!isDropDownListOpened}>
+                    <div hidden={!dropDownModel.isDropDownListOpened}>
                         <div className={style.dropDownList}>
                             <label className={style.list} onChange={onAllOptionsChange}>
-                                <input type="checkbox" checked={isCheckedAll} readOnly/>
+                                <input type="checkbox" checked={dropDownModel.isCheckedAll} readOnly/>
                                 Все
                             </label>
 
-                            {data.map(({id, displayName}) => {
-                                const checked = checkedItems.some(el => el === id)
-                                const onLabelChange = () => {
-                                    if (checked) {
-                                        setCheckedItems(checkedItems.filter(el => el !== id))
-                                        setIsCheckedAll(false)
+                            {dropDownModel.multiDropDownList.map(({id, displayName}: MultiDropDownType) => {
+                                const checkedItem = propertyValue.some(item => item === id)
+                                const onCheckboxChange = () => {
+                                    if (checkedItem) {
+                                        setSelectedItem(propertyValue.filter(item => item !== id), fieldName)
+                                        dropDownModel.setIsCheckedAll(false)
                                     }
-                                    if (!checked) {
-                                        const newArray = [...checkedItems]
+                                    if (!checkedItem) {
+                                        const newArray = [...propertyValue]
                                         newArray.push(id)
-                                        setCheckedItems(newArray)
+                                        setSelectedItem(newArray, fieldName)
                                     }
                                 }
 
                                 return (
-                                    <label key={id} className={checked ? style.checkedItem : style.list} onChange={onLabelChange}>
-                                        <input type="checkbox" checked={checked} readOnly/>
+                                    <label key={id} className={checkedItem ? style.checkedItem : style.list}
+                                           onChange={onCheckboxChange}>
+                                        <input type="checkbox" checked={checkedItem} readOnly/>
                                         <div className={style.listItem}>
                                             {displayName}
                                         </div>

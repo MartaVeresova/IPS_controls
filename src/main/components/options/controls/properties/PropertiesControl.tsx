@@ -14,10 +14,7 @@ type PropsType = {
 
 export const PropertiesControl: FC<PropsType> = observer(({type}) => {
 
-    const [isImageFieldExpanded, setIsImageFieldExpanded] = useState<boolean>(false)
-    const [isSizeFieldExpanded, setIsSizeFieldExpanded] = useState<boolean>(false)
     const [isDraggable, setIsDraggable] = useState<boolean>(false)
-    const [previewImg, setPreviewImg] = useState<string>('')
 
     const draggableRef = useRef<HTMLDivElement | null>(null)
     const propNameRef = useRef<HTMLDivElement | null>(null)
@@ -95,7 +92,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
     }
 
     const onButtonClick = () => {
-        propertyControl.sent()
+        propertyControl.sentData()
     }
 
 
@@ -108,12 +105,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                         <PropertiesControlLeft
                             key={field.propertyName}
                             field={field}
-                            isImageFieldExpanded={isImageFieldExpanded}
-                            setIsImageFieldExpanded={setIsImageFieldExpanded}
-                            isSizeFieldExpanded={isSizeFieldExpanded}
-                            setIsSizeFieldExpanded={setIsSizeFieldExpanded}
-                            previewImg={previewImg}
-                        />)}
+                            dropDownModel={field.dropDownModel}/>)}
                 </div>
 
                 <div className={style.draggable}>
@@ -126,11 +118,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                         <PropertiesControlRight
                             key={field.propertyName}
                             field={field}
-                            isImageFieldExpanded={isImageFieldExpanded}
-                            isSizeFieldExpanded={isSizeFieldExpanded}
-                            previewImg={previewImg}
-                            setPreviewImg={setPreviewImg}
-                            setSimpleDropDownSelectedItem={propertyControl.setSimpleDropDownSelectedItem}
+                            setSelectedItem={propertyControl.setSelectedItem}
                             dropDownModel={field.dropDownModel}/>)}
                 </div>
             </div>

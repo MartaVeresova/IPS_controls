@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
@@ -7,10 +7,10 @@ import {observer} from 'mobx-react-lite';
 type PropsType = {
     propertyValue: string
     fieldName: string
-    dropDownModel:
-        & { enumSelectedName: string }
-        & { enumSelectedOption: string }
-        & { setEnumDropDownSelectedItem: (name: string, option: string) => void }
+    setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
+    dropDownModel: any
+        // & { enumSelectedName: string }
+        // & { setEnumDropDownSelectedName: (name: string) => void }
 }
 
 enum versionMode {
@@ -22,38 +22,36 @@ enum versionMode {
 const data: Array<string[]> = Object.entries(versionMode)
 
 export const EnumDropDown: FC<PropsType> = observer(props => {
-    const {propertyValue, fieldName, dropDownModel} = props
-
-    const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
+    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
 
     useEffect(() => {
         data.forEach(([key, value]) => {
             if (key === propertyValue) {
-                // console.log(JSON.parse(JSON.stringify(dropDownModel)))
-                // dropDownModel.setEnumDropDownSelectedItem(key, value)
+                dropDownModel.setEnumDropDownSelectedName(value)
             }
         })
     }, [dropDownModel, propertyValue])
 
     const onInputClick = () => {
-        setIsDropDownListOpened(!isDropDownListOpened)
+        dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
     }
 
     const options = data.map(([key, value]) => {
         const onOptionClick = () => {
-            dropDownModel.setEnumDropDownSelectedItem([key, value][0], [key, value][1])
-            setIsDropDownListOpened(false)
+            setSelectedItem(key, fieldName)
+            dropDownModel.setEnumDropDownSelectedName([key, value][0])
+            dropDownModel.setIsDropDownListOpened(false)
         }
         return <div key={key}
                     className={value === dropDownModel.enumSelectedName ? style.selectedItem : style.listItem}
                     onClick={onOptionClick}>{value}</div>
     })
 
-    console.log(JSON.parse(JSON.stringify(dropDownModel)))
+
     return (
         <>
-            <GeneralDropDown isDropDownListOpened={isDropDownListOpened}
-                             setIsDropDownListOpened={setIsDropDownListOpened}
+            <GeneralDropDown isDropDownListOpened={dropDownModel.isDropDownListOpened}
+                             setIsDropDownListOpened={dropDownModel.setIsDropDownListOpened}
                              selectedName={dropDownModel.enumSelectedName}
                              onInputClick={onInputClick}>
                 {options}

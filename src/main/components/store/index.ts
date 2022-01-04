@@ -1,5 +1,5 @@
 import {Instance, types} from 'mobx-state-tree'
-import {PropertyControlModel} from './PropertyModal';
+import {PropertyControlModel} from './PropertyModel';
 
 
 export const RootModel = types.model('RootModel', {

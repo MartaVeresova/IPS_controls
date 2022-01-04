@@ -1,66 +1,52 @@
-import React, {FC, useCallback, useState} from 'react';
+import React, {FC, useCallback} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
-import {SelectedItemType} from '../../../store/SimpleDropDownModal';
+import {SimpleDropDownType} from '../../../store/SimpleDropDownModel';
 
 type PropsType = {
     propertyValue: number
     fieldName: string
-    setSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void
-    dropDownModel:
-        & { simpleDropDownList: SelectedItemType[]; }
-        & { setSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void }
-        & { getSimpleSelectedItem: (id: number, value: string) => void }
-        & { getSimpleDropDownList: (id: number, value: string) => void }
+    setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
+    dropDownModel: any
+    // & { simpleDropDownList: SelectedItemType[]; }
+    // & { setSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void }
+    // & { getSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void }
+    // & { getSimpleDropDownList: (id: number, value: string) => void }
 }
 
 export const SimpleDropDown: FC<PropsType> = observer(props => {
-    const {
-        propertyValue,
-        fieldName,
-        setSimpleDropDownSelectedItem,
-        dropDownModel
-    } = props
-    const [isDropDownListOpened, setIsDropDownListOpened] = useState<boolean>(false)
+    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
 
-    // useEffect(() => {
-    //     dropDownModel.getSimpleSelectedItem(propertyValue, fieldName)
-    // }, [dropDownModel, propertyValue, fieldName])
 
     const onInputClick = useCallback(() => {
-        if (!isDropDownListOpened) {
+        if (!dropDownModel.isDropDownListOpened) {
             dropDownModel.getSimpleDropDownList(propertyValue, fieldName)
-            setIsDropDownListOpened(true)
-        } else {
-            setIsDropDownListOpened(false)
         }
-    }, [dropDownModel, propertyValue, fieldName, isDropDownListOpened])
+        dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
+    }, [dropDownModel, propertyValue, fieldName])
 
 
-    const selectedElem = dropDownModel.simpleDropDownList?.find(el => el.id === propertyValue)
-    const options = dropDownModel.simpleDropDownList?.map(item => {
+    const selectedElement = dropDownModel.simpleDropDownList?.find((el: SimpleDropDownType) => el.id === propertyValue)
+
+    const options = dropDownModel.simpleDropDownList?.map((item: SimpleDropDownType) => {
         const onOptionClick = () => {
-            // dropDownModel.setSimpleDropDownSelectedItem(item.id, fieldName)
-            setSimpleDropDownSelectedItem(item.id, fieldName)
-            setIsDropDownListOpened(false)
+            setSelectedItem(item.id, fieldName)
+            dropDownModel.setIsDropDownListOpened(false)
         }
         return (
             <div key={item.id}
-                 className={selectedElem?.displayName === item.displayName ? style.selectedItem : style.listItem}
+                 className={selectedElement?.displayName === item.displayName ? style.selectedItem : style.listItem}
                  onClick={onOptionClick} title={item.displayName}>{item.displayName}</div>
         )
     })
-    // console.log(JSON.stringify(dropDownModel.simpleDropDownList))
 
     return (
         <>
-            <GeneralDropDown
-                isDropDownListOpened={isDropDownListOpened}
-                setIsDropDownListOpened={setIsDropDownListOpened}
-                selectedName={selectedElem?.displayName}
-                onInputClick={onInputClick}
-            >
+            <GeneralDropDown isDropDownListOpened={dropDownModel.isDropDownListOpened}
+                             setIsDropDownListOpened={dropDownModel.setIsDropDownListOpened}
+                             selectedName={selectedElement?.displayName}
+                             onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>
         </>
