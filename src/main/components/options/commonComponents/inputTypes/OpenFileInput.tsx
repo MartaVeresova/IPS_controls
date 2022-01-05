@@ -6,12 +6,22 @@ type PropsType = {
     propertyValue: string
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
-    dropDownModel: any
+    additionalModel: {
+        isImageFieldExpanded: boolean,
+        isSizeFieldExpanded: boolean,
+        sizeWidth: number,
+        sizeHeight: number,
+        selectedFile: File | null,
+        setSelectedFile: (file: File) => void,
+        setSizeImage: (width: number, height: number) => void,
+        setIsImageFieldExpanded: (value: boolean) => void,
+        setIsSizeFieldExpanded: (value: boolean) => void,
+    }
 }
 
 
 export const OpenFileInput: FC<PropsType> = observer((props) => {
-    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
+    const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     const inputRef = useRef<HTMLInputElement | null>(null)
     const imgRef = createRef<HTMLImageElement>()
@@ -19,9 +29,9 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
 
     useEffect(() => {
         if (imgRef.current) {
-            dropDownModel.setSizeImage(imgRef.current.naturalWidth, imgRef.current.naturalHeight)
+            additionalModel.setSizeImage(imgRef.current.naturalWidth, imgRef.current.naturalHeight)
         }
-    }, [dropDownModel, imgRef])
+    }, [additionalModel, imgRef])
 
     useEffect(() => {
         // const encodedData
@@ -39,7 +49,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
             const extFile = fileName.substring(index, fileName.length).toLowerCase();
             if (extFile === 'ico') {
                 if (newFile) {
-                    dropDownModel.setSelectedFile(newFile)
+                    additionalModel.setSelectedFile(newFile)
                     setSelectedItem(window.URL.createObjectURL(newFile), fieldName)
 
                     if (reader !== undefined) {
@@ -54,7 +64,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
     }
 
     const inputTextValue = () => {
-        if (dropDownModel.selectedFile || propertyValue) {
+        if (additionalModel.selectedFile || propertyValue) {
             return '(Значок)'
         }
         return '(отсутствует)'
@@ -78,13 +88,13 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
                     <button onClick={onButtonClick} tabIndex={0}>...</button>
                 </div>
             </div>
-            <div className={style.additionalField} hidden={!dropDownModel.isImageFieldExpanded}>
+            <div className={style.additionalField} hidden={!additionalModel.isImageFieldExpanded}>
                 <div className={style.openImageField} tabIndex={0}>
-                    {`${dropDownModel.sizeWidth}x${dropDownModel.sizeHeight}`}
+                    {`${additionalModel.sizeWidth}x${additionalModel.sizeHeight}`}
                 </div>
-                <div className={style.widthHeightFields} hidden={!dropDownModel.isSizeFieldExpanded}>
-                    <div tabIndex={0}>{dropDownModel.sizeWidth}</div>
-                    <div tabIndex={0}>{dropDownModel.sizeHeight}</div>
+                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}>
+                    <div tabIndex={0}>{additionalModel.sizeWidth}</div>
+                    <div tabIndex={0}>{additionalModel.sizeHeight}</div>
                 </div>
             </div>
         </>

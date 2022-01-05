@@ -1,4 +1,4 @@
-import {Instance, types} from 'mobx-state-tree';
+import {types} from 'mobx-state-tree';
 
 
 export const YesNoDropDownModel = types
@@ -16,4 +16,3 @@ export const YesNoDropDownModel = types
         })
     )
 
-export type YesNoDropDown = Instance<typeof YesNoDropDownModel>

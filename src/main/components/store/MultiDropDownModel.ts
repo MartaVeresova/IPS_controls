@@ -1,9 +1,7 @@
-import {cast, Instance, types} from 'mobx-state-tree';
+import {cast, types} from 'mobx-state-tree';
+import {MultiDropDownType} from '../options/types/Types';
 
-export interface MultiDropDownType {
-    id: string
-    displayName: string
-}
+
 
 export const MultiDropDownDataItemModel = types
     .model('MultiDropDownDataItem', {
@@ -19,19 +17,17 @@ export const MultiDropDownModel = types
         isDropDownListOpened: types.optional(types.boolean, false),
     })
     .actions(self => {
-            let selectedItem: MultiDropDownType[] = []
-            let dropDownList: MultiDropDownType[] = []
+            let dropDownData: MultiDropDownType[] = []
             return {
                 getMultiDropDownSelectedItem(ids: string[]): void {
-                    selectedItem = [
+                    dropDownData = [
                         {id: 'B', displayName: 'Архитектура и строительство'},
                         {id: 'C', displayName: 'Отладка'}
                     ]
-                    self.multiDropDownList = cast([...selectedItem])
-                    console.log(JSON.parse(JSON.stringify(self.multiDropDownList)))
+                    self.multiDropDownList = cast([...dropDownData])
                 },
                 getMultiDropDownList(ids: string[]): void { //get request for list
-                    dropDownList = [
+                    dropDownData = [
                         {id: 'A', displayName: 'Конструкторская подготовка'},
                         {id: 'B', displayName: 'Архитектура и строительство'},
                         {id: 'C', displayName: 'Отладка'},
@@ -42,7 +38,7 @@ export const MultiDropDownModel = types
                         {id: 'H', displayName: 'Управление НСИ'},
                         {id: 'I', displayName: 'SubjectArea_test1_ui'},
                     ]
-                    self.multiDropDownList = cast([...dropDownList])
+                    self.multiDropDownList = cast([...dropDownData])
                 },
                 setIsCheckedAll(value: boolean): void {
                     self.isCheckedAll = value
@@ -54,6 +50,3 @@ export const MultiDropDownModel = types
         }
     )
 
-
-export type MultiDropDownDataItem = Instance<typeof MultiDropDownDataItemModel>
-export type MultiDropDown = Instance<typeof MultiDropDownModel>

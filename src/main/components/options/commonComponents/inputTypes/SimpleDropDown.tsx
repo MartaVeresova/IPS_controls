@@ -2,37 +2,38 @@ import React, {FC, useCallback} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
-import {SimpleDropDownType} from '../../../store/SimpleDropDownModel';
+import {SimpleDropDownType} from '../../types/Types';
 
 type PropsType = {
     propertyValue: number
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
-    dropDownModel: any
-    // & { simpleDropDownList: SelectedItemType[]; }
-    // & { setSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void }
-    // & { getSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void }
-    // & { getSimpleDropDownList: (id: number, value: string) => void }
+    additionalModel: {
+        simpleDropDownList: SimpleDropDownType[],
+        isDropDownListOpened: boolean,
+        getSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void,
+        getSimpleDropDownList: (id: number | null, fieldName: string) => void,
+        setIsDropDownListOpened: (value: boolean) => void,
+    }
 }
 
 export const SimpleDropDown: FC<PropsType> = observer(props => {
-    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
-
+    const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     const onInputClick = useCallback(() => {
-        if (!dropDownModel.isDropDownListOpened) {
-            dropDownModel.getSimpleDropDownList(propertyValue, fieldName)
+        if (!additionalModel.isDropDownListOpened) {
+            additionalModel.getSimpleDropDownList(propertyValue, fieldName)
         }
-        dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
-    }, [dropDownModel, propertyValue, fieldName])
+        additionalModel.setIsDropDownListOpened(!additionalModel.isDropDownListOpened)
+    }, [additionalModel, propertyValue, fieldName])
 
 
-    const selectedElement = dropDownModel.simpleDropDownList?.find((el: SimpleDropDownType) => el.id === propertyValue)
+    const selectedElement = additionalModel.simpleDropDownList?.find(el => el.id === propertyValue)
 
-    const options = dropDownModel.simpleDropDownList?.map((item: SimpleDropDownType) => {
+    const options = additionalModel.simpleDropDownList?.map(item => {
         const onOptionClick = () => {
             setSelectedItem(item.id, fieldName)
-            dropDownModel.setIsDropDownListOpened(false)
+            additionalModel.setIsDropDownListOpened(false)
         }
         return (
             <div key={item.id}
@@ -43,8 +44,8 @@ export const SimpleDropDown: FC<PropsType> = observer(props => {
 
     return (
         <>
-            <GeneralDropDown isDropDownListOpened={dropDownModel.isDropDownListOpened}
-                             setIsDropDownListOpened={dropDownModel.setIsDropDownListOpened}
+            <GeneralDropDown isDropDownListOpened={additionalModel.isDropDownListOpened}
+                             setIsDropDownListOpened={additionalModel.setIsDropDownListOpened}
                              selectedName={selectedElement?.displayName}
                              onInputClick={onInputClick}>
                 {options}

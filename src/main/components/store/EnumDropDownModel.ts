@@ -1,4 +1,4 @@
-import {Instance, types} from 'mobx-state-tree';
+import {types} from 'mobx-state-tree';
 
 
 export const EnumDropDownModel = types
@@ -16,4 +16,3 @@ export const EnumDropDownModel = types
         })
     )
 
-export type EnumDropDown = Instance<typeof EnumDropDownModel>

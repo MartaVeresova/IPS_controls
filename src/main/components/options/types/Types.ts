@@ -15,61 +15,28 @@ export type PropertyDataType = {
     fieldType: FieldTypes
 }
 
-export type PropertyDataType2 = {
-    propertyName: string
-    propertyValue: any
-    fieldType: FieldTypes
-}
-
-export type MultiType = {
+export type MultiDropDownType = {
     id: string
     displayName: string
 }
-export type SimpleType = {
+
+export type SimpleDropDownType = {
     id: number | null
     displayName: string
 }
 
-//ObjectTypes
-export type ObjectTypesType = {
-    id: number
-    globalKey: string
-    name: string
-    shortName: string
-    objectInstanceName: string
-    note_Create: string
-    icon: string | null
-    versionMode: string
-    defaultRelationTypeId: number
-    captionAttributeId: number | null
-    isAbleToAddAnyAttributes: boolean
-    deletedObjectLifetimeInDays: number
-    objectTypeClassifiedOptionId: number
-    isCurrentProjectEnabled: boolean
-    isNeedToCheckParentAccess: boolean
-    isLocalObjectType: boolean
-    isDisableManualCreate: boolean
-    isAbleToCreateSnapshots: boolean
-    isAutoContextEnabled: boolean
-    isMandateAccess: boolean
-    isNeedToIndexAttributes: boolean
-    isAutoCreateSnapshots: boolean
-    isDisablePrototyping: boolean
-    isNotificationsEnabled: boolean
-    isForumEnabled: boolean
-    isExtendedAudit: boolean
-    isEnableWebEdit: boolean
-    assignedSubjectAreaIds: string[]
+export type DataType = {
+    propertyName: string
+    propertyValue: any
+    fieldName: string
+    fieldType: FieldTypes
+    additionalModel:
+        | { inputValue: string, editMode: boolean }
+        | { isImageFieldExpanded: boolean, isSizeFieldExpanded: boolean }
+        | { yesNoSelectedName: string, isDropDownListOpened: boolean }
+        | { multiDropDownList: MultiDropDownType[], isCheckedAll: boolean, isDropDownListOpened: boolean }
+        | { simpleDropDownList: SimpleDropDownType[], isDropDownListOpened: boolean }
+        | { enumSelectedName: string, isDropDownListOpened: boolean }
+        | {}
 }
 
-//LifeCycleLevel
-export type LifeCycleLevelType = {
-    globalKey: string
-    id: number
-    icon: string | null
-    isDefault: boolean
-    litera: string
-    name: string
-    assignedSubjectAreaIds: string[]
-    storageId: number | null
-}

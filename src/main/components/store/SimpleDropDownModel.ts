@@ -1,10 +1,6 @@
-import {cast, Instance, types} from 'mobx-state-tree';
+import {cast, types} from 'mobx-state-tree';
+import {SimpleDropDownType} from '../options/types/Types';
 
-
-export interface SimpleDropDownType {
-    id: number | null
-    displayName: string
-}
 
 export const SimpleDropDownDataItemModel = types
     .model('SimpleDropDownDataItem', {
@@ -19,10 +15,9 @@ export const SimpleDropDownModel = types
         isDropDownListOpened: types.optional(types.boolean, false),
     })
     .actions(self => {
-        let selectedItem: SimpleDropDownType[] = []
-        let dropDownList: SimpleDropDownType[] = []
         return {
-            getSimpleDropDownSelectedItem(id: number, fieldName: string): void {
+            getSimpleDropDownSelectedItem(id: number | null, fieldName: string): void {
+                let selectedItem: SimpleDropDownType[] = []
                 if (fieldName === 'captionAttributeId') {
                     selectedItem = [{id: 7, displayName: 'Описание'}]
                 }
@@ -32,9 +27,10 @@ export const SimpleDropDownModel = types
                 if (fieldName === 'storageId') {
                     selectedItem = [{id: 8, displayName: 'DOCUMS'}]
                 }
-                self.simpleDropDownList = cast([...self.simpleDropDownList, ...selectedItem])
+                self.simpleDropDownList = cast([...selectedItem])
             },
-            getSimpleDropDownList(id: number, fieldName: string): void { //get request for list
+            getSimpleDropDownList(id: number | null, fieldName: string): void {
+                let dropDownList: SimpleDropDownType[] = []
                 if (fieldName === 'captionAttributeId') {
                     dropDownList = [
                         {id: null, displayName: ''},
@@ -80,8 +76,5 @@ export const SimpleDropDownModel = types
             },
         }
     })
-
-export type SimpleDropDownDataItem = Instance<typeof SimpleDropDownDataItemModel>
-export type SimpleDropDown = Instance<typeof SimpleDropDownModel>
 
 // onSnapshot(self.selectedElement, snapshot => console.log('snapshot: ', snapshot))

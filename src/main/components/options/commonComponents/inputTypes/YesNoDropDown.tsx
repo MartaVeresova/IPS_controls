@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
@@ -7,38 +7,43 @@ type PropsType = {
     propertyValue: boolean
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
-    dropDownModel: any
+    additionalModel: {
+        yesNoSelectedName: string,
+        isDropDownListOpened: boolean,
+        setYesNoDropDownSelectedName: (name: string) => void,
+        setIsDropDownListOpened: (value: boolean) => void,
+    }
 }
 type YesNoType = 'да' | 'нет'
 const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
 export const YesNoDropDown: FC<PropsType> = observer(props => {
-    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
+    const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     useEffect(() => {
-        dropDownModel.setYesNoDropDownSelectedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
-    }, [dropDownModel, propertyValue])
+        additionalModel.setYesNoDropDownSelectedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
+    }, [additionalModel, propertyValue])
 
-    const onInputClick = () => {
-        dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
-    }
+    const onInputClick = useCallback(() => {
+        additionalModel.setIsDropDownListOpened(!additionalModel.isDropDownListOpened)
+    }, [additionalModel])
 
     const options = yesNoDropDownData.map(item => {
         const onOptionClick = () => {
-            dropDownModel.setYesNoDropDownSelectedName(item)
+            additionalModel.setYesNoDropDownSelectedName(item)
             setSelectedItem(item === yesNoDropDownData[0], fieldName)
-            dropDownModel.setIsDropDownListOpened(false)
+            additionalModel.setIsDropDownListOpened(false)
         }
         return <div key={item}
-                    className={item === dropDownModel.yesNoSelectedName ? style.selectedItem : style.listItem}
+                    className={item === additionalModel.yesNoSelectedName ? style.selectedItem : style.listItem}
                     onClick={onOptionClick}>{item}</div>
     })
 
     return (
         <>
-            <GeneralDropDown isDropDownListOpened={dropDownModel.isDropDownListOpened}
-                             setIsDropDownListOpened={dropDownModel.setIsDropDownListOpened}
-                             selectedName={dropDownModel.yesNoSelectedName}
+            <GeneralDropDown isDropDownListOpened={additionalModel.isDropDownListOpened}
+                             setIsDropDownListOpened={additionalModel.setIsDropDownListOpened}
+                             selectedName={additionalModel.yesNoSelectedName}
                              onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>

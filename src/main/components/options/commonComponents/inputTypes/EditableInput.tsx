@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, FocusEvent, memo, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, FocusEvent, useEffect} from 'react';
 import style from './EditableInput.module.scss'
 import {observer} from 'mobx-react-lite';
 
@@ -6,35 +6,44 @@ type PropsType = {
     propertyValue: string
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
+    additionalModel: {
+        inputValue: string,
+        editMode: boolean,
+        setInputValue: (value: string) => void,
+        setEditMode: (value: boolean) => void,
+    }
 }
 
 export const EditableInput: FC<PropsType> = observer(props => {
-    const {propertyValue, fieldName, setSelectedItem} = props
+    const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
-    const [editMode, setEditMode] = useState(false)
-    const [inputValue, setInputValue] = useState<string>(propertyValue)
+    useEffect(() => {
+        additionalModel.setInputValue(propertyValue)
+    }, [additionalModel, propertyValue])
 
 
     const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(e.currentTarget.value)
+        additionalModel.setInputValue(e.currentTarget.value)
     }
 
     const onDivClick = () => {
-        setEditMode(true)
+        additionalModel.setEditMode(true)
     }
 
     const onInputBlur = (e: FocusEvent<HTMLInputElement>) => {
         setSelectedItem(e.target.value, fieldName)
-        setEditMode(false)
+        additionalModel.setEditMode(false)
     }
 
 
     return (
         <>
             <div className={style.editableInput} tabIndex={0}>
-                {!editMode
-                    ? <div onClick={onDivClick} title={inputValue}>{inputValue}</div>
-                    : <input type="text" value={inputValue} onChange={onInputChange} onBlur={onInputBlur} autoFocus/>}
+                {!additionalModel.editMode
+                    ? <div onClick={onDivClick} title={additionalModel.inputValue}>{additionalModel.inputValue}</div>
+                    :
+                    <input type="text" value={additionalModel.inputValue} onChange={onInputChange} onBlur={onInputBlur}
+                           autoFocus/>}
             </div>
         </>
     )

@@ -105,7 +105,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                         <PropertiesControlLeft
                             key={field.propertyName}
                             field={field}
-                            dropDownModel={field.dropDownModel}/>)}
+                            additionalModel={field.additionalModel}/>)}
                 </div>
 
                 <div className={style.draggable}>
@@ -119,7 +119,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                             key={field.propertyName}
                             field={field}
                             setSelectedItem={propertyControl.setSelectedItem}
-                            dropDownModel={field.dropDownModel}/>)}
+                            additionalModel={field.additionalModel}/>)}
                 </div>
             </div>
             <div>

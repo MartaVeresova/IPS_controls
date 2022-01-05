@@ -1,22 +1,4 @@
-import {MultiType, PropertyDataType, SimpleType} from '../../../types/Types';
-
-//данные с сервака
-export const storage: SimpleType[] = [
-    {id: null, displayName: ''},
-    {id: 8, displayName: 'DOCUMS'},
-]
-
-export const assignedSubjectAreaTypes: MultiType[] = [
-    {id: 'A', displayName: 'Конструкторская подготовка'},
-    {id: 'B', displayName: 'Архитектура и строительство'},
-    {id: 'C', displayName: 'Отладка'},
-    {id: 'D', displayName: 'Администрирование системы'},
-    {id: 'E', displayName: 'Технологическая подготовка'},
-    {id: 'F', displayName: 'Общая'},
-    {id: 'G', displayName: 'Производство'},
-    {id: 'H', displayName: 'Управление НСИ'},
-    {id: 'I', displayName: 'SubjectArea_test1_ui'}
-]
+import {PropertyDataType} from '../../../types/Types';
 
 //данные на фронте
 export const lifeCycleLevelData: PropertyDataType[] = [
@@ -76,17 +58,3 @@ export const lifeCycleLevelData: PropertyDataType[] = [
     },
 ]
 
-
-const arr = ['Глобальный идентификатор', 'Идентификатор']
-const arr2 = ['globalKey', 'id']
-const arr3 = ['editableInput', 'readOnlyInput']
-
-const array = arr.map((item, i) => {
-    return {
-        propertyName: item,
-        propertyValue: null,
-        fieldName: arr2[i],
-        fieldType: arr3[i],
-        selectedItem: null,
-    }
-})

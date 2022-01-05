@@ -8,9 +8,12 @@ type PropsType = {
     propertyValue: string
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
-    dropDownModel: any
-        // & { enumSelectedName: string }
-        // & { setEnumDropDownSelectedName: (name: string) => void }
+    additionalModel: {
+        enumSelectedName: string,
+        isDropDownListOpened: boolean,
+        setEnumDropDownSelectedName: (name: string) => void,
+        setIsDropDownListOpened: (value: boolean) => void,
+    }
 }
 
 enum versionMode {
@@ -22,37 +25,37 @@ enum versionMode {
 const data: Array<string[]> = Object.entries(versionMode)
 
 export const EnumDropDown: FC<PropsType> = observer(props => {
-    const {propertyValue, fieldName, setSelectedItem, dropDownModel} = props
+    const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     useEffect(() => {
         data.forEach(([key, value]) => {
             if (key === propertyValue) {
-                dropDownModel.setEnumDropDownSelectedName(value)
+                additionalModel.setEnumDropDownSelectedName(value)
             }
         })
-    }, [dropDownModel, propertyValue])
+    }, [additionalModel, propertyValue])
 
     const onInputClick = () => {
-        dropDownModel.setIsDropDownListOpened(!dropDownModel.isDropDownListOpened)
+        additionalModel.setIsDropDownListOpened(!additionalModel.isDropDownListOpened)
     }
 
     const options = data.map(([key, value]) => {
         const onOptionClick = () => {
             setSelectedItem(key, fieldName)
-            dropDownModel.setEnumDropDownSelectedName([key, value][0])
-            dropDownModel.setIsDropDownListOpened(false)
+            additionalModel.setEnumDropDownSelectedName([key, value][0])
+            additionalModel.setIsDropDownListOpened(false)
         }
         return <div key={key}
-                    className={value === dropDownModel.enumSelectedName ? style.selectedItem : style.listItem}
+                    className={value === additionalModel.enumSelectedName ? style.selectedItem : style.listItem}
                     onClick={onOptionClick}>{value}</div>
     })
 
 
     return (
         <>
-            <GeneralDropDown isDropDownListOpened={dropDownModel.isDropDownListOpened}
-                             setIsDropDownListOpened={dropDownModel.setIsDropDownListOpened}
-                             selectedName={dropDownModel.enumSelectedName}
+            <GeneralDropDown isDropDownListOpened={additionalModel.isDropDownListOpened}
+                             setIsDropDownListOpened={additionalModel.setIsDropDownListOpened}
+                             selectedName={additionalModel.enumSelectedName}
                              onInputClick={onInputClick}>
                 {options}
             </GeneralDropDown>
