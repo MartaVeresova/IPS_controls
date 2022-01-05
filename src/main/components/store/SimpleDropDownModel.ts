@@ -15,24 +15,23 @@ export const SimpleDropDownModel = types
         isDropDownListOpened: types.optional(types.boolean, false),
     })
     .actions(self => {
+        let dropDownData: SimpleDropDownType[] = []
         return {
             getSimpleDropDownSelectedItem(id: number | null, fieldName: string): void {
-                let selectedItem: SimpleDropDownType[] = []
                 if (fieldName === 'captionAttributeId') {
-                    selectedItem = [{id: 7, displayName: 'Описание'}]
+                    dropDownData = [{id: 7, displayName: 'Описание'}]
                 }
                 if (fieldName === 'defaultRelationTypeId') {
-                    selectedItem = [{id: 6, displayName: 'Изделие-заготовка'}]
+                    dropDownData = [{id: 6, displayName: 'Изделие-заготовка'}]
                 }
                 if (fieldName === 'storageId') {
-                    selectedItem = [{id: 8, displayName: 'DOCUMS'}]
+                    dropDownData = [{id: 8, displayName: 'DOCUMS'}]
                 }
-                self.simpleDropDownList = cast([...selectedItem])
+                self.simpleDropDownList = cast([...dropDownData])
             },
             getSimpleDropDownList(id: number | null, fieldName: string): void {
-                let dropDownList: SimpleDropDownType[] = []
                 if (fieldName === 'captionAttributeId') {
-                    dropDownList = [
+                    dropDownData = [
                         {id: null, displayName: ''},
                         {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},
                         {id: 18033, displayName: 'Автоматически размещающиеся в архиве типы документов'},
@@ -51,7 +50,7 @@ export const SimpleDropDownModel = types
                     ]
                 }
                 if (fieldName === 'defaultRelationTypeId') {
-                    dropDownList = [
+                    dropDownData = [
                         {id: 0, displayName: 'Аналоги'},
                         {id: 1, displayName: 'Вложения'},
                         {id: 2, displayName: 'Документация на изделие'},
@@ -64,12 +63,12 @@ export const SimpleDropDownModel = types
                     ]
                 }
                 if (fieldName === 'storageId') {
-                    dropDownList = [
+                    dropDownData = [
                         {id: null, displayName: ''},
                         {id: 8, displayName: 'DOCUMS'},
                     ]
                 }
-                self.simpleDropDownList = cast([...dropDownList])
+                self.simpleDropDownList = cast([...dropDownData])
             },
             setIsDropDownListOpened(value: boolean): void {
                 self.isDropDownListOpened = value

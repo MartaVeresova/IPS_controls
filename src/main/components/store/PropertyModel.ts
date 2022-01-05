@@ -47,6 +47,13 @@ export const PropertyItemModel = types
         fieldType: types.optional(FieldTypesUnion, 'editableInput'),
         additionalModel: types.optional(AdditionalModelsType, {}),
     })
+    .actions(self => ({
+        setSelectedItem(value: string | number | boolean | null | string[], fieldName: string): void {
+            if (self.fieldName === fieldName) {
+                self.propertyValue = value
+            }
+        },
+    }))
 
 
 export const PropertyControlModel = types
@@ -153,13 +160,6 @@ export const PropertyControlModel = types
                     newData.push(fieldModel)
                 })
                 self.propertyData = cast(newData)
-            },
-            setSelectedItem(value: string | number | boolean | null | string[], fieldName: string): void {
-                self.propertyData.forEach(item => {
-                    if (item.fieldName === fieldName) {
-                        item.propertyValue = value
-                    }
-                })
             },
             sentData(): void {
                 const data = Object.fromEntries(self.propertyData.map(n => [n.fieldName, n.propertyValue]))

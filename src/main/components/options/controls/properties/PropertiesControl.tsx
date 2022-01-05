@@ -118,7 +118,8 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                         <PropertiesControlRight
                             key={field.propertyName}
                             field={field}
-                            setSelectedItem={propertyControl.setSelectedItem}
+                            setSelectedItem={field.setSelectedItem}
+                            // setSelectedItem={propertyControl.setSelectedItem}
                             additionalModel={field.additionalModel}/>)}
                 </div>
             </div>
