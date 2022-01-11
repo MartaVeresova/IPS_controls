@@ -1,4 +1,4 @@
-.tabControlContainer {
+.propertyControl {
   display: flex;
   flex-direction: row;
   width: 60vw;
@@ -9,7 +9,7 @@
   outline: 1px solid gray;
   border: 1px solid gray;
 
-  .name {
+  .propertyNameColumn {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -20,10 +20,10 @@
     max-width: 2000px;
   }
 
-  .draggable {
+  .columnBorder {
     position: relative;
 
-    & div {
+    .draggableBorder {
       cursor: col-resize;
       width: 9px;
       height: 100%;
@@ -32,7 +32,7 @@
     }
   }
 
-  .value {
+  .propertyValueColumn {
     width: 50%;
     min-width: 200px;
     max-width: 2000px;

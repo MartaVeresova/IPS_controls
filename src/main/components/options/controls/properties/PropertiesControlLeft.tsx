@@ -26,32 +26,28 @@ export const PropertiesControlLeft: FC<PropsType> = observer(props => {
 
 
     return (
-        <>
-            <div className={style.propertyName}>
-                <div className={style.wrap} tabIndex={0}>
-                    <div className={style.allProp} onDoubleClick={onImageClick}>
-                        {field.propertyName === 'Изображение' && (field.propertyValue) &&
-                            <Pointer isFieldExpanded={additionalModel.isImageFieldExpanded} onIconClick={onImageClick}
-                                     type="imageFieldIcon"/>}
-                        {field.propertyName}
+        <div className={style.propertyName}>
+            <div className={style.imageField} tabIndex={0} onDoubleClick={onImageClick}>
+                {field.propertyName === 'Изображение' && (field.propertyValue) &&
+                    <Pointer isFieldExpanded={additionalModel.isImageFieldExpanded} onIconClick={onImageClick}
+                             type="imageFieldIcon"/>}
+                {field.propertyName}
+            </div>
+            {field.propertyName === 'Изображение' &&
+                <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>
+                    <div className={style.sizeField} tabIndex={0} onDoubleClick={onSizeClick}>
+                        <Pointer isFieldExpanded={additionalModel.isSizeFieldExpanded} onIconClick={onSizeClick}
+                                 type="sizeFieldIcon"/>
+                        Size
+                    </div>
+                    <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
+                         tabIndex={0}>Width
+                    </div>
+                    <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
+                         tabIndex={0}>Height
                     </div>
                 </div>
-                {
-                    field.propertyName === 'Изображение' &&
-                    <div className={style.additionalField} hidden={!additionalModel.isImageFieldExpanded}>
-                        <div className={style.sizeField} tabIndex={0} onDoubleClick={onSizeClick}>
-                            <Pointer isFieldExpanded={additionalModel.isSizeFieldExpanded} onIconClick={onSizeClick}
-                                     type="sizeFieldIcon"/>
-                            Size
-                        </div>
-
-                        <div hidden={!additionalModel.isSizeFieldExpanded}>
-                            <div className={style.widthHeightFields} tabIndex={0}>Width</div>
-                            <div className={style.widthHeightFields} tabIndex={0}>Height</div>
-                        </div>
-                    </div>
-                }
-            </div>
-        </>
+            }
+        </div>
     )
 })

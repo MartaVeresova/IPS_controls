@@ -6,7 +6,7 @@ export const lifeCycleLevelData: PropertyDataType[] = [
         propertyName: 'Глобальный идентификатор',
         propertyValue: null,
         fieldName: 'globalKey',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Идентификатор',
@@ -36,13 +36,13 @@ export const lifeCycleLevelData: PropertyDataType[] = [
         propertyName: 'Литера',
         propertyValue: null,
         fieldName: 'litera',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Наименование',
         propertyValue: null,
         fieldName: 'name',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Предметная область',

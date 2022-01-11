@@ -53,7 +53,7 @@ export const MultiDropDown: FC<PropsType> = observer(props => {
             additionalModel.setIsCheckedAll(!additionalModel.isCheckedAll)
         }
 
-        const inputValue = () => {
+        const selectedNames = () => {
             let nameArray: string[] = []
             additionalModel.multiDropDownList.forEach((item: MultiDropDownType) => {
                 if (propertyValue.some(elem => elem === item.id)) {
@@ -68,54 +68,46 @@ export const MultiDropDown: FC<PropsType> = observer(props => {
         }
 
         return (
-            <>
-                <div className={style.block} ref={dropDownRef}>
-                    <div
-                        className={!propertyValue.length && !additionalModel.isDropDownListOpened ? style.error : style.container}
-                        tabIndex={0}
-                        onClick={onInputClick} title={additionalModel.isCheckedAll ? 'Все' : inputValue()}>
-                        <div className={style.value}>
-                            {additionalModel.isCheckedAll ? 'Все' : inputValue()}
-                        </div>
-                        <Pointer isFieldExpanded={additionalModel.isDropDownListOpened} onIconClick={onInputClick}
-                                 type="dropDown"/>
+            <div className={style.dropDown} ref={dropDownRef}>
+                <div tabIndex={0} onClick={onInputClick} title={additionalModel.isCheckedAll ? 'Все' : selectedNames()}
+                     className={!propertyValue.length && !additionalModel.isDropDownListOpened ? style.error : style.fieldWithSelectedNames}>
+                    <div className={style.selectedNames}>
+                        {additionalModel.isCheckedAll ? 'Все' : selectedNames()}
                     </div>
-
-                    <div hidden={!additionalModel.isDropDownListOpened}>
-                        <div className={style.dropDownList}>
-                            <label className={style.list} onChange={onAllOptionsChange}>
-                                <input type="checkbox" checked={additionalModel.isCheckedAll} readOnly/>
-                                Все
-                            </label>
-
-                            {additionalModel.multiDropDownList.map(({id, displayName}: MultiDropDownType) => {
-                                const checkedItem = propertyValue.some(item => item === id)
-                                const onCheckboxChange = () => {
-                                    if (checkedItem) {
-                                        setSelectedItem(propertyValue.filter(item => item !== id), fieldName)
-                                        additionalModel.setIsCheckedAll(false)
-                                    }
-                                    if (!checkedItem) {
-                                        const newArray = [...propertyValue]
-                                        newArray.push(id)
-                                        setSelectedItem(newArray, fieldName)
-                                    }
-                                }
-
-                                return (
-                                    <label key={id} className={checkedItem ? style.checkedItem : style.list}
-                                           onChange={onCheckboxChange}>
-                                        <input type="checkbox" checked={checkedItem} readOnly/>
-                                        <div className={style.listItem}>
-                                            {displayName}
-                                        </div>
-                                    </label>
-                                )
-                            })}
-                        </div>
-                    </div>
+                    <Pointer isFieldExpanded={additionalModel.isDropDownListOpened} onIconClick={onInputClick}
+                             type="dropDown"/>
                 </div>
-            </>
+
+                <div hidden={!additionalModel.isDropDownListOpened} className={style.dropDownList}>
+                    <label className={style.allNames} onChange={onAllOptionsChange}>
+                        <input type="checkbox" checked={additionalModel.isCheckedAll} readOnly/>
+                        Все
+                    </label>
+
+                    {additionalModel.multiDropDownList.map(({id, displayName}: MultiDropDownType) => {
+                        const checkedItem = propertyValue.some(item => item === id)
+                        const onCheckboxChange = () => {
+                            if (checkedItem) {
+                                setSelectedItem(propertyValue.filter(item => item !== id), fieldName)
+                                additionalModel.setIsCheckedAll(false)
+                            }
+                            if (!checkedItem) {
+                                const newArray = [...propertyValue]
+                                newArray.push(id)
+                                setSelectedItem(newArray, fieldName)
+                            }
+                        }
+
+                        return (
+                            <label key={id} className={checkedItem ? style.selectedListItem : style.allNames}
+                                   onChange={onCheckboxChange}>
+                                <input type="checkbox" checked={checkedItem} readOnly/>
+                                <div className={style.listItems}>{displayName}</div>
+                            </label>
+                        )
+                    })}
+                </div>
+            </div>
         )
     }
 )

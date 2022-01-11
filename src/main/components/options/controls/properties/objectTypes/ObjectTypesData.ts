@@ -30,7 +30,7 @@ export const objectTypesData: PropertyDataType[] = [
         propertyName: 'Время жизни удалённых объектов (дней)',
         propertyValue: null,
         fieldName: 'deletedObjectLifetimeInDays',
-        fieldType: 'readOnlyInput',
+        fieldType: 'editableNumberInput',
     },
     {
         propertyName: 'Глобальный идентификатор',
@@ -66,7 +66,7 @@ export const objectTypesData: PropertyDataType[] = [
         propertyName: 'Имя объекта',
         propertyValue: null,
         fieldName: 'objectInstanceName',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Индексировать таблицу атрибутов',
@@ -78,19 +78,19 @@ export const objectTypesData: PropertyDataType[] = [
         propertyName: 'Классификация создаваемых объектов',
         propertyValue: null,
         fieldName: 'objectTypeClassifiedOptionId',
-        fieldType: 'readOnlyInput',
+        fieldType: 'simpleDropDown',
     },
     {
         propertyName: 'Комментарий',
         propertyValue: null,
         fieldName: 'note_Create',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Краткое наименование',
         propertyValue: null,
         fieldName: 'shortName',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Локальный тип объектов',
@@ -114,7 +114,7 @@ export const objectTypesData: PropertyDataType[] = [
         propertyName: 'Наименование',
         propertyValue: null,
         fieldName: 'name',
-        fieldType: 'editableInput',
+        fieldType: 'editableStringInput',
     },
     {
         propertyName: 'Наследование прав доступа',

@@ -1,20 +1,15 @@
-.editableInput {
+.editableStringInput {
   width: 100%;
   padding-left: 10px;
-  //height: 30px;
 
-  & div {
-    //height: 100%;
-    //display: flex;
-    //align-items: center;
+  .offEditingMode {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  & input {
+  .onEditingMode {
     width: 100%;
-    //height: 100%;
     height: 23px;
     font-size: 20px;
     outline: none;

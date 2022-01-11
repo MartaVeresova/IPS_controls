@@ -35,7 +35,7 @@ export const YesNoDropDown: FC<PropsType> = observer(props => {
             additionalModel.setIsDropDownListOpened(false)
         }
         return <div key={item}
-                    className={item === additionalModel.yesNoSelectedName ? style.selectedItem : style.listItem}
+                    className={item === additionalModel.yesNoSelectedName ? style.selectedListItem : style.listItems}
                     onClick={onOptionClick}>{item}</div>
     })
 

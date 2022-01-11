@@ -1,11 +1,10 @@
-.wrap {
+.dropDown {
   width: 100%;
   color: #474747;
-  //transition: all 3s ease;
   position: relative;
   cursor: pointer;
 
-  .container {
+  .fieldWithSelectedName {
     padding: 0 10px 0 10px;
     display: flex;
     justify-content: space-between;
@@ -38,32 +37,30 @@
     box-shadow: 0 4px 5px rgb(204, 204, 204);
     border-radius: 0 2px 3px 3px;
     cursor: pointer;
-
-    & div {
-      &:hover {
-        background-color: #c7c7c7;
-        transition: all .4s;
-      }
-
-      &:active {
-        background-color: #e2e2e2;
-      }
-
-      &:empty {
-        min-height: 25px;
-      }
-    }
   }
 }
 
-.listItem {
+.listItems {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   padding-left: 10px;
+
+  &:hover {
+    background-color: #c7c7c7;
+    transition: all .4s;
+  }
+
+  &:active {
+    background-color: #e2e2e2;
+  }
+
+  &:empty {
+    min-height: 25px;
+  }
 }
 
-.selectedItem {
-  @extend .listItem;
+.selectedListItem {
+  @extend .listItems;
   background-color: #c7c7c7;
 }

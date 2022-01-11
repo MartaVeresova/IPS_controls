@@ -1,5 +1,4 @@
 import React, {FC, useEffect} from 'react';
-import {EditableInput} from '../../commonComponents/inputTypes/EditableInput';
 import {ReadOnlyInput} from '../../commonComponents/inputTypes/ReadOnlyInput';
 import {MultiDropDown} from '../../commonComponents/inputTypes/MultiDropDown';
 import {YesNoDropDown} from '../../commonComponents/inputTypes/YesNoDropDown';
@@ -9,6 +8,8 @@ import {OpenFileInput} from '../../commonComponents/inputTypes/OpenFileInput';
 import style from './PropertiesControlRight.module.scss';
 import {observer} from 'mobx-react-lite';
 import {DataType} from '../../types/Types';
+import {EditableStringInput} from '../../commonComponents/inputTypes/EditableStringInput';
+import {EditableNumberInput} from '../../commonComponents/inputTypes/EditableNumberInput';
 
 
 type PropsType = {
@@ -29,11 +30,17 @@ export const PropertiesControlRight: FC<PropsType> = observer(props => {
     return (
         <>
             <div className={style.propertyValue}>
-                {field.fieldType === 'editableInput' &&
-                    <EditableInput propertyValue={field.propertyValue}
-                                   fieldName={field.fieldName}
-                                   setSelectedItem={setSelectedItem}
-                                   additionalModel={additionalModel}/>}
+                {field.fieldType === 'editableStringInput' &&
+                    <EditableStringInput propertyValue={field.propertyValue}
+                                         fieldName={field.fieldName}
+                                         setSelectedItem={setSelectedItem}
+                                         additionalModel={additionalModel}/>}
+
+                {field.fieldType === 'editableNumberInput' &&
+                    <EditableNumberInput propertyValue={field.propertyValue}
+                                         fieldName={field.fieldName}
+                                         setSelectedItem={setSelectedItem}
+                                         additionalModel={additionalModel}/>}
 
                 {field.fieldType === 'readOnlyInput' &&
                     <ReadOnlyInput propertyValue={field.propertyValue}/>}

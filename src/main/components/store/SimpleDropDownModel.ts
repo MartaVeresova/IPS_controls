@@ -21,6 +21,9 @@ export const SimpleDropDownModel = types
                 if (fieldName === 'captionAttributeId') {
                     dropDownData = [{id: 7, displayName: 'Описание'}]
                 }
+                if (fieldName === 'objectTypeClassifiedOptionId') {
+                    dropDownData = [{id: 0, displayName: 'не классифицировать'}]
+                }
                 if (fieldName === 'defaultRelationTypeId') {
                     dropDownData = [{id: 6, displayName: 'Изделие-заготовка'}]
                 }
@@ -47,6 +50,13 @@ export const SimpleDropDownModel = types
                         {id: 17487, displayName: 'Создавать версии документов в архиве'},
                         {id: 1030, displayName: 'Структура архива'},
                         {id: 1017, displayName: 'Файловый шкаф'},
+                    ]
+                }
+                if (fieldName === 'objectTypeClassifiedOptionId') {
+                    dropDownData = [
+                        {id: 0, displayName: 'не классифицировать'},
+                        {id: 1, displayName: 'выборочная классификация'},
+                        {id: 2, displayName: 'обязательная классификация'}
                     ]
                 }
                 if (fieldName === 'defaultRelationTypeId') {

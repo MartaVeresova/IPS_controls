@@ -1,0 +1,42 @@
+.editableNumberInput {
+  padding: 0 7px 0 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+
+  &:active, &:focus, &:hover {
+    outline: none;
+    border: none;
+  }
+
+  & input {
+    width: 100%;
+    height: 23px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+  }
+
+  &:active, &:focus, &:hover {
+    outline: none;
+    border: none;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  button {
+    width: 20px;
+
+    &:hover {
+      cursor: pointer;
+      border-radius: 2px;
+      border: 1.6px solid #474747;
+    }
+  }
+}

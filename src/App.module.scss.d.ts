@@ -1,5 +1,5 @@
 declare const styles: {
-    readonly "wrap": string;
+    readonly "container": string;
     readonly "treeMenu": string;
 };
 export = styles;

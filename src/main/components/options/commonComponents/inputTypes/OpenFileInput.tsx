@@ -63,7 +63,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
         }
     }
 
-    const inputTextValue = () => {
+    const imageCaption = () => {
         if (additionalModel.selectedFile || propertyValue) {
             return '(Значок)'
         }
@@ -77,25 +77,23 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
 
     return (
         <>
-            <div className={style.block} tabIndex={0}>
-                <div className={style.container}>
-                    <div className={style.inputField}>
-                        <img alt="" src={propertyValue} ref={imgRef}/>
-                        <div>{inputTextValue()}</div>
-                    </div>
-                    <input type="file" name="file" id="file" ref={inputRef} accept=".ico"
-                           onChange={imageUpload}/>
-                    <button onClick={onButtonClick} tabIndex={0}>...</button>
+            <div className={style.imageUploadField} tabIndex={0}>
+                <div className={style.imageWithCaption}>
+                    <img alt="" src={propertyValue} ref={imgRef}/>
+                    <div>{imageCaption()}</div>
                 </div>
+                <input type="file" name="file" ref={inputRef} accept=".ico" onChange={imageUpload}/>
+                <button className={style.imageUploadButton} onClick={onButtonClick} tabIndex={0}>...</button>
             </div>
-            <div className={style.additionalField} hidden={!additionalModel.isImageFieldExpanded}>
-                <div className={style.openImageField} tabIndex={0}>
+
+            <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>
+                <div className={style.sizesField} tabIndex={0}>
                     {`${additionalModel.sizeWidth}x${additionalModel.sizeHeight}`}
                 </div>
-                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}>
-                    <div tabIndex={0}>{additionalModel.sizeWidth}</div>
-                    <div tabIndex={0}>{additionalModel.sizeHeight}</div>
-                </div>
+                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
+                     tabIndex={0}>{additionalModel.sizeWidth}</div>
+                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
+                     tabIndex={0}>{additionalModel.sizeHeight}</div>
             </div>
         </>
     )

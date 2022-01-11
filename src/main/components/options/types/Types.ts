@@ -1,6 +1,7 @@
 //common
 export type FieldTypes =
-    | 'editableInput'
+    | 'editableStringInput'
+    | 'editableNumberInput'
     | 'readOnlyInput'
     | 'openFileInput'
     | 'yesNoDropDown'
@@ -31,7 +32,8 @@ export type DataType = {
     fieldName: string
     fieldType: FieldTypes
     additionalModel:
-        | { inputValue: string, editMode: boolean }
+        | { stringInputValue: string, isEditMode: boolean}
+        | { numberInputValue: number, isEditMode: boolean }
         | { isImageFieldExpanded: boolean, isSizeFieldExpanded: boolean }
         | { yesNoSelectedName: string, isDropDownListOpened: boolean }
         | { multiDropDownList: MultiDropDownType[], isCheckedAll: boolean, isDropDownListOpened: boolean }

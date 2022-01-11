@@ -46,7 +46,7 @@ export const EnumDropDown: FC<PropsType> = observer(props => {
             additionalModel.setIsDropDownListOpened(false)
         }
         return <div key={key}
-                    className={value === additionalModel.enumSelectedName ? style.selectedItem : style.listItem}
+                    className={value === additionalModel.enumSelectedName ? style.selectedListItem : style.listItems}
                     onClick={onOptionClick}>{value}</div>
     })
 

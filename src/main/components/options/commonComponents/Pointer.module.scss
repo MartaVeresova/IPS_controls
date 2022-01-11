@@ -1,11 +1,11 @@
 .imageFieldIconOff {
   position: absolute;
-  top: -2px;
+  top: 0;
   left: 5px;
   height: 20px;
   cursor: pointer;
   transition: transform .3s linear;
-  transform: rotate(-90deg) translate(-20%, -20%);
+  transform: rotate(-90deg) translate(-25%, -25%);
 
   &:hover {
     font-weight: bolder;
@@ -20,7 +20,7 @@
 
 .sizeFieldIconOff {
   position: absolute;
-  top: -2px;
+  top: -3px;
   left: 25px;
   cursor: pointer;
   transition: transform .3s linear;

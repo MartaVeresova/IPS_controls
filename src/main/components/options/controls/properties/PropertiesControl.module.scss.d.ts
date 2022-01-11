@@ -1,8 +1,9 @@
 declare const styles: {
-    readonly "tabControlContainer": string;
-    readonly "name": string;
-    readonly "draggable": string;
-    readonly "value": string;
+    readonly "propertyControl": string;
+    readonly "propertyNameColumn": string;
+    readonly "columnBorder": string;
+    readonly "draggableBorder": string;
+    readonly "propertyValueColumn": string;
 };
 export = styles;
 

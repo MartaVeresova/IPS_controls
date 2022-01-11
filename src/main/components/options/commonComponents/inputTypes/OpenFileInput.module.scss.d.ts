@@ -1,9 +1,9 @@
 declare const styles: {
-    readonly "additionalField": string;
-    readonly "block": string;
-    readonly "container": string;
-    readonly "inputField": string;
-    readonly "openImageField": string;
+    readonly "imageUploadField": string;
+    readonly "imageWithCaption": string;
+    readonly "imageUploadButton": string;
+    readonly "additionalFields": string;
+    readonly "sizesField": string;
     readonly "widthHeightFields": string;
 };
 export = styles;

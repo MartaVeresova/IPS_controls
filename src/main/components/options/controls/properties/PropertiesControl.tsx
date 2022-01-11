@@ -98,9 +98,9 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
 
     return (
         <>
-            <div className={style.tabControlContainer} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
+            <div className={style.propertyControl} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
                  ref={propDisplayRef}>
-                <div className={style.name} ref={propNameRef}>
+                <div className={style.propertyNameColumn} ref={propNameRef}>
                     {propertyControl.propertyData.map(field =>
                         <PropertiesControlLeft
                             key={field.propertyName}
@@ -108,24 +108,22 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                             additionalModel={field.additionalModel}/>)}
                 </div>
 
-                <div className={style.draggable}>
-                    <div onMouseDown={onDraggableMouseDown} ref={draggableRef}>
+                <div className={style.columnBorder}>
+                    <div className={style.draggableBorder} onMouseDown={onDraggableMouseDown} ref={draggableRef}>
                     </div>
                 </div>
 
-                <div className={style.value} ref={propValueRef}>
+                <div className={style.propertyValueColumn} ref={propValueRef}>
                     {propertyControl.propertyData.map(field =>
                         <PropertiesControlRight
                             key={field.propertyName}
                             field={field}
                             setSelectedItem={field.setSelectedItem}
-                            // setSelectedItem={propertyControl.setSelectedItem}
                             additionalModel={field.additionalModel}/>)}
                 </div>
             </div>
-            <div>
-                <button style={{margin: '15px', width: '50px'}} onClick={onButtonClick}>sent</button>
-            </div>
+
+            <button style={{margin: '15px', width: '50px'}} onClick={onButtonClick}>sent</button>
         </>
     )
 })

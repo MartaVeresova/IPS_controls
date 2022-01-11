@@ -11,7 +11,7 @@ export const App: FC = memo(() => {
 
     return (
         <>
-            <div className={style.wrap}>
+            <div className={style.container}>
                 <div className={style.treeMenu}>
                     <RootTree setIsLifeCycleLevelOpen={setIsLifeCycleLevelOpen}
                               setIsObjectTypesOpen={setIsObjectTypesOpen}

@@ -37,7 +37,7 @@ export const SimpleDropDown: FC<PropsType> = observer(props => {
         }
         return (
             <div key={item.id}
-                 className={selectedElement?.displayName === item.displayName ? style.selectedItem : style.listItem}
+                 className={selectedElement?.displayName === item.displayName ? style.selectedListItem : style.listItems}
                  onClick={onOptionClick} title={item.displayName}>{item.displayName}</div>
         )
     })

@@ -1,27 +1,25 @@
 .propertyName {
   outline: 1px solid gray;
 
-  .wrap {
+  .imageField {
     height: 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 25px;
+    position: relative;
+
     &:focus {
       background-color: #428bca;
       color: white;
     }
-
-    .allProp {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-left: 25px;
-      position: relative;
-    }
   }
 
-  .additionalField {
+  .additionalFields {
     line-height: 30px;
     color: gray;
 

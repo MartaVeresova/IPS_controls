@@ -5,7 +5,8 @@ import {EnumDropDownModel} from './EnumDropDownModel';
 import {YesNoDropDownModel} from './YesNoDropDownModel';
 import {MultiDropDownModel} from './MultiDropDownModel';
 import {OpenFileModel} from './OpenFileModel';
-import {EditableInputModel} from './EditableInputModel';
+import {EditableStringInputModel} from './EditableStringInputModel';
+import {EditableNumberInputModel} from './EditableNumberInputModel';
 
 const image: string = 'data:image/png;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfHx8/3x8fP98fHz/fHx8/3x8fP98fHz/fHx8/3x8fP98fHz/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHx8fP98fHz/fHx8/3x8fP98fHz/fHx8/3x8fP98fHz/fHx8/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfHx8/3x8fP98fHz/fHx8/3x8fP98fHz/AAAAALl7X//Urp3//v7+//7+/v/+/v7/zKCL/7p9Yf8AAAAAAAAAAHx8fP98fHz/fHx8/3x8fP98fHz/fHx8/72CZ/+6fGD/3b+y//7+/v/+/v7//v7+/9Wwn/+6fGD/vYJn/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC5el7/uXpe/+jSx//9/v7/3eLx//7+/v/fwrX/uHhb/7p8X/8AAAAAAAAAAAAAAAAAAAAA0g+r/9IPq//SD6v/3sCz/8CHbP/v4Nn/prXi/11xvf+3xen/6tTI/8CHbf/jyr7/AAAAAAAAAAAAAAAAAAAAANIPq//SD6v/0g+r/wAAAAAAAAAA2Njm/01bpf9BTI//WWiu/+bj6f8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABvfLj/hZbN/3F+uP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg5fT/4ud1v+FmNP/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAqLTd/4SX0v+Jm9T/g5bS/7O+4P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIGJrP+JnNj/i53X/4mc2v+Eiqn/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRVHD/jqHf/4WWzv91hLf/PDpM/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAXltk/yYmP/8gHjH/CgIN/3Frbv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACUj4//a2Vo/62qrP8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gCcQf4AnEH//5xB/8CcQYDAnEEAf5xBAHicQQB4nEHB/5xB4/+cQeP/nEHB/5xBwf+cQcH/nEHB/5xB4/+cQQ=='
 
@@ -20,7 +21,8 @@ const PropertyValueType = types.union(
 )
 
 const FieldTypesUnion = types.union(
-    types.literal('editableInput'),
+    types.literal('editableStringInput'),
+    types.literal('editableNumberInput'),
     types.literal('readOnlyInput'),
     types.literal('openFileInput'),
     types.literal('yesNoDropDown'),
@@ -30,7 +32,8 @@ const FieldTypesUnion = types.union(
 )
 
 const AdditionalModelsType = types.union(
-    EditableInputModel,
+    EditableStringInputModel,
+    EditableNumberInputModel,
     OpenFileModel,
     YesNoDropDownModel,
     MultiDropDownModel,
@@ -44,11 +47,14 @@ export const PropertyItemModel = types
         propertyName: types.optional(types.string, ''),
         propertyValue: types.optional(types.union(PropertyValueType), null),
         fieldName: types.optional(types.string, ''),
-        fieldType: types.optional(FieldTypesUnion, 'editableInput'),
+        fieldType: types.optional(FieldTypesUnion, 'editableStringInput'),
         additionalModel: types.optional(AdditionalModelsType, {}),
     })
     .actions(self => ({
         setSelectedItem(value: string | number | boolean | null | string[], fieldName: string): void {
+            // if (fieldName === 'editableNumberInput') {
+            //     self.propertyValue = value
+            // }
             if (self.fieldName === fieldName) {
                 self.propertyValue = value
             }
@@ -88,8 +94,8 @@ export const PropertyControlModel = types
                     defaultRelationTypeId: 6,
                     captionAttributeId: 7,
                     isAbleToAddAnyAttributes: false,
-                    deletedObjectLifetimeInDays: 0,
-                    objectTypeClassifiedOptionId: 5555,
+                    deletedObjectLifetimeInDays: 2,
+                    objectTypeClassifiedOptionId: 0,
                     isCurrentProjectEnabled: true,
                     isNeedToCheckParentAccess: false,
                     isLocalObjectType: true,
@@ -112,41 +118,47 @@ export const PropertyControlModel = types
 
                 data.forEach(item => {
                     let additionalModel = {}
-                    if (item.fieldType === 'editableInput') {
-                        additionalModel = EditableInputModel.create({
-                            inputValue: '',
-                            editMode: false
+                    if (item.fieldType === 'editableStringInput') {
+                        additionalModel = EditableStringInputModel.create({
+                            stringInputValue: '',
+                            isEditMode: false,
+                        })
+                    }
+                    if (item.fieldType === 'editableNumberInput') {
+                        additionalModel = EditableNumberInputModel.create({
+                            numberInputValue: 0,
+                            isEditMode: false,
                         })
                     }
                     if (item.fieldType === 'openFileInput') {
                         additionalModel = OpenFileModel.create({
                             isImageFieldExpanded: false,
-                            isSizeFieldExpanded: false
+                            isSizeFieldExpanded: false,
                         })
                     }
                     if (item.fieldType === 'yesNoDropDown') {
                         additionalModel = YesNoDropDownModel.create({
                             yesNoSelectedName: '',
-                            isDropDownListOpened: false
+                            isDropDownListOpened: false,
                         })
                     }
                     if (item.fieldType === 'multiDropDown') {
                         additionalModel = MultiDropDownModel.create({
                             multiDropDownList: [],
                             isCheckedAll: false,
-                            isDropDownListOpened: false
+                            isDropDownListOpened: false,
                         })
                     }
                     if (item.fieldType === 'simpleDropDown') {
                         additionalModel = SimpleDropDownModel.create({
                             simpleDropDownList: [],
-                            isDropDownListOpened: false
+                            isDropDownListOpened: false,
                         })
                     }
                     if (item.fieldType === 'enumDropDown') {
                         additionalModel = EnumDropDownModel.create({
                             enumSelectedName: '',
-                            isDropDownListOpened: false
+                            isDropDownListOpened: false,
                         })
                     }
 

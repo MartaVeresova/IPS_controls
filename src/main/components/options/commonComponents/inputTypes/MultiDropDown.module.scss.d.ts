@@ -1,12 +1,12 @@
 declare const styles: {
-    readonly "block": string;
-    readonly "checkedItem": string;
-    readonly "container": string;
-    readonly "dropDownList": string;
+    readonly "dropDown": string;
+    readonly "fieldWithSelectedNames": string;
     readonly "error": string;
-    readonly "list": string;
-    readonly "listItem": string;
-    readonly "value": string;
+    readonly "selectedNames": string;
+    readonly "dropDownList": string;
+    readonly "allNames": string;
+    readonly "listItems": string;
+    readonly "selectedListItem": string;
 };
 export = styles;
 
