@@ -31,7 +31,7 @@ export const PropertiesControlLeft: FC<PropsType> = observer(props => {
                 {field.propertyName === 'Изображение' && (field.propertyValue) &&
                     <Pointer isFieldExpanded={additionalModel.isImageFieldExpanded} onIconClick={onImageClick}
                              type="imageFieldIcon"/>}
-                {field.propertyName}
+                <div className={style.propertyNameField}>{field.propertyName}</div>
             </div>
             {field.propertyName === 'Изображение' &&
                 <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>
