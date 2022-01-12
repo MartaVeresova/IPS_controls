@@ -7,15 +7,15 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        isImageFieldExpanded: boolean,
-        isSizeFieldExpanded: boolean,
-        sizeWidth: number,
-        sizeHeight: number,
-        selectedFile: File | null,
-        setSelectedFile: (file: File) => void,
-        setSizeImage: (width: number, height: number) => void,
-        setIsImageFieldExpanded: (value: boolean) => void,
-        setIsSizeFieldExpanded: (value: boolean) => void,
+        isImageFieldExpanded: boolean
+        isSizeFieldExpanded: boolean
+        sizeWidth: number
+        sizeHeight: number
+        selectedFile: File | null
+        setSelectedFile: (file: File) => void
+        setSizeImage: (width: number, height: number) => void
+        setIsImageFieldExpanded: (value: boolean) => void
+        setIsSizeFieldExpanded: (value: boolean) => void
     }
 }
 

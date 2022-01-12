@@ -9,6 +9,8 @@ export type FieldTypes =
     | 'simpleDropDown'
     | 'enumDropDown'
 
+export type YesNoType = 'да' | 'нет'
+
 export type PropertyDataType = {
     propertyName: string
     propertyValue: any

@@ -7,10 +7,10 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        numberInputValue: number,
-        setInputValue: (value: number) => void,
-        isEditMode: boolean,
-        setIsEditMode: (value: boolean) => void,
+        numberInputValue: number
+        setInputValue: (value: number) => void
+        isEditMode: boolean
+        setIsEditMode: (value: boolean) => void
     }
 }
 
@@ -21,19 +21,18 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
         additionalModel.setInputValue(propertyValue)
     }, [additionalModel, propertyValue])
 
-    const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const onInputNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.value === '') {
             additionalModel.setInputValue(0)
         } else additionalModel.setInputValue(Number(e.currentTarget.value))
     }
 
-    const onInputBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const onInputNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
         setSelectedItem(Number(e.target.value), fieldName)
         additionalModel.setIsEditMode(false)
     }
 
-    const onInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        console.log(e)
+    const onInputNumberKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === '.' || e.key === '-' || e.key === '+' || e.key === 'e') {
             e.preventDefault()
         }
@@ -45,13 +44,26 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
 
     const stringValue = additionalModel.numberInputValue.toString()
 
+    const onInputTextChange = () => {
+        additionalModel.setInputValue(0)
+        additionalModel.setIsEditMode(false)
+    }
+
+    const onInputTextBlur = () => {
+        setSelectedItem(2147483647, fieldName)
+        additionalModel.setIsEditMode(false)
+    }
+
     return (
         <>
             <div className={style.editableNumberInput} tabIndex={0}>
                 {!additionalModel.isEditMode
+
                     ? <input type="number" min={0} step={1} value={stringValue}
-                             onChange={onInputChange} onBlur={onInputBlur} onKeyDown={onInputKeyDown}/>
-                    : <div>{'Не ограничено'}</div>}
+                             onChange={onInputNumberChange} onBlur={onInputNumberBlur} onKeyDown={onInputNumberKeyDown}/>
+
+                    : <input type="text" value="Не ограничено" onChange={onInputTextChange} onBlur={onInputTextBlur}/>}
+
                 <button onClick={onButtonClick} tabIndex={0}>...</button>
             </div>
 

@@ -1,4 +1,5 @@
 import {types} from 'mobx-state-tree';
+import {VersionMode} from './Enums';
 
 
 export const EnumDropDownModel = types
@@ -6,6 +7,11 @@ export const EnumDropDownModel = types
         enumSelectedName: types.optional(types.string, ''),
         isDropDownListOpened: types.optional(types.boolean, false),
     })
+    .views(() => ({
+        get enumDropDownData(): Array<string[]> {
+            return Object.entries(VersionMode)
+        },
+    }))
     .actions(self => ({
             setEnumDropDownSelectedName(name: string): void {
                 self.enumSelectedName = name

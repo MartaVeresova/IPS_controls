@@ -2,7 +2,6 @@ import {cast, types} from 'mobx-state-tree';
 import {MultiDropDownType} from '../options/types/Types';
 
 
-
 export const MultiDropDownDataItemModel = types
     .model('MultiDropDownDataItem', {
         id: types.optional(types.identifier, ''),

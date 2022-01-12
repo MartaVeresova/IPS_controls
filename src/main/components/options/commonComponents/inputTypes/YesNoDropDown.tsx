@@ -2,36 +2,36 @@ import React, {FC, useCallback, useEffect} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
+import {YesNoType} from '../../types/Types';
 
 type PropsType = {
     propertyValue: boolean
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        yesNoSelectedName: string,
-        isDropDownListOpened: boolean,
-        setYesNoDropDownSelectedName: (name: string) => void,
-        setIsDropDownListOpened: (value: boolean) => void,
+        yesNoDropDownData: YesNoType[]
+        yesNoSelectedName: string
+        isDropDownListOpened: boolean
+        setYesNoDropDownSelectedName: (name: string) => void
+        setIsDropDownListOpened: (value: boolean) => void
     }
 }
-type YesNoType = 'да' | 'нет'
-const yesNoDropDownData: YesNoType[] = ['да', 'нет']
 
 export const YesNoDropDown: FC<PropsType> = observer(props => {
     const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     useEffect(() => {
-        additionalModel.setYesNoDropDownSelectedName(propertyValue ? yesNoDropDownData[0] : yesNoDropDownData[1])
+        additionalModel.setYesNoDropDownSelectedName(propertyValue ? additionalModel.yesNoDropDownData[0] : additionalModel.yesNoDropDownData[1])
     }, [additionalModel, propertyValue])
 
     const onInputClick = useCallback(() => {
         additionalModel.setIsDropDownListOpened(!additionalModel.isDropDownListOpened)
     }, [additionalModel])
 
-    const options = yesNoDropDownData.map(item => {
+    const options = additionalModel.yesNoDropDownData.map(item => {
         const onOptionClick = () => {
             additionalModel.setYesNoDropDownSelectedName(item)
-            setSelectedItem(item === yesNoDropDownData[0], fieldName)
+            setSelectedItem(item === additionalModel.yesNoDropDownData[0], fieldName)
             additionalModel.setIsDropDownListOpened(false)
         }
         return <div key={item}

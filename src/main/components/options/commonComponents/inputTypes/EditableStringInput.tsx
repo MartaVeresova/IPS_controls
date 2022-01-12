@@ -7,10 +7,10 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        stringInputValue: string,
-        setInputValue: (value: string) => void,
-        isEditMode: boolean,
-        setIsEditMode: (value: boolean) => void,
+        stringInputValue: string
+        setInputValue: (value: string) => void
+        isEditMode: boolean
+        setIsEditMode: (value: boolean) => void
     }
 }
 

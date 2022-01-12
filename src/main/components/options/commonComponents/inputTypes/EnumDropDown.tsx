@@ -9,26 +9,19 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        enumSelectedName: string,
-        isDropDownListOpened: boolean,
-        setEnumDropDownSelectedName: (name: string) => void,
-        setIsDropDownListOpened: (value: boolean) => void,
+        enumDropDownData: Array<string[]>
+        enumSelectedName: string
+        isDropDownListOpened: boolean
+        setEnumDropDownSelectedName: (name: string) => void
+        setIsDropDownListOpened: (value: boolean) => void
     }
 }
-
-enum versionMode {
-    notComputableValue = 'Абстрактный тип',
-    storedValue = 'Неверсионный тип',
-    multiVersion = 'Версионный тип',
-}
-
-const data: Array<string[]> = Object.entries(versionMode)
 
 export const EnumDropDown: FC<PropsType> = observer(props => {
     const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     useEffect(() => {
-        data.forEach(([key, value]) => {
+        additionalModel.enumDropDownData.forEach(([key, value]) => {
             if (key === propertyValue) {
                 additionalModel.setEnumDropDownSelectedName(value)
             }
@@ -39,7 +32,7 @@ export const EnumDropDown: FC<PropsType> = observer(props => {
         additionalModel.setIsDropDownListOpened(!additionalModel.isDropDownListOpened)
     }
 
-    const options = data.map(([key, value]) => {
+    const options = additionalModel.enumDropDownData.map(([key, value]) => {
         const onOptionClick = () => {
             setSelectedItem(key, fieldName)
             additionalModel.setEnumDropDownSelectedName([key, value][0])

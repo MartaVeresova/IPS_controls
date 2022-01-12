@@ -9,11 +9,11 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        simpleDropDownList: SimpleDropDownType[],
-        isDropDownListOpened: boolean,
-        getSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void,
-        getSimpleDropDownList: (id: number | null, fieldName: string) => void,
-        setIsDropDownListOpened: (value: boolean) => void,
+        simpleDropDownList: SimpleDropDownType[]
+        isDropDownListOpened: boolean
+        getSimpleDropDownSelectedItem: (id: number | null, fieldName: string) => void
+        getSimpleDropDownList: (id: number | null, fieldName: string) => void
+        setIsDropDownListOpened: (value: boolean) => void
     }
 }
 

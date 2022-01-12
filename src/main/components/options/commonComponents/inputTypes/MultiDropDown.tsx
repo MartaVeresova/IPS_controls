@@ -10,13 +10,13 @@ type PropsType = {
     fieldName: string
     setSelectedItem: (value: string | number | boolean | null | string[], fieldName: string) => void
     additionalModel: {
-        multiDropDownList: MultiDropDownType[],
-        isCheckedAll: boolean,
-        isDropDownListOpened: boolean,
-        getMultiDropDownSelectedItem: (ids: string[]) => void,
-        getMultiDropDownList: (ids: string[]) => void,
-        setIsCheckedAll: (value: boolean) => void,
-        setIsDropDownListOpened: (value: boolean) => void,
+        multiDropDownList: MultiDropDownType[]
+        isCheckedAll: boolean
+        isDropDownListOpened: boolean
+        getMultiDropDownSelectedItem: (ids: string[]) => void
+        getMultiDropDownList: (ids: string[]) => void
+        setIsCheckedAll: (value: boolean) => void
+        setIsDropDownListOpened: (value: boolean) => void
     }
 }
 
