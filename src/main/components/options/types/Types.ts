@@ -35,7 +35,7 @@ export type DataType = {
     fieldType: FieldTypes
     additionalModel:
         | { stringInputValue: string, isEditMode: boolean}
-        | { numberInputValue: number, isEditMode: boolean }
+        | { numberInputValue: number, isNumberMode: boolean }
         | { isImageFieldExpanded: boolean, isSizeFieldExpanded: boolean }
         | { yesNoSelectedName: string, isDropDownListOpened: boolean }
         | { multiDropDownList: MultiDropDownType[], isCheckedAll: boolean, isDropDownListOpened: boolean }

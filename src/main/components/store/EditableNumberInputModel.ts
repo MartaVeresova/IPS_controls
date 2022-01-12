@@ -4,14 +4,14 @@ import {types} from 'mobx-state-tree';
 export const EditableNumberInputModel = types
     .model('EditableNumberInput', {
         numberInputValue: types.optional(types.number, 0),
-        isEditMode: types.optional(types.boolean, false),
+        isNumberMode: types.optional(types.boolean, true),
     })
     .actions(self => ({
             setInputValue(value: number): void {
                 self.numberInputValue = value
             },
-            setIsEditMode(value: boolean): void {
-                self.isEditMode = value
+            setIsNumberMode(value: boolean): void {
+                self.isNumberMode = value
             },
         })
     )

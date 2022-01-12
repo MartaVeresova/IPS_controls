@@ -127,7 +127,7 @@ export const PropertyControlModel = types
                     if (item.fieldType === 'editableNumberInput') {
                         additionalModel = EditableNumberInputModel.create({
                             numberInputValue: 0,
-                            isEditMode: false,
+                            isNumberMode: true,
                         })
                     }
                     if (item.fieldType === 'openFileInput') {

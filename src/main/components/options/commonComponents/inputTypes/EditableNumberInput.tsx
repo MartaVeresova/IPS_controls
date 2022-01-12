@@ -9,8 +9,8 @@ type PropsType = {
     additionalModel: {
         numberInputValue: number
         setInputValue: (value: number) => void
-        isEditMode: boolean
-        setIsEditMode: (value: boolean) => void
+        isNumberMode: boolean
+        setIsNumberMode: (value: boolean) => void
     }
 }
 
@@ -21,15 +21,17 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
         additionalModel.setInputValue(propertyValue)
     }, [additionalModel, propertyValue])
 
+    const maxValue = 2147483647
+    const stringValue = additionalModel.numberInputValue.toString()
+
     const onInputNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.currentTarget.value === '') {
             additionalModel.setInputValue(0)
+        }
+        if (Number(e.currentTarget.value) > maxValue) {
+            additionalModel.setInputValue(maxValue)
+            additionalModel.setIsNumberMode(false)
         } else additionalModel.setInputValue(Number(e.currentTarget.value))
-    }
-
-    const onInputNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
-        setSelectedItem(Number(e.target.value), fieldName)
-        additionalModel.setIsEditMode(false)
     }
 
     const onInputNumberKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -38,42 +40,42 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
         }
     }
 
-    const onButtonClick = () => {
-        additionalModel.setIsEditMode(true)
+    const onInputNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
+        setSelectedItem(Number(e.target.value), fieldName)
     }
 
-    const stringValue = additionalModel.numberInputValue.toString()
+    const inputTextValue = () => {
+        if (additionalModel.numberInputValue === maxValue || !additionalModel.isNumberMode) {
+            return 'Не ограничено'
+        }
+    }
 
     const onInputTextChange = () => {
+        additionalModel.setIsNumberMode(true)
         additionalModel.setInputValue(0)
-        additionalModel.setIsEditMode(false)
     }
 
     const onInputTextBlur = () => {
-        setSelectedItem(2147483647, fieldName)
-        additionalModel.setIsEditMode(false)
+        setSelectedItem(maxValue, fieldName)
     }
+
+    const onButtonClick = () => {
+        additionalModel.setIsNumberMode(false)
+        setSelectedItem(maxValue, fieldName)
+    }
+
 
     return (
         <>
             <div className={style.editableNumberInput} tabIndex={0}>
-                {!additionalModel.isEditMode
-
-                    ? <input type="number" min={0} step={1} value={stringValue}
-                             onChange={onInputNumberChange} onBlur={onInputNumberBlur} onKeyDown={onInputNumberKeyDown}/>
-
-                    : <input type="text" value="Не ограничено" onChange={onInputTextChange} onBlur={onInputTextBlur}/>}
+                {additionalModel.isNumberMode
+                    ? <input type="number" min={0} step={1} value={stringValue} onChange={onInputNumberChange}
+                             onKeyDown={onInputNumberKeyDown} onBlur={onInputNumberBlur}/>
+                    : <input type="text" value={inputTextValue()}
+                             onChange={onInputTextChange} onBlur={onInputTextBlur}/>}
 
                 <button onClick={onButtonClick} tabIndex={0}>...</button>
             </div>
-
-            {/*<div className={style.editableNumberInput} tabIndex={0}>*/}
-            {/*    {!additionalModel.isEditMode*/}
-            {/*        ? <input type="text" value={stringValue} pattern="\d+"*/}
-            {/*                 onChange={onInputChange} onBlur={onInputBlur} onKeyDown={onInputKeyDown}/>*/}
-            {/*        : <div>{'Не ограничено'}</div>}*/}
-            {/*    <button onClick={onButtonClick} tabIndex={0}>...</button>*/}
-            {/*</div>*/}
         </>
     )
 })
