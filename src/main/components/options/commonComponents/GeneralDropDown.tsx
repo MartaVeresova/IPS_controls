@@ -20,7 +20,7 @@ export const GeneralDropDown: FC<PropsType> = props => {
 
     return (
         <div className={style.dropDown} ref={formRef}>
-            <div className={style.fieldWithSelectedName} onClick={onInputClick} title={selectedName} tabIndex={0}>
+            <div className={style.fieldWithSelectedName} onClick={onInputClick} title={selectedName}>
                 <div className={style.selectedName}>{selectedName}</div>
                 <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
             </div>

@@ -37,7 +37,7 @@ export const EditableStringInput: FC<PropsType> = observer(props => {
 
 
     return (
-        <div className={style.editableStringInput} tabIndex={0}>
+        <div className={style.editableStringInput}>
             {!additionalModel.isEditMode
                 ? <div onClick={onDivClick} className={style.offEditingMode} title={additionalModel.stringInputValue}>
                     {additionalModel.stringInputValue}</div>

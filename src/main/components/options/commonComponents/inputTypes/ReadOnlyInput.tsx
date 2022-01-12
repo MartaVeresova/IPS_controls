@@ -8,7 +8,7 @@ type PropsType = {
 export const ReadOnlyInput: FC<PropsType> = memo(({propertyValue}) => {
 
     return (
-        <div className={style.readOnlyInput} tabIndex={0} title={propertyValue}>
+        <div className={style.readOnlyInput} title={propertyValue}>
             {propertyValue}
         </div>
     )

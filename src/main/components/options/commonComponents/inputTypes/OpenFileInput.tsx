@@ -77,23 +77,23 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
 
     return (
         <>
-            <div className={style.imageUploadField} tabIndex={0}>
+            <div className={style.imageUploadField}>
                 <div className={style.imageWithCaption}>
                     <img alt="" src={propertyValue} ref={imgRef}/>
                     <div>{imageCaption()}</div>
                 </div>
                 <input type="file" name="file" ref={inputRef} accept=".ico" onChange={imageUpload}/>
-                <button className={style.imageUploadButton} onClick={onButtonClick} tabIndex={0}>...</button>
+                <button className={style.imageUploadButton} onClick={onButtonClick}>...</button>
             </div>
 
             <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>
-                <div className={style.sizesField} tabIndex={0}>
+                <div className={style.sizesField} >
                     {`${additionalModel.sizeWidth}x${additionalModel.sizeHeight}`}
                 </div>
-                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
-                     tabIndex={0}>{additionalModel.sizeWidth}</div>
-                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}
-                     tabIndex={0}>{additionalModel.sizeHeight}</div>
+                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}>
+                    {additionalModel.sizeWidth}</div>
+                <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}>
+                    {additionalModel.sizeHeight}</div>
             </div>
         </>
     )

@@ -69,7 +69,7 @@ export const MultiDropDown: FC<PropsType> = observer(props => {
 
         return (
             <div className={style.dropDown} ref={dropDownRef}>
-                <div tabIndex={0} onClick={onInputClick} title={additionalModel.isCheckedAll ? 'Все' : selectedNames()}
+                <div onClick={onInputClick} title={additionalModel.isCheckedAll ? 'Все' : selectedNames()}
                      className={!propertyValue.length && !additionalModel.isDropDownListOpened ? style.error : style.fieldWithSelectedNames}>
                     <div className={style.selectedNames}>
                         {additionalModel.isCheckedAll ? 'Все' : selectedNames()}
