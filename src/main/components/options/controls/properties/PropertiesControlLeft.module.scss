@@ -9,15 +9,15 @@
     padding-left: 25px;
     position: relative;
 
+    &:focus {
+      background-color: #428bca;
+      color: white;
+    }
+
     .propertyNameField {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-    }
-
-    &:focus {
-      background-color: #428bca;
-      color: white;
     }
   }
 

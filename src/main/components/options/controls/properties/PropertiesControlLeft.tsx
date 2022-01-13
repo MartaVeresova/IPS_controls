@@ -8,6 +8,12 @@ import {observer} from 'mobx-react-lite';
 type PropsType = {
     field: PropertyDataType
     additionalModel: any
+    //     {
+    //     isImageFieldExpanded: boolean
+    //     isSizeFieldExpanded: boolean
+    //     setIsImageFieldExpanded: (value: boolean) => void
+    //     setIsSizeFieldExpanded: (value: boolean) => void
+    // }
 }
 
 export const PropertiesControlLeft: FC<PropsType> = observer(props => {

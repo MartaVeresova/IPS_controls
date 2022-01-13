@@ -69,12 +69,12 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
         <>
             <div className={style.editableNumberInput}>
                 {additionalModel.isNumberMode
-                    ? <input type="number" min={0} step={1} value={stringValue} onChange={onInputNumberChange}
+                    ? <input className={style.numberInput} type="number" min={0} step={1} value={stringValue} onChange={onInputNumberChange}
                              onKeyDown={onInputNumberKeyDown} onBlur={onInputNumberBlur}/>
-                    : <input type="text" value={inputTextValue()}
+                    : <input  className={style.textInput} type="text" value={inputTextValue()}
                              onChange={onInputTextChange} onBlur={onInputTextBlur}/>}
 
-                <button onClick={onButtonClick}>...</button>
+                <button className={style.notLimitedValue} onClick={onButtonClick}>...</button>
             </div>
         </>
     )

@@ -98,8 +98,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
 
     return (
         <>
-            <div className={style.propertyControl} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp}
-                 ref={propDisplayRef}>
+            <div className={style.propertyControl} onMouseMove={onDisplayMouseMove} onMouseUp={onDisplayMouseUp} ref={propDisplayRef}>
                 <div className={style.propertyNameColumn} ref={propNameRef}>
                     {propertyControl.propertyData.map(field =>
                         <PropertiesControlLeft

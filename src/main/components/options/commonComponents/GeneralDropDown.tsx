@@ -1,4 +1,4 @@
-import React, {FC, useRef} from 'react';
+import React, {FC, memo, useRef} from 'react';
 import style from './GeneralDropDown.module.scss';
 import {useOnClickOutside} from '../../hooks/useOnClickOutside';
 import {Pointer} from './Pointer';
@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 
-export const GeneralDropDown: FC<PropsType> = props => {
+export const GeneralDropDown: FC<PropsType> = memo(props => {
     const {isDropDownListOpened, setIsDropDownListOpened, selectedName, onInputClick, children} = props
 
     const formRef = useRef<HTMLDivElement | null>(null)
@@ -20,7 +20,7 @@ export const GeneralDropDown: FC<PropsType> = props => {
 
     return (
         <div className={style.dropDown} ref={formRef}>
-            <div className={style.fieldWithSelectedName} onClick={onInputClick} title={selectedName}>
+            <div className={style.fieldWithSelectedName} onClick={onInputClick} title={selectedName} tabIndex={0}>
                 <div className={style.selectedName}>{selectedName}</div>
                 <Pointer isFieldExpanded={isDropDownListOpened} onIconClick={onInputClick} type="dropDown"/>
             </div>
@@ -29,4 +29,4 @@ export const GeneralDropDown: FC<PropsType> = props => {
             </div>
         </div>
     )
-}
+})

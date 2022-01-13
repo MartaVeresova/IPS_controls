@@ -83,7 +83,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
                     <div>{imageCaption()}</div>
                 </div>
                 <input type="file" name="file" ref={inputRef} accept=".ico" onChange={imageUpload}/>
-                <button className={style.imageUploadButton} onClick={onButtonClick}>...</button>
+                <button className={style.loadFileButton} onClick={onButtonClick}>...</button>
             </div>
 
             <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>

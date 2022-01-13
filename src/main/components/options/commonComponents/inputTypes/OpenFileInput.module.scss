@@ -25,13 +25,18 @@
     display: none;
   }
 
-  .imageUploadButton {
+  .loadFileButton {
     width: 20px;
+    height: 20px;
+    padding-bottom: 20px;
+    border: 1px solid gray;
+    border-radius: 2px;
 
     &:hover {
       cursor: pointer;
+      height: 20px;
       border-radius: 2px;
-      border: 1.6px solid #474747;
+      border: 1.5px solid #474747;
     }
   }
 }

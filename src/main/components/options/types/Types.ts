@@ -11,6 +11,8 @@ export type FieldTypes =
 
 export type YesNoType = 'да' | 'нет'
 
+export type PointerType = 'imageFieldIcon' | 'sizeFieldIcon' | 'dropDown'
+
 export type PropertyDataType = {
     propertyName: string
     propertyValue: any
