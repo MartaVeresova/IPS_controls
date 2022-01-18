@@ -34,6 +34,23 @@ export const SimpleDropDownModel = types
             },
             getSimpleDropDownList(id: number | null, fieldName: string): void {
                 if (fieldName === 'captionAttributeId') {
+
+
+                    // fetch(`api/objecttypes/2039/availableCaptionAttributeKeyAndNameCollection`, {
+                    //     method: 'POST',
+                    //     /* body: '',*/
+                    // })
+                    //     .then(response => response.json())
+                    //     .then(result => {
+                    //         console.log(result)
+                    //         self.simpleDropDownList = cast([...result])
+                    //     })
+                    //     .catch(err => {
+                    //         console.log(err);
+                    //     });
+
+
+
                     dropDownData = [
                         {id: null, displayName: ''},
                         {id: 1425, displayName: 'SEARCH_ID_ARCHIVE'},

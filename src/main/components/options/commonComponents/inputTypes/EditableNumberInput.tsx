@@ -18,7 +18,10 @@ export const EditableNumberInput: FC<PropsType> = observer(props => {
     const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
 
     useEffect(() => {
-        additionalModel.setInputValue(propertyValue)
+        if (propertyValue === maxValue) {
+            additionalModel.setInputValue(maxValue)
+            additionalModel.setIsNumberMode(false)
+        } else additionalModel.setInputValue(propertyValue)
     }, [additionalModel, propertyValue])
 
     const maxValue = 2147483647

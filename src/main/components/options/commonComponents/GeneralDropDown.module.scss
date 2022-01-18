@@ -15,12 +15,12 @@
       outline: none;
       border: none;
     }
-  }
 
-  .selectedName {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    .selectedName {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   .dropDownList {
@@ -36,30 +36,31 @@
     box-shadow: 0 4px 5px rgb(204, 204, 204);
     border-radius: 0 2px 3px 3px;
     cursor: pointer;
+
+    .listItems {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding-left: 10px;
+
+      &:hover {
+        background-color: #c7c7c7;
+        transition: all .4s;
+      }
+
+      &:active {
+        background-color: #e2e2e2;
+      }
+
+      &:empty {
+        min-height: 25px;
+      }
+    }
+
+    .selectedListItem {
+      @extend .listItems;
+      background-color: #c7c7c7;
+    }
   }
 }
 
-.listItems {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-left: 10px;
-
-  &:hover {
-    background-color: #c7c7c7;
-    transition: all .4s;
-  }
-
-  &:active {
-    background-color: #e2e2e2;
-  }
-
-  &:empty {
-    min-height: 25px;
-  }
-}
-
-.selectedListItem {
-  @extend .listItems;
-  background-color: #c7c7c7;
-}

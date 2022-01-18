@@ -1,18 +1,19 @@
 .dropDown {
   width: 100%;
-  position: relative;
   color: #474747;
+  position: relative;
   cursor: pointer;
 
   .fieldWithSelectedNames {
+    padding: 0 10px 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 30px;
-    padding: 0 10px 0 10px;
+    max-height: 30px;
 
     &:active, &:focus, &:hover {
       outline: none;
+      border: none;
     }
 
     .selectedNames {
@@ -32,14 +33,14 @@
     width: 99.8%;
     position: absolute;
     z-index: 2;
-    margin-top: 1.2px;
+    margin-top: 3.7px;
     margin-left: 1px;
+    max-height: 150px;
+    line-height: 25px;
+    overflow-y: auto;
     background-color: #f8f8f8;
     box-shadow: 0 4px 5px rgb(204, 204, 204);
     border-radius: 0 2px 3px 3px;
-    max-height: 150px;
-    overflow-y: auto;
-    line-height: 25px;
 
     .allNames {
       -webkit-touch-callout: none;
@@ -50,7 +51,7 @@
       display: flex;
       align-items: center;
       cursor: pointer;
-      padding-left: 10px;
+      padding: 5px 0 0 10px;
 
       &:hover {
         background-color: #c7c7c7;
@@ -59,12 +60,6 @@
 
       &:active {
         background-color: #e2e2e2;
-      }
-
-      .listItems {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
 
       input[type='checkbox'] {
@@ -81,6 +76,12 @@
           appearance: auto;
           accent-color: rgb(255, 255, 255);
         }
+      }
+
+      .listItems {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
 

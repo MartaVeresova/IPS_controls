@@ -3,8 +3,6 @@ import style from './PropertiesControl.module.scss'
 import {PropertiesControlLeft} from './PropertiesControlLeft';
 import {PropertiesControlRight} from './PropertiesControlRight';
 import {observer} from 'mobx-react-lite';
-import {lifeCycleLevelData} from './lifeCycleLevel/LifeCycleLevelData';
-import {objectTypesData} from './objectTypes/ObjectTypesData';
 import {useStore} from '../../../hooks/useStore';
 
 
@@ -29,15 +27,6 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
         }
         if (type === 'objectTypesType') {
             propertyControl.getObjectTypesData()
-        }
-    }, [type, propertyControl])
-
-    useEffect(() => {
-        if (type === 'lifeCycleLevelType') {
-            propertyControl.init(lifeCycleLevelData)
-        }
-        if (type === 'objectTypesType') {
-            propertyControl.init(objectTypesData)
         }
     }, [type, propertyControl])
 
@@ -91,7 +80,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
         setIsDraggable(false)
     }
 
-    const onButtonClick = () => {
+    const onSentButtonClick = () => {
         propertyControl.sentData()
     }
 
@@ -122,7 +111,7 @@ export const PropertiesControl: FC<PropsType> = observer(({type}) => {
                 </div>
             </div>
 
-            <button style={{margin: '15px', width: '50px'}} onClick={onButtonClick}>sent</button>
+            <button style={{margin: '15px', width: '50px'}} onClick={onSentButtonClick}>sent</button>
         </>
     )
 })

@@ -1,4 +1,4 @@
-import React, {FC, useCallback} from 'react';
+import React, {FC, useCallback, useEffect} from 'react';
 import {GeneralDropDown} from '../GeneralDropDown';
 import style from '../GeneralDropDown.module.scss';
 import {observer} from 'mobx-react-lite';
@@ -19,6 +19,10 @@ type PropsType = {
 
 export const SimpleDropDown: FC<PropsType> = observer(props => {
     const {propertyValue, fieldName, setSelectedItem, additionalModel} = props
+
+    useEffect(() => {
+        additionalModel.getSimpleDropDownSelectedItem(propertyValue, fieldName)
+    }, [additionalModel, propertyValue, fieldName])
 
     const onInputClick = useCallback(() => {
         if (!additionalModel.isDropDownListOpened) {

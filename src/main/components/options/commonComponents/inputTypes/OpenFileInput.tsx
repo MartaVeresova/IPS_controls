@@ -2,6 +2,7 @@ import React, {ChangeEvent, createRef, FC, useEffect, useRef} from 'react';
 import style from './OpenFileInput.module.scss'
 import {observer} from 'mobx-react-lite';
 
+
 type PropsType = {
     propertyValue: string
     fieldName: string
@@ -36,6 +37,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
     useEffect(() => {
         // const encodedData
         window.btoa(propertyValue)
+        // console.log(window.btoa(propertyValue))
     }, [propertyValue])
 
 
@@ -48,15 +50,13 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
             const index = fileName.lastIndexOf('.') + 1;
             const extFile = fileName.substring(index, fileName.length).toLowerCase();
             if (extFile === 'ico') {
-                if (newFile) {
-                    additionalModel.setSelectedFile(newFile)
-                    setSelectedItem(window.URL.createObjectURL(newFile), fieldName)
+                if (newFile && reader !== undefined) {
 
-                    if (reader !== undefined) {
-                        reader.onload = () => {
-                            setSelectedItem(reader.result as string, fieldName)
-                        }
-                        reader.readAsDataURL(newFile)
+                    // additionalModel.setSelectedFile(newFile)
+                    reader.readAsDataURL(newFile)
+                    reader.onload = () => {
+                        console.log(window.btoa(reader.result as string))
+                        setSelectedItem(reader.result as string, fieldName)
                     }
                 }
             } else console.log('ONLY \'.ico\' FILES ARE ALLOWED!!!')
@@ -87,7 +87,7 @@ export const OpenFileInput: FC<PropsType> = observer((props) => {
             </div>
 
             <div className={style.additionalFields} hidden={!additionalModel.isImageFieldExpanded}>
-                <div className={style.sizesField} >
+                <div className={style.sizesField}>
                     {`${additionalModel.sizeWidth}x${additionalModel.sizeHeight}`}
                 </div>
                 <div className={style.widthHeightFields} hidden={!additionalModel.isSizeFieldExpanded}>

@@ -21,12 +21,6 @@ type PropsType = {
 export const PropertiesControlRight: FC<PropsType> = observer(props => {
     const {field, setSelectedItem, additionalModel} = props
 
-    useEffect(() => {
-        if (field.fieldType === 'simpleDropDown') {
-            additionalModel.getSimpleDropDownSelectedItem(field.propertyValue, field.fieldName)
-        }
-    }, [additionalModel, field])
-
     return (
         <>
             <div className={style.propertyValue}>
